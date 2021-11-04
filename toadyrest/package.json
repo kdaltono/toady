@@ -1,0 +1,17 @@
+{
+  "name": "toadyrest",
+  "version": "1.0.0",
+  "description": "Rest API for Toady",
+  "main": "server.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "author": "James Dalton",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.9.0"
+  }
+}
