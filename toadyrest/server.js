@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 
-// This program doesn't work when running in docker, only works when run locally! Pls find the issue
+// TODO: Get gitignore working
 
 const app = express()
 

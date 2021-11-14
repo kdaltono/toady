@@ -1,5 +1,5 @@
 # Run the docker container with persistant storage
-docker-compose up -d
+docker-compose up -d [--build]
 
 # Open MariaDB/MySQL to execute SQL queries
 docker exec -it db mysql -u root -p

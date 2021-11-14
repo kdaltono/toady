@@ -1,5 +1,10 @@
 version: '3'
 services:
+  app:
+    container_name: toady_app
+    build: toadyapp/.
+    ports: 
+      - "80:80"
   rest:
     container_name: toady_rest
     build: toadyrest/.
