@@ -1,24 +1,26 @@
 version: '3'
 services:
-  app:
+  toady_app:
     container_name: toady_app
     build: toadyapp/.
     ports: 
       - "80:80"
-  rest:
+    links:
+      - toady_rest
+  toady_rest:
     container_name: toady_rest
     build: toadyrest/.
     command: npm run test
     restart: on-failure
     depends_on:
-      - db
+      - toady_db
     links:
-      - db
+      - toady_db
     ports:
       - "8080:8080"
-  db:
+  toady_db:
     image: mariadb:10.5.8
-    container_name: db
+    container_name: toady_db
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: toady

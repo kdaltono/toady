@@ -1,5 +1,6 @@
 module.exports = {
-    HOST: 'host.docker.internal',
+    HOST: 'toady_db',
+    //HOST: 'localhost',
     USER: 'root',
     PASSWORD: '1234',
     DB: 'toady',

@@ -9,4 +9,5 @@ from
     account_types a_t
 WHERE
     u.account_type_id = a_t.account_type_id
+    AND u.user_id = 1
     ;

@@ -5,11 +5,15 @@ const cors = require('cors')
 
 const app = express()
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-};
+const corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+    methods: [ 'GET', 'POST', 'OPTIONS' ],
+    headers: [ 'content-type' ]
+}
 
 app.use(cors(corsOptions))
+app.options('*', cors());
 
 // Parse request of content-type - application/json
 app.use(express.json())
