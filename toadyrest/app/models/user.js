@@ -1,5 +1,7 @@
 const sql = require("./db")
 
+// TODO: Update this so normal queries don't return all fields, like passwords, etc
+
 const User = function(user) {
     this.userId = user.userId
     this.firstName = user.firstName
@@ -55,6 +57,26 @@ User.findById = (userId, result) => {
             console.log("Found user: " + res)
             result(null, res[0])
             return;
+        }
+
+        result({kind: "not_found"}, null)
+    })
+}
+
+User.findByUsername = (username, result) => {
+    const query = "SELECT * FROM users WHERE username = ?"
+
+    sql.query(query, username, (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        if (res.length) {
+            console.log("Found user: " + res)
+            result(null, res[0])
+            return
         }
 
         result({kind: "not_found"}, null)
