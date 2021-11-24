@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/toady.routes")(app)
+require("./app/routes/auth.routes")(app)
 
 // Set port, listen for requests:
 const PORT = 8080

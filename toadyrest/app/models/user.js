@@ -3,10 +3,12 @@ const sql = require("./db")
 // TODO: Update this so normal queries don't return all fields, like passwords, etc
 
 const User = function(user) {
-    this.userId = user.userId
-    this.firstName = user.firstName
-    this.lastName = user.lastName
-    this.accountTypeId = user.accountTypeId
+    this.userId = user.user_id
+    this.username = user.username
+    this.firstName = user.first_name
+    this.lastName = user.last_name
+    this.currentPassword = user.current_password
+    this.accountTypeId = user.account_type_id
 }
 
 User.getDisplayDescription = (userId, result) => {
@@ -74,7 +76,7 @@ User.findByUsername = (username, result) => {
         }
 
         if (res.length) {
-            console.log("Found user: " + res)
+            console.log("Found user: " + JSON.stringify(res[0]))
             result(null, res[0])
             return
         }
