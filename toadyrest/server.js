@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const passport = require("passport")
 
 // TODO: Get gitignore working
 
@@ -11,6 +12,9 @@ const corsOptions = {
     methods: [ 'GET', 'POST', 'OPTIONS' ],
     headers: [ 'content-type' ]
 }
+
+require('./app/config/passport.config')(passport)
+app.use(passport.initialize())
 
 app.use(cors(corsOptions))
 app.options('*', cors());

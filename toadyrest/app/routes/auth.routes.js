@@ -21,5 +21,9 @@ module.exports = app => {
             }
         })
     })
+
+    app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+        res.status(200).send({ success: true, msg: "Successfully used protected route!" })
+    })
 }
 

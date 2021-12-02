@@ -9,7 +9,7 @@ function issueJWT(user) {
         iat: Date.now()
     }
 
-    const signedToken = jsonwebtoken.sign(payload, 'TempPrivateKey', { expiresIn: expiresIn, algorithm: 'HS256' })
+    const signedToken = jsonwebtoken.sign(payload, 'TempPhraseToChange', { expiresIn: expiresIn, algorithm: 'HS256' })
 
     return {
         token: "Bearer " + signedToken,

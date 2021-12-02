@@ -9,15 +9,19 @@ const options = {
     algorithms: ['HS256']
 }
 
+// I dont think this is running
 module.exports = (passport) => {
     passport.use(new JwtStrategy(options, function(jwt_payload, done) {
-        User.findByUsername(username, function(err, user) {
+        User.findByUsername(jwt_payload.sub, function(err, user) {
             if (err) {
+                console.log("JWT Auth: Error: " + JSON.stringify(err))
                 return done(err, false)
             }
             if (user) {
+                console.log("JWT Auth: User found: " + JSON.stringify(user))
                 return done(null, user)
             } else {
+                console.log("JWT Auth: Unknown Error: " + JSON.stringify(err))
                 return done(null, false)
             }
         })
