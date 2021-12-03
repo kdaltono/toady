@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 export class RestService {
 
   private restUrl = 'http://localhost:8080/users/a';
+  private protectedRoute = 'http://localhost:8080/protected';
 
   constructor(
     private http: HttpClient,
@@ -25,6 +26,15 @@ export class RestService {
           tap(_ => this.log('Fetched users')),
           catchError(this.handleError<User[]>('getUsers', []))
     );
+  }
+
+  getProtectedRoute(): Observable<any> {
+    // Currently not working correctly
+    return this.http.get<any>(this.protectedRoute)
+      .pipe(
+        tap(_ => this.log("Fetched protected route")),
+        catchError(this.handleError<any>('getProtectedRoute', []))
+      )
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

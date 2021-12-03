@@ -9,7 +9,6 @@ const options = {
     algorithms: ['HS256']
 }
 
-// I dont think this is running
 module.exports = (passport) => {
     passport.use(new JwtStrategy(options, function(jwt_payload, done) {
         User.findByUsername(jwt_payload.sub, function(err, user) {

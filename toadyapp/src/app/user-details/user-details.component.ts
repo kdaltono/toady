@@ -11,7 +11,8 @@ import { MessageService } from '../message.service';
 })
 export class UserDetailsComponent implements OnInit {
 
-  users: User[] = []
+  users: User[] = [];
+  info: any;
 
   constructor(
     private restService: RestService,
@@ -25,8 +26,8 @@ export class UserDetailsComponent implements OnInit {
   }
 
   setUsers(): void {
-    this.restService.getUsers()
-      .subscribe(users => this.users = users);
+    this.restService.getProtectedRoute()
+      .subscribe(info => this.info = info);
     this.messageService.add("UserDetails: retrieved users");
   }
 
