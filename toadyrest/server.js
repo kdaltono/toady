@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const passport = require("passport")
 
 // TODO: Get gitignore working
 
@@ -8,16 +7,21 @@ const app = express()
 
 const corsOptions = {
     origin: '*',
+    exposedHeaders: ['sessionId'],
     optionsSuccessStatus: 200,
-    methods: [ 'GET', 'POST', 'OPTIONS' ],
-    headers: [ 'content-type' ]
+    methods: [ 'GET', 'POST', 'OPTIONS', 'HEAD', 'PATCH', 'PUT', 'DELETE' ],
+    headers: [ 'Content-Type' ],
+    preflightContinue: false,
+    allowedHeaders: ['sessionId', 'Content-Type', 'Authorization']
 }
-
-require('./app/config/passport.config')(passport)
-app.use(passport.initialize())
 
 app.use(cors(corsOptions))
 app.options('*', cors());
+
+const passport = require("passport")
+
+require('./app/config/passport.config')(passport)
+app.use(passport.initialize())
 
 // Parse request of content-type - application/json
 app.use(express.json())

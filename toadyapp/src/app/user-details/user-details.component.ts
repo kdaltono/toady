@@ -12,7 +12,7 @@ import { MessageService } from '../message.service';
 export class UserDetailsComponent implements OnInit {
 
   users: User[] = [];
-  info: any;
+  info: string = '';
 
   constructor(
     private restService: RestService,
@@ -27,7 +27,7 @@ export class UserDetailsComponent implements OnInit {
 
   setUsers(): void {
     this.restService.getProtectedRoute()
-      .subscribe(info => this.info = info);
+      .subscribe(info => this.info = JSON.stringify(info));
     this.messageService.add("UserDetails: retrieved users");
   }
 
