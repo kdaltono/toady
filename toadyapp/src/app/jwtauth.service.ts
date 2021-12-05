@@ -29,6 +29,7 @@ export class JWTAuthService {
     this.http.post(this.loginURL, reqObject, { headers: headers }).subscribe(
       (response) => {
         this.setLocalStorage(response);
+        // Get all of the user details based on this user
       },
 
       (error) => {
@@ -44,12 +45,14 @@ export class JWTAuthService {
   setLocalStorage(responseObj: any) {
     const expiresAt = moment().add(responseObj.expiresIn);
     localStorage.setItem('id_token', responseObj.token);
+    localStorage.setItem('user_id', responseObj.user_id);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('user_id');
   }
 
   public isLoggedIn() {

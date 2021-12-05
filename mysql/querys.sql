@@ -11,3 +11,15 @@ WHERE
     u.account_type_id = a_t.account_type_id
     AND u.user_id = 1
     ;
+
+SELECT
+    u.username,
+    t.task_title
+FROM
+    user_to_task utt LEFT JOIN users u
+    ON (utt.user_id = u.user_id) 
+    LEFT JOIN tasks t
+    ON (utt.task_id = t.task_id)
+WHERE
+    u.user_id = 1
+    ;

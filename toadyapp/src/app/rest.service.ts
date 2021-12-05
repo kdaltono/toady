@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs';
 
 import { User } from './user';
+import { DisplayTask } from './displaytask';
 import { MessageService } from './message.service';
 import { environment } from '../environments/environment';
 
@@ -14,6 +15,7 @@ export class RestService {
 
   private restUrl = 'http://localhost:8080/users/a';
   private protectedRoute = 'http://localhost:8080/protected';
+  private displayTaskURL = 'http://localhost:8080/tasks/';
 
   constructor(
     private http: HttpClient,
@@ -34,6 +36,14 @@ export class RestService {
       .pipe(
         tap(_ => this.log("Fetched protected route")),
         catchError(this.handleError<any>('getProtectedRoute', []))
+      )
+  }
+
+  getDisplayTasks(userId: string): Observable<DisplayTask[]> {
+    return this.http.get<DisplayTask[]>(this.displayTaskURL + userId)
+      .pipe(
+        tap(_ => this.log(`Fetched display tasks for user: ${userId}`)),
+        catchError(this.handleError<DisplayTask[]>('getDisplayTasks', []))
       )
   }
 

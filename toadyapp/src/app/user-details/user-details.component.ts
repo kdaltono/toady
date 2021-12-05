@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { RestService } from '../rest.service';
 import { MessageService } from '../message.service';
+import { DisplayTask } from '../displaytask';
 
 @Component({
   selector: 'app-user-details',
@@ -13,6 +14,7 @@ export class UserDetailsComponent implements OnInit {
 
   users: User[] = [];
   info: string = '';
+  displayTasks: DisplayTask[] = [];
 
   constructor(
     private restService: RestService,
@@ -22,7 +24,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     // Call the rest service, and then save them here and display them on the page
     // Also updaet user.ts to the correct values pls
-    this.setUsers();
+    this.setDisplayTasks();
   }
 
   setUsers(): void {
@@ -31,4 +33,15 @@ export class UserDetailsComponent implements OnInit {
     this.messageService.add("UserDetails: retrieved users");
   }
 
+  setDisplayTasks(): void {
+    const userId = localStorage.getItem('user_id');
+
+    if (userId) {
+      this.restService.getDisplayTasks(userId)
+        .subscribe(tasks => this.displayTasks = tasks);
+      this.messageService.add("UserDetails: retrieved displayt tasks");
+    } else {
+      this.messageService.add("UserDetails: local storage 'user_id' is not set");
+    }
+  }
 }

@@ -3,5 +3,7 @@
     <!-- <li *ngFor="let user of users">
         <a>{{user.first_name}} {{user.last_name}}</a>
     </li> -->
-    <a>{{info}}</a>
+    <li *ngFor="let task of displayTasks">
+        <a>{{task.task_title}} - assigned to {{task.username}}</a>
+    </li>
 </ul>

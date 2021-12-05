@@ -13,6 +13,7 @@ function issueJWT(user) {
 
     return {
         token: "Bearer " + signedToken,
+        user_id: user.user_id,
         expires: expiresIn
     }
 }
