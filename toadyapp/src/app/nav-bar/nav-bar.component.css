@@ -1,0 +1,12 @@
+.navbar {
+    height: 50px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: blue;
+    margin: 0px !important;
+}
+
+.navlink {
+    margin-left: 20px;
+}

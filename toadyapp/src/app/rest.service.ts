@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs';
 
 import { User } from './user';
 import { DisplayTask } from './displaytask';
+import { Task } from './task'
 import { MessageService } from './message.service';
 import { environment } from '../environments/environment';
 
@@ -16,6 +17,7 @@ export class RestService {
   private restUrl = 'http://localhost:8080/users/a';
   private protectedRoute = 'http://localhost:8080/protected';
   private displayTaskURL = 'http://localhost:8080/tasks/';
+  private taskURL = 'http://localhost:8080/tasks/t/';
 
   constructor(
     private http: HttpClient,
@@ -44,6 +46,14 @@ export class RestService {
       .pipe(
         tap(_ => this.log(`Fetched display tasks for user: ${userId}`)),
         catchError(this.handleError<DisplayTask[]>('getDisplayTasks', []))
+      )
+  }
+
+  getTaskFullDetails(taskId: string): Observable<Task> {
+    return this.http.get<Task>(this.taskURL + taskId)
+      .pipe(
+        tap(_ => this.log(`Fetched task details for task ID: ${taskId}`)),
+        catchError(this.handleError<Task>('getTaskFullDetails'))
       )
   }
 

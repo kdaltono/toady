@@ -10,10 +10,14 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { JWTAuthService } from './jwtauth.service';
+import { TaskComponent } from './task/task.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: UserDetailsComponent }
+  { path: 'home', component: UserDetailsComponent },
+  { path: 'task/:taskid', component: TaskComponent }
+  /*{ path: '**', redirectTo: '/login' }*/
 ]
 
 @NgModule({
@@ -21,7 +25,9 @@ const appRoutes: Routes = [
     AppComponent,
     MessagesComponent,
     UserDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    TaskComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
