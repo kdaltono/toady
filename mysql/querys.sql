@@ -23,3 +23,45 @@ FROM
 WHERE
     u.user_id = 1
     ;
+
+
+SELECT
+    t.task_id,
+    t.task_title,
+    u.username
+FROM
+    (
+        SELECT
+            utt.task_id,
+            utt.user_id
+        FROM    
+            user_to_task utt
+        WHERE
+            utt.user_id = 1
+    ) AS assigned_tasks LEFT JOIN tasks t
+    ON (t.task_id = assigned_tasks.task_id)
+    ;
+
+SELECT
+    t.task_id,
+    t.task_title,
+    GROUP_CONCAT(u.username) as "usernames"
+FROM
+    (
+        SELECT DISTINCT
+            utt.task_id
+        FROM    
+            user_to_task utt
+        WHERE
+            utt.user_id = 2
+    ) AS a_t LEFT JOIN user_to_task utt
+    ON (a_t.task_id = utt.task_id) LEFT JOIN tasks t
+    ON (utt.task_id = t.task_id) LEFT JOIN users u
+    ON (utt.user_id = u.user_id)
+GROUP BY
+    t.task_id,
+    t.task_title
+ORDER BY
+    t.task_id
+    ;
+    

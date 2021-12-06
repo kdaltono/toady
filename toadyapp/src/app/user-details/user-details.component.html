@@ -4,6 +4,6 @@
         <a>{{user.first_name}} {{user.last_name}}</a>
     </li> -->
     <li *ngFor="let task of displayTasks">
-        <a>{{task.task_title}} - assigned to {{task.username}}</a>
+        <a>{{task.task_title}} - assigned to: {{task.usernames}}</a>
     </li>
 </ul>

@@ -3,6 +3,7 @@ module.exports = app => {
     const passport = require('passport')
     const utils = require('../lib/utils')
     const tasks = require('../controllers/task.controller')
+    const users = require('../controllers/user.controller')
 
     app.post('/login', function(req, res, data) {
         User.findByUsername(req.body.username, function(err, user) {
@@ -23,10 +24,11 @@ module.exports = app => {
         })
     })
 
-    app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-        res.status(200).send({ success: true, msg: "Successfully used protected route!" })
-    })
-
     app.get('/tasks/:userId', passport.authenticate('jwt', { session: false }), tasks.getDisplayDescription)
+    app.get('/tasks/t/:taskId', passport.authenticate('jwt', { session: false }), tasks.getTaskDetails)
+
+    app.get("/users/a", passport.authenticate('jwt', { session: false }), users.findAll)
+    app.get("/users/s/:userId", passport.authenticate('jwt', { session: false }), users.findById)
+    app.get("/users/d/:userId", passport.authenticate('jwt', { session: false }), users.getDisplayInformation)
 }
 

@@ -1,4 +1,5 @@
 export interface DisplayTask {
-    username: string,
-    task_title: string
+    task_id: number,
+    task_title: string,
+    usernames: string
 };

@@ -1,24 +1,21 @@
 const sql = require('./db')
 
-const TaskDisplay = function(task) {
-    this.username = task.username
+const Task = function(task) {
+    this.task_id = task.task_id
     this.task_title = task.task_title
+    this.task_desc = task.task_desc
 }
 
-TaskDisplay.getUserDisplayTasks = (userId, result) => {
+Task.getTaskInformation = (taskId, result) => {
     const query = 
     "SELECT " +
-        "u.username, " +
-        "t.task_title " +
+        "* " +
     "FROM " +
-        "user_to_task utt LEFT JOIN users u " +
-        "ON (utt.user_id = u.user_id) " +
-        "LEFT JOIN tasks t " +
-        "ON (utt.task_id = t.task_id) " +
+        "tasks t " +
     "WHERE " +
-        "u.user_id = ?"
-    
-    sql.query(query, userId, (err, res) => {
+        "t.task_id = ?"
+
+    sql.query(query, taskId, (err, res) => {
         if (err) {
             console.log("Error: " + err)
             result(err, null)
@@ -28,11 +25,11 @@ TaskDisplay.getUserDisplayTasks = (userId, result) => {
         if (res.length) {
             console.log("Found display tasks: " + res)
             result(null, res)
-            return;
+            return
         }
 
-        result({kind: "not_found"}, null)
+        result({ kind: "not_found" }, null)
     })
 }
 
-module.exports = TaskDisplay
+module.exports = Task

@@ -12,8 +12,6 @@ import { DisplayTask } from '../displaytask';
 })
 export class UserDetailsComponent implements OnInit {
 
-  users: User[] = [];
-  info: string = '';
   displayTasks: DisplayTask[] = [];
 
   constructor(
@@ -25,12 +23,6 @@ export class UserDetailsComponent implements OnInit {
     // Call the rest service, and then save them here and display them on the page
     // Also updaet user.ts to the correct values pls
     this.setDisplayTasks();
-  }
-
-  setUsers(): void {
-    this.restService.getProtectedRoute()
-      .subscribe(info => this.info = JSON.stringify(info));
-    this.messageService.add("UserDetails: retrieved users");
   }
 
   setDisplayTasks(): void {
