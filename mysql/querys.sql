@@ -45,7 +45,7 @@ FROM
 SELECT
     t.task_id,
     t.task_title,
-    GROUP_CONCAT(u.username) as "usernames"
+    GROUP_CONCAT(u.username SEPARATOR', ') as "usernames"
 FROM
     (
         SELECT DISTINCT
