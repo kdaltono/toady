@@ -1,16 +1,24 @@
 .navbar {
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: left;
     align-items: center;
-    background-color: blue;
-    margin: 0px !important;
-}
-
-.navlink {
-    margin-left: 20px;
+    background-color: #4c516d;
 }
 
 .logo {
-    margin-left: 20px;
+    border: 0px;
+    margin: 0px 0px 0px 20px;
+    color: white;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    -webkit-text-stroke: 1.5px black;
+}
+
+.navlink {
+    margin: 0px 0px 0px 20px;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    font-size: 30px;
+    -webkit-text-stroke: 0.5px black;
 }

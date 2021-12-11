@@ -47,7 +47,7 @@ INSERT INTO account_types (display_name, account_type_level) VALUES ("Viewer", 1
 INSERT INTO account_types (display_name, account_type_level) VALUES ("User", 5);
 
 INSERT INTO users (username, first_name, last_name, account_type_id, current_password) VALUES ("jdalton", "James", "Dalton", 1, "1234");
-INSERT INTO users (username, first_name, last_name, account_type_id, current_password) VALUES ("gwalis", "Gabi", "Wallis", 3, "3414");
+INSERT INTO users (username, first_name, last_name, account_type_id, current_password) VALUES ("gwallis", "Gabi", "Wallis", 3, "3414");
 
 INSERT INTO tasks(task_title, task_desc) VALUES ("Test task 1", "Task description");
 INSERT INTO tasks(task_title, task_desc) VALUES ("Test task 2", "Task description 2");

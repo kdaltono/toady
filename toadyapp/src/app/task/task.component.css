@@ -1,0 +1,14 @@
+.task-area {
+    background-color: #838996;
+    margin: 10px 100px 0px 100px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.task-header {
+    margin: 0px;
+}
+
+.task-desc {
+    margin: 10px 0px 0px 0px;
+}
