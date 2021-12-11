@@ -6,7 +6,7 @@ function issueJWT(user) {
 
     const payload = {
         sub: username,
-        iat: Date.now()
+        iat: Math.floor(Date.now() / 1000)
     }
 
     const signedToken = jsonwebtoken.sign(payload, 'TempPhraseToChange', { expiresIn: expiresIn, algorithm: 'HS256' })

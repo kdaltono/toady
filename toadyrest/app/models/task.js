@@ -23,8 +23,8 @@ Task.getTaskInformation = (taskId, result) => {
         }
 
         if (res.length) {
-            console.log("Found display tasks: " + res)
-            result(null, res)
+            console.log("Found display tasks: " + res[0])
+            result(null, res[0])
             return
         }
 
