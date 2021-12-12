@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { catchError, map, tap } from 'rxjs';
 import { MessageService } from './message.service';
 import * as moment from 'moment';
@@ -14,7 +15,8 @@ export class JWTAuthService {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   sendLoginRequest(username: string, password: string) {
@@ -29,7 +31,7 @@ export class JWTAuthService {
     this.http.post(this.loginURL, reqObject, { headers: headers }).subscribe(
       (response) => {
         this.setLocalStorage(response);
-        // Get all of the user details based on this user
+        this.router.navigate(['/home'])
       },
 
       (error) => {
