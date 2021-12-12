@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MessageService } from '../message.service';
 
@@ -17,9 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 headers: req.headers.set("Authorization", idToken)
             });
 
-            const stringIdToken = JSON.stringify(cloned)
             this.messageService.add(`Intercept: ${idToken}`)
-
             return next.handle(cloned);
         } else {
             return next.handle(req);

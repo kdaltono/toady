@@ -28,12 +28,10 @@ export class UserDetailsComponent implements OnInit {
   setDisplayTasks(): void {
     const userId = localStorage.getItem('user_id');
 
-    if (userId) {
-      this.restService.getDisplayTasks(userId)
-        .subscribe(tasks => this.displayTasks = tasks);
-      this.messageService.add("UserDetails: retrieved displayt tasks");
-    } else {
-      this.messageService.add("UserDetails: local storage 'user_id' is not set");
-    }
+    // If userId is null, then the error will be found in RestService's error handler,
+    // and redirect to /login
+    this.restService.getDisplayTasks(userId!)
+      .subscribe(tasks => this.displayTasks = tasks);
+    this.messageService.add("UserDetails: retrieved displayt tasks");
   }
 }

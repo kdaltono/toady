@@ -1,8 +1,9 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'
-import { Routes, RouterModule } from '@angular/router'
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule, Router } from '@angular/router';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -16,8 +17,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: UserDetailsComponent },
-  { path: 'task/:taskid', component: TaskComponent }
-  /*{ path: '**', redirectTo: '/login' }*/
+  { path: 'task/:taskid', component: TaskComponent },
+  { path: '', redirectTo: 'home' },
+  { path: '**', redirectTo: 'home' }
 ]
 
 @NgModule({
@@ -41,8 +43,23 @@ const appRoutes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(
+    private jwtAuthService: JWTAuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // Delete the locally stored token information so that it won't send repeated
+    // Unauthorised requests
+    if (!this.jwtAuthService.isLoggedIn()) {
+      this.jwtAuthService.logout();
+      this.router.navigate(['/login']);
+    }
+  }
+}
