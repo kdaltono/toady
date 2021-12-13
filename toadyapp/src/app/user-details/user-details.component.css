@@ -1,0 +1,19 @@
+.task-container {
+    background-color: #fefbfd;
+    margin: 10px 100px 0px 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    /*outline: 2px solid black;*/
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.task-text {
+    margin: 0px;
+    padding-left: 10px;
+}
+
+.task-title {
+    margin: 0px;
+}
