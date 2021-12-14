@@ -11,6 +11,32 @@ const User = function(user) {
     this.accountTypeId = user.account_type_id
 }
 
+User.getSimpleInformation = (result) => {
+    const query = "SELECT " +
+        "u.user_id, " +
+        "CONCAT(u.first_name, ' ', u.last_name) AS full_name " +
+    "FROM " +
+        "users u " +
+    "ORDER BY " +
+        "u.user_id"
+    
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return;
+        }
+
+        if (res.length) {
+            console.log("Found users: " + res)
+            result(null, res)
+            return;
+        }
+
+        result({kind: "not_found"}, null)
+    })
+}
+
 User.getDisplayDescription = (userId, result) => {
     const query = 
     "SELECT " +
@@ -25,8 +51,6 @@ User.getDisplayDescription = (userId, result) => {
     "WHERE " + 
         "u.account_type_id = a_t.account_type_id " +
         "AND u.user_id = ? "
-
-    console.log(query)
 
     sql.query(query, userId, (err, res) => {
         if (err) {
