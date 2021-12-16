@@ -65,3 +65,15 @@ ORDER BY
     t.task_id
     ;
     
+SELECT DISTINCT
+    u.user_id, 
+    CONCAT(u.first_name, ' ', u.last_name) AS full_name
+FROM
+    users u
+ORDER BY
+    u.user_id
+    ;
+
+select * from users;
+
+delete * from users where users.user_id > 2;

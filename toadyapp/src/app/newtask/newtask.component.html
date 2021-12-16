@@ -1,0 +1,16 @@
+<div class='new-task-area'>
+    <h2>Create New Task</h2>
+    <form (ngSubmit)="onNewTaskSubmit()" #newtaskform="ngForm">
+        <div class='new-task-form'>
+            <p class='new-task-form-item'>Title</p>
+            <input type="text" name="tasktitle" ngModel class='new-task-form-item'>
+            <p class='new-task-form-item'>Description</p>
+            <input type="text" name="taskdesc" ngModel class='new-task-form-item'>
+            <!-- TODO: Need to add way to assign users -->
+            <select [(ngModel)]='selectedUsers' class='new-task-form-item new-task-select' multiple size="4">
+                <option *ngFor="let u of users" [ngValue]="u">{{u.full_name}}</option>
+            </select>
+        </div>
+        <button type="submit">Create Task</button>
+    </form>
+</div>

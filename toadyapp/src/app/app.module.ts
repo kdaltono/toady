@@ -13,11 +13,13 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { JWTAuthService } from './jwtauth.service';
 import { TaskComponent } from './task/task.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NewtaskComponent } from './newtask/newtask.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: UserDetailsComponent },
   { path: 'task/:taskid', component: TaskComponent },
+  { path: 'add', component: NewtaskComponent },
   { path: '', redirectTo: 'home' },
   { path: '**', redirectTo: 'home' }
 ]
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
     UserDetailsComponent,
     LoginComponent,
     TaskComponent,
-    NavBarComponent
+    NavBarComponent,
+    NewtaskComponent
   ],
   imports: [
     BrowserModule,

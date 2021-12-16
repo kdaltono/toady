@@ -12,7 +12,7 @@ const User = function(user) {
 }
 
 User.getSimpleInformation = (result) => {
-    const query = "SELECT " +
+    const query = "SELECT DISTINCT " +
         "u.user_id, " +
         "CONCAT(u.first_name, ' ', u.last_name) AS full_name " +
     "FROM " +

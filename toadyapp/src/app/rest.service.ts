@@ -10,6 +10,7 @@ import { Task } from './task'
 import { MessageService } from './message.service';
 import { environment } from '../environments/environment';
 import { JWTAuthService } from './jwtauth.service';
+import { SimplifiedUser } from './simplifieduser';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class RestService {
     private jwtAuthService: JWTAuthService
   ) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.restUrl)
+  getUsers(): Observable<SimplifiedUser[]> {
+    return this.http.get<SimplifiedUser[]>(this.restUrl)
         .pipe(
           tap(
             event => {
@@ -39,24 +40,8 @@ export class RestService {
               this.handleErrorResponse(error);
             }
           ),
-          catchError(this.handleError<User[]>('getUsers', []))
+          catchError(this.handleError<SimplifiedUser[]>('getUsers', []))
     );
-  }
-
-  getProtectedRoute(): Observable<any> {
-    // Currently not working correctly
-    return this.http.get<any>(this.protectedRoute)
-      .pipe(
-        tap(
-          event => {
-            this.log("Fetched protected route")
-          },
-          error => {
-            this.handleErrorResponse(error);
-          }
-        ),
-        catchError(this.handleError<any>('getProtectedRoute', []))
-      )
   }
 
   getDisplayTasks(userId: string): Observable<DisplayTask[]> {
@@ -102,7 +87,7 @@ export class RestService {
   private handleErrorResponse(err: any) {
     this.messageService.add('Error found!')
     if (err instanceof HttpErrorResponse) {
-      if ((err.status >= 400 && err.status < 500) || err.statusText === 'Unauthorized') {
+      if ((err.status >= 400 && err.status < 500) && err.statusText === 'Unauthorized') {
         this.jwtAuthService.logout()
         this.router.navigate(['/login'])
       }

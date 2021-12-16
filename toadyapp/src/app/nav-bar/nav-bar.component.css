@@ -22,3 +22,8 @@
     font-size: 30px;
     -webkit-text-stroke: 0.5px black;
 }
+
+.left-navlink {
+    margin-left: auto;
+    margin-right: 20px;
+}
