@@ -24,11 +24,11 @@ export class NewtaskComponent implements OnInit {
     this.restService.getUsers().subscribe(users => this.users = users);
   }
 
-  onNewTaskSubmit(): void {
-    const taskTitle = this.newTaskForm?.value.taskTitle;
-    const taskDescription = this.newTaskForm?.value.taskDesc;
+  onNewTaskSubmit() {
+    const taskTitle = this.newTaskForm?.value.tasktitle;
+    const taskDescription = this.newTaskForm?.value.taskdesc;
     
     // Need to find a way to submit a new task
+    this.restService.insertNewTask(taskTitle, taskDescription, this.selectedUsers);
   }
-
 }

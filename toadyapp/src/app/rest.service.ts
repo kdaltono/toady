@@ -21,6 +21,7 @@ export class RestService {
   private protectedRoute = 'http://localhost:8080/protected';
   private displayTaskURL = 'http://localhost:8080/tasks/';
   private taskURL = 'http://localhost:8080/tasks/t/';
+  private insertNewTaskURL = 'http://localhost:8080/tasks/i';
 
   constructor(
     private http: HttpClient,
@@ -72,6 +73,23 @@ export class RestService {
         ),
         catchError(this.handleError<Task>('getTaskFullDetails'))
       )
+  }
+
+  insertNewTask(taskTitle: string, taskDescription: string, assignedUsers: SimplifiedUser[]) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      task_title: taskTitle,
+      task_desc: taskDescription,
+      assigned_users: assignedUsers
+    }
+
+    this.http.post(this.insertNewTaskURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add('New Task added successfully')
+        this.router.navigate(['/home'])
+      }
+    )
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -32,4 +32,18 @@ Task.getTaskInformation = (taskId, result) => {
     })
 }
 
+Task.insertNewTask = (taskTitle, taskDescription, result) => {
+    const query = 'INSERT INTO tasks(task_title, task_desc) VALUES (?, ?)'
+
+    sql.query(query, [taskTitle, taskDescription], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return;
+        }
+
+        result(null, res.insertId)
+    })
+}
+
 module.exports = Task
