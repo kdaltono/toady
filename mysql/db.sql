@@ -33,6 +33,21 @@ CREATE TABLE IF NOT EXISTS tasks(
     PRIMARY KEY (task_id)
 );
 
+CREATE TABLE IF NOT EXISTS task_comments(
+    comment_id INTEGER AUTO_INCREMENT NOT NULL,
+    task_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    comment_text TEXT NOT NULL,
+    dstamp DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (comment_id),
+    FOREIGN KEY (task_id)
+        REFERENCES tasks(task_id),
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+);
+
+INSERT INTO task_comments(task_id, user_id, comment_text) VALUES (1, 1, "Task comment");
+
 CREATE TABLE IF NOT EXISTS user_to_task(
     task_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,

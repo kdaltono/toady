@@ -1,5 +1,6 @@
 const e = require('express')
 const TaskDisplay = require('../models/task_display')
+const TaskComments = require('../models/task_comments')
 const Task = require('../models/task')
 const UserToTask = require('../models/user_to_task')
 
@@ -13,6 +14,24 @@ exports.getDisplayDescription = (req, res) => {
             } else {
                 res.status(500).send({
                     message: `Error retrieving user ID: ${req.params.userId}`
+                })
+            }
+        } else {
+            res.send(data)
+        }
+    })
+}
+
+exports.getTaskComments = (req, res) => {
+    TaskComments.getTaskComments(req.params.taskId, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Could not find task ID: ${req.params.taskId}`
+                })
+            } else {
+                res.status(500).send({
+                    message: `Error retrieving task ID: ${req.params.taskId}`
                 })
             }
         } else {

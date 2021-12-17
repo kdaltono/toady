@@ -26,11 +26,12 @@ module.exports = app => {
 
     app.get('/tasks/:userId', passport.authenticate('jwt', { session: false }), tasks.getDisplayDescription)
     app.get('/tasks/t/:taskId', passport.authenticate('jwt', { session: false }), tasks.getTaskDetails)
+    app.post('/tasks/i', passport.authenticate('jwt', { session: false }), tasks.insertNewTask)
+
+    app.get("/comm/:taskId", passport.authenticate('jwt', { session: false }), tasks.getTaskComments)
 
     app.get("/users/a", passport.authenticate('jwt', { session: false }), users.findAll)
     app.get("/users/s/:userId", passport.authenticate('jwt', { session: false }), users.findById)
     app.get("/users/d/:userId", passport.authenticate('jwt', { session: false }), users.getDisplayInformation)
-
-    app.post('/tasks/i', passport.authenticate('jwt', { session: false }), tasks.insertNewTask)
 }
 
