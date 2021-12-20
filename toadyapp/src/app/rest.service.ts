@@ -22,6 +22,7 @@ export class RestService {
   private displayTaskURL = 'http://localhost:8080/tasks/';
   private taskURL = 'http://localhost:8080/tasks/t/';
   private insertNewTaskURL = 'http://localhost:8080/tasks/i';
+  private commentsURL = 'http://localhost:8080/comm/'
 
   constructor(
     private http: HttpClient,
@@ -72,6 +73,22 @@ export class RestService {
           }
         ),
         catchError(this.handleError<Task>('getTaskFullDetails'))
+      )
+  }
+
+  getTaskComments(taskId: string): Observable<any> {
+    // TODO: Add comments url and query
+    return this.http.get<Comment>(this.commentsURL + taskId)
+      .pipe(
+        tap(
+          event => {
+            this.log(`Fetched comments for task ID: ${taskId}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<Comment>('getTaskComments'))
       )
   }
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { of, Observable } from 'rxjs';
 import { RestService } from '../rest.service';
-import { Task } from '../task'
+import { Task } from '../task';
+import { Comment } from '../comment';
 
 @Component({
   selector: 'app-task',
@@ -15,6 +17,7 @@ export class TaskComponent implements OnInit {
   title: string = '';
 
   taskDetails!: Task;
+  taskComments: Comment[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -31,12 +34,7 @@ export class TaskComponent implements OnInit {
         this.taskId = params['taskid'];
         if (this.taskId) {
           // Get the task ID from the REST API
-          this.restService.getTaskFullDetails(this.taskId)
-            .subscribe(data => {
-              this.taskDetails = data
-
-              this.output = JSON.stringify(this.taskDetails)
-            })
+          this.updateUI();
         } else {
           // Display that task could not be displayed
           this.taskDetails = {
@@ -46,6 +44,28 @@ export class TaskComponent implements OnInit {
           }
         }
       })
+  }
+
+  updateUI(): void {
+    this.setTaskDetails();
+    this.setComments();
+  }
+
+  async setTaskDetails(): Promise<void> {
+    this.restService.getTaskFullDetails(this.taskId)
+      .subscribe(data => {
+        this.taskDetails = data
+
+        this.output = JSON.stringify(this.taskDetails)
+    });
+  }
+
+  async setComments(): Promise<void> {
+    this.restService.getTaskComments(this.taskId)
+      .subscribe(data => {
+        this.taskComments = data
+        // Display comments
+    });
   }
 
 }

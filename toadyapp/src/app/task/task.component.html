@@ -3,3 +3,8 @@
 
     <p class='task-desc'>{{taskDetails?.task_desc}}</p> 
 </div>
+<div class='comment-area' *ngFor="let comment of taskComments">
+    <p class='comment-name'>{{comment.full_name}}</p>
+    <p class='comment-text'>{{comment.comment_text}}</p>
+    <p class='comment-date'>{{comment.dstamp}}</p>
+</div>
