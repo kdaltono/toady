@@ -4,6 +4,7 @@ import { of, Observable } from 'rxjs';
 import { RestService } from '../rest.service';
 import { Task } from '../task';
 import { Comment } from '../comment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-task',
@@ -63,9 +64,19 @@ export class TaskComponent implements OnInit {
   async setComments(): Promise<void> {
     this.restService.getTaskComments(this.taskId)
       .subscribe(data => {
-        this.taskComments = data
-        // Display comments
+        for (let comment of data) {
+          let dstamp: string = moment(comment.dstamp).utc().format('DD-MM-YYYY HH:mm:ss');
+          this.taskComments.push({
+            comment_id: comment.comment_id,
+            full_name: comment.full_name,
+            comment_text: comment.comment_text,
+            dstamp: dstamp
+          });
+        }
     });
   }
 
+  submitComment(): void {
+    
+  }
 }

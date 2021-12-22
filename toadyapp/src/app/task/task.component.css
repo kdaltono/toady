@@ -18,8 +18,9 @@
     /* Style these so that they look distinct and not like a repeat of the task details above */
     display: flex;
     flex-direction: column;
-    margin: 10px 100px 0px 100px;
-    background-color: #fefbfd;
+    margin: 10px 120px 0px 120px;
+    background-color: #e9d7de;
+    color: #555555;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     padding: 20px;
     border-radius: 10px;
@@ -29,15 +30,27 @@
     margin: 0px;
 }
 
-/*
-.comment-name {
-
-}
-
-.comment-text {
-
-}
-
-.comment-date {
+/*.comment-name {
 
 }*/
+
+.comment-text {
+    padding-top: 5px;
+}
+
+.comment-input-area {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0px;
+    margin: 10px 120px 0px 120px;
+    padding: 10px;
+}
+
+.comment-input {
+    width: 100%;
+}
+
+.comment-submit {
+    float: right;
+}
