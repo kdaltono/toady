@@ -8,6 +8,20 @@ const TaskComments = function(taskComment) {
     this.dstamp = taskComment.dstamp
 }
 
+TaskComments.addComment = (taskId, userId, commentText, result) => {
+    const query = 'INSERT INTO task_comments(user_id, task_id, comment_text) VALUES (?, ?, ?)'
+
+    sql.query(query, [userId, taskId, commentText], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return;
+        }
+
+        result(null, res.insertId)
+    })
+}
+
 TaskComments.getTaskComments = (taskId, result) => {
     const query = 
     'select ' + 

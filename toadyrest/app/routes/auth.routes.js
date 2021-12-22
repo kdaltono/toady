@@ -29,6 +29,7 @@ module.exports = app => {
     app.post('/tasks/i', passport.authenticate('jwt', { session: false }), tasks.insertNewTask)
 
     app.get("/comm/:taskId", passport.authenticate('jwt', { session: false }), tasks.getTaskComments)
+    app.post('/comm/add', passport.authenticate('jwt', { session: false }), tasks.insertNewComment)
 
     app.get("/users/a", passport.authenticate('jwt', { session: false }), users.findAll)
     app.get("/users/s/:userId", passport.authenticate('jwt', { session: false }), users.findById)

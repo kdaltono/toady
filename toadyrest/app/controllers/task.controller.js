@@ -83,3 +83,17 @@ exports.insertNewTask = (req, res) => {
         }
     })
 }
+
+exports.insertNewComment = (req, res) => {
+    TaskComments.addComment(req.body.task_id, req.body.user_id, req.body.comment_text, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Error inserting comment: Task ${req.body.task_id} from ${req.body.user_id}: ${req.body.comment_text}`
+            })
+        } else {
+            res.send({
+                message: `Success`
+            })
+        }
+    })
+}
