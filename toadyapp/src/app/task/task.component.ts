@@ -16,6 +16,7 @@ export class TaskComponent implements OnInit {
   taskId: string = '';
   output: string = '';
   title: string = '';
+  commentText: string = '';
 
   taskDetails!: Task;
   taskComments: Comment[] = [];

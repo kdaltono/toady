@@ -36,19 +36,24 @@
 
 .comment-text {
     padding-top: 5px;
+    white-space: pre-wrap;
 }
 
 .comment-input-area {
-    display: flex;
-    flex-direction: row;
     position: fixed;
     bottom: 0px;
-    margin: 10px 120px 0px 120px;
-    padding: 10px;
+    width: 100%;
+}
+
+.comment-element-parent {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 120px 20px 120px;
 }
 
 .comment-input {
-    width: 100%;
+    flex: 1;
+    resize: none;
 }
 
 .comment-submit {

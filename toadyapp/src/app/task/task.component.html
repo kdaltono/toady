@@ -11,7 +11,10 @@
     This text box needs to have width that stretches. And also maybe one that supports multiple
     lines so that formatting can be done by the user
 -->
+<p class='comment-text'>{{commentText}}</p>
 <div class='comment-input-area'>
-    <input type='text' class='comment-input'>
-    <button (click)="submitComment()" class='comment-submit'>Enter</button>
+    <div class='comment-element-parent'>
+        <textarea class='comment-input' [(ngModel)]="commentText"></textarea>
+        <button (click)="submitComment()" class='comment-submit'>Enter</button>
+    </div>
 </div>
