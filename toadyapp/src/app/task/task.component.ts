@@ -5,6 +5,7 @@ import { RestService } from '../rest.service';
 import { Task } from '../task';
 import { Comment } from '../comment';
 import * as moment from 'moment';
+import { JWTAuthService } from '../jwtauth.service';
 
 @Component({
   selector: 'app-task',
@@ -23,7 +24,8 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private restService: RestService
+    private restService: RestService,
+    private jwtAuthService: JWTAuthService
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +65,8 @@ export class TaskComponent implements OnInit {
   }
 
   async setComments(): Promise<void> {
+    this.taskComments = [];
+
     this.restService.getTaskComments(this.taskId)
       .subscribe(data => {
         for (let comment of data) {
@@ -78,6 +82,15 @@ export class TaskComponent implements OnInit {
   }
 
   submitComment(): void {
-    
+    let userId = localStorage.getItem("user_id");
+
+    if (userId === null) {
+      this.jwtAuthService.logout();
+    } else {
+      this.restService.insertNewComment(this.taskId, userId, this.commentText).then(() => {
+        // TODO: This needs to wait before updating comments
+        this.setComments()
+      })
+    }
   }
 }

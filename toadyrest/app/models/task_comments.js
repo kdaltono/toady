@@ -35,7 +35,7 @@ TaskComments.getTaskComments = (taskId, result) => {
     'where ' +
         'tc.task_id = ? ' +
     'order by ' +
-        'tc.dstamp DESC'
+        'tc.dstamp ASC'
 
     sql.query(query, taskId, (err, res) => {
         if (err) {

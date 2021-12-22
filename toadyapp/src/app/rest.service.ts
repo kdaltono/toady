@@ -22,7 +22,8 @@ export class RestService {
   private displayTaskURL = 'http://localhost:8080/tasks/';
   private taskURL = 'http://localhost:8080/tasks/t/';
   private insertNewTaskURL = 'http://localhost:8080/tasks/i';
-  private commentsURL = 'http://localhost:8080/comm/'
+  private commentsURL = 'http://localhost:8080/comm/';
+  private insertCommentURL = 'http://localhost:8080/comm/add';
 
   constructor(
     private http: HttpClient,
@@ -105,6 +106,22 @@ export class RestService {
       () => {
         this.messageService.add('New Task added successfully')
         this.router.navigate(['/home'])
+      }
+    )
+  }
+
+  async insertNewComment(taskId: string, userId: string, commentText: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      task_id: taskId,
+      user_id: userId,
+      comment_text: commentText
+    }
+
+    this.http.post(this.insertCommentURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add('New comment inserted successfully')
       }
     )
   }
