@@ -14,6 +14,7 @@ import { JWTAuthService } from './jwtauth.service';
 import { TaskComponent } from './task/task.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NewtaskComponent } from './newtask/newtask.component';
+import { CommentsComponent } from './task/comments/comments.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     LoginComponent,
     TaskComponent,
     NavBarComponent,
-    NewtaskComponent
+    NewtaskComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

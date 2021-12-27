@@ -1,0 +1,45 @@
+.comment-area {
+    /* Style these so that they look distinct and not like a repeat of the task details above */
+    display: flex;
+    flex-direction: column;
+    margin: 10px 120px 0px 120px;
+    background-color: #e9d7de;
+    color: #555555;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.comment-area p {
+    margin: 0px;
+}
+
+/*.comment-name {
+
+}*/
+
+.comment-text {
+    padding-top: 5px;
+    white-space: pre-wrap;
+}
+
+.comment-input-area {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.comment-element-parent {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 120px 20px 120px;
+}
+
+.comment-input {
+    flex: 1;
+    resize: none;
+}
+
+.comment-submit {
+    float: right;
+}
