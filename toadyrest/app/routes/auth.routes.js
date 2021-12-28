@@ -16,7 +16,13 @@ module.exports = app => {
                 if (isValid) {
                     console.log('/login: user: ' + JSON.stringify(user))
                     const tokenObject = utils.issueJWT(user)
-                    res.status(200).json({ success: true, token: tokenObject.token, expiresIn: tokenObject.expires, user_id: tokenObject.user_id })
+                    res.status(200).json({ 
+                        success: true, 
+                        token: tokenObject.token, 
+                        expiresIn: tokenObject.expires, 
+                        user_id: tokenObject.user_id, 
+                        full_name: tokenObject.full_name 
+                    })
                 } else {
                     res.status(401).json({ success: false, msg: 'Incorrect password' })
                 }

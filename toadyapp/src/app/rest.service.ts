@@ -110,7 +110,7 @@ export class RestService {
     )
   }
 
-  async insertNewComment(taskId: string, userId: string, commentText: string) {
+  insertNewComment(taskId: string, userId: string, commentText: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     const reqObject = {

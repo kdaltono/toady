@@ -49,15 +49,21 @@ export class JWTAuthService {
     localStorage.setItem('id_token', responseObj.token);
     localStorage.setItem('user_id', responseObj.user_id);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('full_name', responseObj.full_name);
   }
 
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user_id');
+    localStorage.removeItem('full_name');
   }
 
-  public isLoggedIn() {
+  getFullName(): string {
+    return localStorage.getItem('full_name')!
+  }
+
+  public isLoggedIn(): boolean {
     return moment().isBefore(this.getExpiration());
   }
 

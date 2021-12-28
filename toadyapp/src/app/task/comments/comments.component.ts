@@ -44,16 +44,27 @@ export class CommentsComponent implements OnInit {
     });
   }
 
-  submitComment(): void {
+  submitComment() {
+    // This doesn't seem like a secure way of submitting comments. Should probably go off of
+    // the Bearer token somehow
     let userId = localStorage.getItem("user_id");
 
     if (userId === null) {
       this.jwtAuthService.logout();
     } else {
-      this.restService.insertNewComment(this.taskId, userId, this.commentText).then(() => {
-        // TODO: This needs to wait before updating comments
-        this.setComments()
+      this.restService.insertNewComment(this.taskId, userId, this.commentText);
+
+      // Add fake comment, this will be removed and the real one loaded from server if 
+      // the page is refreshed
+      this.taskComments.push({
+        comment_id: -1,
+        full_name: this.jwtAuthService.getFullName(),
+        comment_text: this.commentText,
+        dstamp: moment().utc().format('DD-MM-YYYY HH:mm:ss')
       })
+
+      // Clear comment text
+      this.commentText = '';
     }
   }
 }

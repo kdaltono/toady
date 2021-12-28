@@ -14,9 +14,7 @@
     margin: 0px;
 }
 
-/*.comment-name {
-
-}*/
+/* TODO: Add padding to comment area so that the input area doesn't overlap the comments */
 
 .comment-text {
     padding-top: 5px;

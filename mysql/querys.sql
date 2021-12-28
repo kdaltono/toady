@@ -78,8 +78,10 @@ INSERT INTO tasks(task_title, task_desc) VALUES ("Test title", "Test description
 
 INSERT INTO user_to_task(task_id, user_id) VALUES (?, ?)
 
-select * from users;
+INSERT INTO task_comments(user_id, task_id, comment_text) VALUES (?, ?, ?)
 
+select * from users;
+s
 delete * from users where users.user_id > 2;
 
 select 
