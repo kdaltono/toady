@@ -15,6 +15,8 @@ import { TaskComponent } from './task/task.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NewtaskComponent } from './newtask/newtask.component';
 import { CommentsComponent } from './task/comments/comments.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/modules/material/material.module';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -40,7 +42,9 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     JWTAuthService, 

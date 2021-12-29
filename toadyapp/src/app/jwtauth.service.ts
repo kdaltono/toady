@@ -63,6 +63,10 @@ export class JWTAuthService {
     return localStorage.getItem('full_name')!
   }
 
+  getCurrentUserID(): string {
+    return localStorage.getItem('user_id')!;
+  }
+
   public isLoggedIn(): boolean {
     return moment().isBefore(this.getExpiration());
   }

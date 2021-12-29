@@ -13,18 +13,23 @@ import { Comment } from 'src/app/comment';
 })
 export class CommentsComponent implements OnInit {
 
-  taskComments: Comment[] = [];
-  commentText: string = '';
-
   constructor(
     private restService: RestService,
     private jwtAuthService: JWTAuthService
   ) { }
 
   @Input() taskId!: string;
+  taskComments: Comment[] = [];
+  commentText: string = '';
+  currentUserId: string = '';
 
   ngOnInit(): void {
+    this.currentUserId = this.jwtAuthService.getCurrentUserID();
     this.setComments();
+  }
+
+  isCurrentUserComment(userId: string): boolean {
+    return this.currentUserId == userId;
   }
 
   setComments() {
@@ -35,6 +40,8 @@ export class CommentsComponent implements OnInit {
         for (let comment of data) {
           let dstamp: string = moment(comment.dstamp).utc().format('DD-MM-YYYY HH:mm:ss');
           this.taskComments.push({
+            isCurrentUserComment: this.isCurrentUserComment(comment.user_id),
+            user_id: comment.user_id,
             comment_id: comment.comment_id,
             full_name: comment.full_name,
             comment_text: comment.comment_text,
@@ -47,16 +54,16 @@ export class CommentsComponent implements OnInit {
   submitComment() {
     // This doesn't seem like a secure way of submitting comments. Should probably go off of
     // the Bearer token somehow
-    let userId = localStorage.getItem("user_id");
-
-    if (userId === null) {
+    if (this.currentUserId === null) {
       this.jwtAuthService.logout();
     } else {
-      this.restService.insertNewComment(this.taskId, userId, this.commentText);
+      this.restService.insertNewComment(this.taskId, this.currentUserId, this.commentText);
 
       // Add fake comment, this will be removed and the real one loaded from server if 
       // the page is refreshed
       this.taskComments.push({
+        isCurrentUserComment: true,
+        user_id: this.currentUserId,
         comment_id: -1,
         full_name: this.jwtAuthService.getFullName(),
         comment_text: this.commentText,

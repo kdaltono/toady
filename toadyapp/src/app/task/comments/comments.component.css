@@ -1,4 +1,4 @@
-.comment-area {
+.user-comment-area {
     /* Style these so that they look distinct and not like a repeat of the task details above */
     display: flex;
     flex-direction: column;
@@ -6,11 +6,26 @@
     background-color: #e9d7de;
     color: #555555;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
 }
 
-.comment-area p {
+.user-comment-area p {
+    margin: 0px;
+}
+
+.other-user-comment-area {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 120px 0px 120px;
+    background-color: #e9dbd7;
+    color: #555555;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.other-user-comment-area p {
     margin: 0px;
 }
 
@@ -40,4 +55,14 @@
 
 .comment-submit {
     float: right;
+}
+
+.comment-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon-left {
+    margin-left: auto;
 }

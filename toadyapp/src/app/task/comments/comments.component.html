@@ -1,7 +1,27 @@
-<div class='comment-area' *ngFor="let comment of taskComments">
-    <p class='comment-name'>{{comment.full_name}} - {{comment.dstamp}}</p>
-    <p class='comment-text'>{{comment.comment_text}}</p>
+
+
+<div *ngFor="let comment of taskComments">
+    <ng-template [ngIf]="comment.isCurrentUserComment" [ngIfElse]="otherUserComment">
+        <div class='user-comment-area'>
+            <div class=comment-header>
+                <p class='comment-name'>{{comment.full_name}} - {{comment.dstamp}}</p>
+                <!-- <span class="material-icons icon-left">delete</span> -->
+                <button mat-icon-button class='icon-left'>
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <p class='comment-text'>{{comment.comment_text}}</p>
+        </div>
+    </ng-template>
+    <ng-template #otherUserComment>
+        <div class='other-user-comment-area'>
+            <p class='comment-name'>{{comment.full_name}} - {{comment.dstamp}}</p>
+            <p class='comment-text'>{{comment.comment_text}}</p>
+        </div>
+    </ng-template>
+    
 </div>
+
 <div class='comment-input-area'>
     <div class='comment-element-parent'>
         <textarea class='comment-input' [(ngModel)]="commentText"></textarea>
