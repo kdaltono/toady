@@ -11,6 +11,7 @@
     margin: 0px 0px 0px 20px;
     color: white;
     font-size: 40px;
+    font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     -webkit-text-stroke: 1.5px black;
 }
