@@ -24,6 +24,7 @@ export class RestService {
   private insertNewTaskURL = 'http://localhost:8080/tasks/i';
   private commentsURL = 'http://localhost:8080/comm/';
   private insertCommentURL = 'http://localhost:8080/comm/add';
+  private deleteCommentURL = 'http://localhost:8080/comm/del';
 
   constructor(
     private http: HttpClient,
@@ -122,6 +123,22 @@ export class RestService {
     this.http.post(this.insertCommentURL, reqObject, { headers: headers }).subscribe(
       () => {
         this.messageService.add('New comment inserted successfully')
+      }
+    )
+  }
+
+  deleteComment(commentId: string, commentText: string, userId: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      comment_id: commentId,
+      comment_text: commentText,
+      user_id: userId
+    }
+
+    this.http.delete(this.deleteCommentURL, {headers: headers, body: reqObject}).subscribe(
+      () => {
+        this.messageService.add('Comment deleted successfully')
       }
     )
   }

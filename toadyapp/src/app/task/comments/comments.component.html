@@ -1,12 +1,10 @@
-
-
 <div *ngFor="let comment of taskComments">
     <ng-template [ngIf]="comment.isCurrentUserComment" [ngIfElse]="otherUserComment">
         <div class='user-comment-area'>
             <div class=comment-header>
                 <p class='comment-name'>{{comment.full_name}} - {{comment.dstamp}}</p>
                 <!-- <span class="material-icons icon-left">delete</span> -->
-                <button mat-icon-button class='icon-left'>
+                <button mat-icon-button class='icon-left' (click)='beginDelete(comment)'>
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
@@ -26,5 +24,22 @@
     <div class='comment-element-parent'>
         <textarea class='comment-input' [(ngModel)]="commentText"></textarea>
         <button (click)="submitComment()" class='comment-submit'>Enter</button>
+    </div>
+</div>
+
+<!-- Need to update the layout for this, it's currently not very nice -->
+<div *ngIf="deleteComment">
+    <div class='blur'></div>
+    <div class='popup'>
+        <div class='popup-content'>
+            <div class='popup-header'>
+                <p class='popup-title'>alert</p>
+            </div>
+            <p class='popup-text'>Are you sure you want to delete this comment?</p>
+            <div class='popup-buttons'>
+                <button class='popup-button' (click)='confirmDelete()'>Yes</button>
+                <button class='popup-button' (click)="cancelDelete()">Cancel</button>
+            </div>
+        </div>
     </div>
 </div>
