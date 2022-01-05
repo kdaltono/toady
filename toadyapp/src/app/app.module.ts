@@ -17,6 +17,7 @@ import { NewtaskComponent } from './newtask/newtask.component';
 import { CommentsComponent } from './task/comments/comments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material/material.module';
+import { RestService } from './rest.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     JWTAuthService, 
+    RestService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
