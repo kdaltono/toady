@@ -4,6 +4,7 @@ import { RestService } from '../rest.service';
 import { Task } from '../task';
 import { Comment } from '../comment';
 import { JWTAuthService } from '../jwtauth.service';
+import { TaskStatus } from '../task_status';
 
 @Component({
   selector: 'app-task',
@@ -17,6 +18,8 @@ export class TaskComponent implements OnInit {
   title: string = '';
 
   taskDetails!: Task;
+  taskStatuses: TaskStatus[] = [];
+  selectedStatus: TaskStatus = {} as TaskStatus;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +27,8 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getParameter()
+    this.getParameter();
+
   }
 
   getParameter() {
@@ -49,6 +53,7 @@ export class TaskComponent implements OnInit {
 
   updateUI(): void {
     this.setTaskDetails();
+    this.setTaskStatusSelect();
   }
 
   setTaskDetails() {
@@ -56,7 +61,17 @@ export class TaskComponent implements OnInit {
       .subscribe(data => {
         this.taskDetails = data
 
-        this.output = JSON.stringify(this.taskDetails)
+        this.selectedStatus = {
+          status_id: this.taskDetails.status_id,
+          status_text: this.taskDetails.status_text
+        }
     });
+  }
+
+  setTaskStatusSelect() {
+    this.restService.getTaskStatus()
+      .subscribe(data => {
+        this.taskStatuses = data
+      })
   }
 }

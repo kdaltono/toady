@@ -8,6 +8,16 @@
 
 .task-header {
     margin: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.status-select {
+    margin-left: auto;
+}
+
+.task-title {
+    margin: 0px;
 }
 
 .task-desc {

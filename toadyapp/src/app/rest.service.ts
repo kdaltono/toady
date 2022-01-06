@@ -11,6 +11,7 @@ import { MessageService } from './message.service';
 import { environment } from '../environments/environment';
 import { JWTAuthService } from './jwtauth.service';
 import { SimplifiedUser } from './simplifieduser';
+import { TaskStatus } from './task_status';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class RestService {
   private commentsURL = 'http://localhost:8080/comm/';
   private insertCommentURL = 'http://localhost:8080/comm/add';
   private deleteCommentURL = 'http://localhost:8080/comm/del';
+  private taskStatusURL = 'http://localhost:8080/status';
 
   constructor(
     private http: HttpClient,
@@ -78,8 +80,22 @@ export class RestService {
       )
   }
 
+  getTaskStatus(): Observable<TaskStatus[]> {
+    return this.http.get<TaskStatus[]>(this.taskStatusURL)
+      .pipe(
+        tap(
+          event => {
+            this.log('Fetched task statuses')
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<TaskStatus[]>('getTaskStatus'))
+      )
+  }
+
   getTaskComments(taskId: string): Observable<any> {
-    // TODO: Add comments url and query
     return this.http.get<Comment>(this.commentsURL + taskId)
       .pipe(
         tap(

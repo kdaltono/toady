@@ -7,7 +7,7 @@ const Status = function(status) {
 };
 
 Status.getTaskStatus = (result) => {
-    const query = 'select * from task_status';
+    const query = 'select status_id, status_text from task_status';
 
     sql.query(query, (err, res) => {
         if (err) {

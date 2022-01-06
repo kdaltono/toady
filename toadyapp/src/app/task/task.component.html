@@ -1,13 +1,15 @@
 <div class='task-area'>
-    <div>
-        <h1 class='task-header'>[{{taskDetails?.status_text}}] {{taskDetails?.task_id}}: {{taskDetails?.task_title}}</h1>
+    <div class='task-header'>
+        <h1 class='task-title'>{{taskDetails?.task_id}}: {{taskDetails?.task_title}}</h1>
 
         <!-- 
             Need to get the statuses from REST API, and then display them all here and
-            select the current taskDetail's as the default one
-        <select>
-
-        </select> -->
+            select the current taskDetail's as the default one -->
+        <select class='status-select' [(ngModel)]="selectedStatus.status_id">
+            <option *ngFor="let status of taskStatuses" [ngValue]="status.status_id">
+                {{status.status_text}}
+            </option>
+        </select>
     </div>
 
     <p class='task-desc'>{{taskDetails?.task_desc}}</p> 
