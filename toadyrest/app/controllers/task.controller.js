@@ -97,3 +97,17 @@ exports.insertNewComment = (req, res) => {
         }
     })
 }
+
+exports.deleteComment = (req, res) => {
+    TaskComments.deleteComment(req.body.comment_id, req.body.comment_text, req.body.user_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Error deleting comment: Comment text: ${req.body.comment_text}`
+            })
+        } else {
+            res.send({
+                message: `Success`
+            })
+        }
+    })
+}

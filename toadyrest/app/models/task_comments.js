@@ -25,6 +25,7 @@ TaskComments.addComment = (taskId, userId, commentText, result) => {
 TaskComments.getTaskComments = (taskId, result) => {
     const query = 
     'select ' + 
+        'u.user_id, ' +
         'tc.comment_id, ' +
         'CONCAT(u.first_name, " ", u.last_name) AS full_name, ' +
         'tc.comment_text, ' +
@@ -52,6 +53,43 @@ TaskComments.getTaskComments = (taskId, result) => {
 
         result({kind: 'not_found'}, null)
     })
+}
+
+TaskComments.deleteComment = (commentId, commentText, userId, result) => {
+    var query; 
+
+    if (commentId = -1) {
+        query = 'delete from ' + 
+            'task_comments ' + 
+        'where ' + 
+            'comment_text = ? ' + 
+            'AND user_id = ? ' + 
+        'order by ' + 
+            'dstamp DESC ' + 
+        'limit 1';
+
+        sql.query(query, [commentText, userId], (err, res) => {
+            if (err) {
+                console.log('Error: ' + err)
+                result(null, err)
+                return
+            }
+
+            result(null, res)
+        })
+    } else {
+        query = 'delete FROM task_comments where comment_id = ? limit 1';
+
+        sql.query(query, commentId, (err, res) => {
+            if (err) {
+                console.log('Error: ' + err)
+                result(null, err)
+                return
+            }
+
+            result(null, res)
+        })
+    }
 }
 
 module.exports = TaskComments
