@@ -4,6 +4,7 @@ module.exports = app => {
     const utils = require('../lib/utils')
     const tasks = require('../controllers/task.controller')
     const users = require('../controllers/user.controller')
+    const status = require('../controllers/status.controller')
 
     app.post('/login', function(req, res, data) {
         User.findByUsername(req.body.username, function(err, user) {
@@ -33,6 +34,8 @@ module.exports = app => {
     app.get('/tasks/:userId', passport.authenticate('jwt', { session: false }), tasks.getDisplayDescription)
     app.get('/tasks/t/:taskId', passport.authenticate('jwt', { session: false }), tasks.getTaskDetails)
     app.post('/tasks/i', passport.authenticate('jwt', { session: false }), tasks.insertNewTask)
+
+    app.get('/status', passport.authenticate('jwt', { session: false }), status.getStatusTask)
 
     app.get("/comm/:taskId", passport.authenticate('jwt', { session: false }), tasks.getTaskComments)
     app.post('/comm/add', passport.authenticate('jwt', { session: false }), tasks.insertNewComment)

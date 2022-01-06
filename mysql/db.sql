@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS tasks(
     task_id INTEGER AUTO_INCREMENT NOT NULL,
     task_title VARCHAR(50) NOT NULL,
     task_desc TEXT NOT NULL,
-    status_id INTEGER NOT NULL,
+    status_id INTEGER NOT NULL DEFAULT 1,
     PRIMARY KEY (task_id),
     FOREIGN KEY (status_id)
         REFERENCES task_status(status_id)

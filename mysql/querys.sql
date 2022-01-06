@@ -94,3 +94,23 @@ from
     ON (tc.user_id = u.user_id)
 where
     tc.task_id = 1;
+
+delete FROM task_comments where comment_id = ? limit 1
+
+delete from task_comments where comment_text = ? AND user_id = ? order by dstamp DESC limit 1
+
+select
+    t.task_id,
+    t.task_title,
+    t.task_desc,
+    st.status_text
+from
+    tasks t left join task_status st
+    on (t.status_id = st.status_id)
+where
+    t.task_id = 1;
+
+SELECT
+    *
+FROM
+    task_status;

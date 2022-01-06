@@ -39,7 +39,9 @@ export class TaskComponent implements OnInit {
           this.taskDetails = {
             task_id: -1,
             task_title: "Task not found",
-            task_desc: `Could not find task: ${this.taskId}`
+            task_desc: `Could not find task: ${this.taskId}`,
+            status_id: -1,
+            status_text: "Unknown"
           }
         }
       })

@@ -1,5 +1,14 @@
 <div class='task-area'>
-    <h1 class='task-header'>{{taskDetails?.task_id}}: {{taskDetails?.task_title}}</h1>
+    <div>
+        <h1 class='task-header'>[{{taskDetails?.status_text}}] {{taskDetails?.task_id}}: {{taskDetails?.task_title}}</h1>
+
+        <!-- 
+            Need to get the statuses from REST API, and then display them all here and
+            select the current taskDetail's as the default one
+        <select>
+
+        </select> -->
+    </div>
 
     <p class='task-desc'>{{taskDetails?.task_desc}}</p> 
 </div>

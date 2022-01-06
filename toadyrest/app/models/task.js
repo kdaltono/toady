@@ -8,11 +8,16 @@ const Task = function(task) {
 
 Task.getTaskInformation = (taskId, result) => {
     const query = 
-    "SELECT " +
-        "* " +
-    "FROM " +
-        "tasks t " +
-    "WHERE " +
+    "select " +
+        "t.task_id, " +
+        "t.task_title, " +
+        "t.task_desc, " +
+        "st.status_id, " +
+        "st.status_text " +
+    "from " +
+        "tasks t left join task_status st " +
+        "on (t.status_id = st.status_id) " +
+    "where " +
         "t.task_id = ?"
 
     sql.query(query, taskId, (err, res) => {
