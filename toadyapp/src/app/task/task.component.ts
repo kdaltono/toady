@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../rest.service';
 import { Task } from '../task';
-import { Comment } from '../comment';
-import { JWTAuthService } from '../jwtauth.service';
 import { TaskStatus } from '../task_status';
 
 @Component({
@@ -20,6 +18,7 @@ export class TaskComponent implements OnInit {
   taskDetails!: Task;
   taskStatuses: TaskStatus[] = [];
   selectedStatus: TaskStatus = {} as TaskStatus;
+  originalStatusId: number = -1;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +27,14 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParameter();
+  }
 
+  ngOnDestroy(): void {
+    // When the component is unloaded, update the status
+    if (this.originalStatusId !== this.selectedStatus.status_id) {
+      this.restService.updateTaskStatus(this.taskId, 
+        this.selectedStatus.status_id.toString());
+    }
   }
 
   getParameter() {
@@ -65,6 +71,7 @@ export class TaskComponent implements OnInit {
           status_id: this.taskDetails.status_id,
           status_text: this.taskDetails.status_text
         }
+        this.originalStatusId = this.taskDetails.status_id;
     });
   }
 

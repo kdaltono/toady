@@ -27,6 +27,7 @@ export class RestService {
   private insertCommentURL = 'http://localhost:8080/comm/add';
   private deleteCommentURL = 'http://localhost:8080/comm/del';
   private taskStatusURL = 'http://localhost:8080/status';
+  private updateStatusURL = 'http://localhost:8080/tasks/status/u'
 
   constructor(
     private http: HttpClient,
@@ -155,6 +156,21 @@ export class RestService {
     this.http.delete(this.deleteCommentURL, {headers: headers, body: reqObject}).subscribe(
       () => {
         this.messageService.add('Comment deleted successfully')
+      }
+    )
+  }
+
+  updateTaskStatus(taskId: string, statusId: string): void {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      task_id: taskId,
+      status_id: statusId
+    }
+
+    this.http.put<any>(this.updateStatusURL, reqObject, { headers }).subscribe(
+      () => {
+        this.messageService.add('Task Status update successful');
       }
     )
   }
