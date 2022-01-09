@@ -114,3 +114,5 @@ SELECT
     *
 FROM
     task_status;
+
+UPDATE tasks SET status_id = 1 WHERE task_id = 1;

@@ -13,6 +13,7 @@ import { DisplayTask } from '../displaytask';
 export class UserDetailsComponent implements OnInit {
 
   displayTasks: DisplayTask[] = [];
+  tasksLoaded: boolean = false;
 
   constructor(
     private restService: RestService,
@@ -20,18 +21,21 @@ export class UserDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Call the rest service, and then save them here and display them on the page
-    // Also updaet user.ts to the correct values pls
-    this.setDisplayTasks();
+    // Wait 2 seconds so that db can update properly
+    setTimeout(() => {
+      this.setDisplayTasks();
+    }, 1000);
   }
 
   setDisplayTasks(): void {
     const userId = localStorage.getItem('user_id');
 
-    // If userId is null, then the error will be found in RestService's error handler,
-    // and redirect to /login
+    // This doesn't work when the user isn't logged in. It looks odd waiting and 
+    // then redirecting the user
     this.restService.getDisplayTasks(userId!)
-      .subscribe(tasks => this.displayTasks = tasks);
-    this.messageService.add("UserDetails: retrieved displayt tasks");
+      .subscribe(tasks => {
+        this.displayTasks = tasks;
+        this.tasksLoaded = true;
+      });
   }
 }
