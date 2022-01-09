@@ -12,6 +12,15 @@
 }
 
 .new-task-form-item {
+    margin: 0px;
+    width: 100%;
+    padding: 0px;
+}
+
+.new-task-form-section {
     margin-top: 10px;
-    margin-right: auto;
+}
+
+.new-task-desc {
+    resize: none;
 }

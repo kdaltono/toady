@@ -18,6 +18,7 @@ import { CommentsComponent } from './task/comments/comments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { RestService } from './rest.service';
+import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
     TaskComponent,
     NavBarComponent,
     NewtaskComponent,
-    CommentsComponent
+    CommentsComponent,
+    TextareaAutoresizeDirective
   ],
   imports: [
     BrowserModule,

@@ -2,15 +2,21 @@
     <h2>Create New Task</h2>
     <form (ngSubmit)="onNewTaskSubmit()" #newtaskform="ngForm">
         <div class='new-task-form'>
-            <p class='new-task-form-item'>Title</p>
-            <input type="text" name="tasktitle" ngModel class='new-task-form-item'>
-            <p class='new-task-form-item'>Description</p>
-            <input type="text" name="taskdesc" ngModel class='new-task-form-item'>
-            <!-- TODO: Need to add way to assign users -->
-            <select [(ngModel)]='selectedUsers' class='new-task-form-item new-task-select' multiple size="4">
-                <option *ngFor="let u of users" [ngValue]="u">{{u.full_name}}</option>
-            </select>
+            <div class='new-task-form-section'>
+                <p class='new-task-form-item'>Title</p>
+                <input type="text" name="tasktitle" ngModel class='new-task-form-item'>
+            </div>
+            <div class='new-task-form-section'>
+                <p class='new-task-form-item'>Description</p>
+                <textarea name="taskdesc" ngModel class='new-task-form-item new-task-desc' rows="6" appTextareaAutoresize></textarea>
+            </div>
+            <div class='new-task-form-section'>
+                <p class='new-task-form-item'>Assign Users</p>
+                <select [(ngModel)]='selectedUsers' class='new-task-form-item' multiple size="4">
+                    <option *ngFor="let u of users" [ngValue]="u">{{u.full_name}}</option>
+                </select>
+            </div>
         </div>
-        <button type="submit">Create Task</button>
+        <button type="submit" class='new-task-form-section'>Create Task</button>
     </form>
 </div>
