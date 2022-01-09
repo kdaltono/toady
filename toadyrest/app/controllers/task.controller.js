@@ -111,3 +111,17 @@ exports.deleteComment = (req, res) => {
         }
     })
 }
+
+exports.updateStatus = (req, res) => {
+    Task.updateStatus(req.body.task_id, req.body.status_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Error updating task with ID: ${req.body.task_id}`
+            })
+        } else {
+            res.send({
+                message: 'Success'
+            })
+        }
+    })
+}

@@ -51,4 +51,18 @@ Task.insertNewTask = (taskTitle, taskDescription, result) => {
     })
 }
 
+Task.updateStatus = (taskId, statusId, result) => {
+    const query = 'UPDATE tasks SET status_id = ? where task_id = ?'
+
+    sql.query(query, [statusId, taskId], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, 'Success')
+    })
+}
+
 module.exports = Task
