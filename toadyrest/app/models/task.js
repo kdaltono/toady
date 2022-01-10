@@ -38,7 +38,7 @@ Task.getTaskInformation = (taskId, result) => {
 }
 
 Task.insertNewTask = (taskTitle, taskDescription, result) => {
-    const query = 'INSERT INTO tasks(task_title, task_desc) VALUES (?, ?)'
+    const query = 'INSERT INTO tasks(task_title, task_desc, status_id) VALUES (?, ?, 1)'
 
     sql.query(query, [taskTitle, taskDescription], (err, res) => {
         if (err) {

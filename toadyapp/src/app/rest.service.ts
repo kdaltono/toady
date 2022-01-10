@@ -124,6 +124,9 @@ export class RestService {
       () => {
         this.messageService.add('New Task added successfully')
         this.router.navigate(['/home'])
+      },
+      error => {
+        this.messageService.add('Error: ' + JSON.stringify(error));
       }
     )
   }
