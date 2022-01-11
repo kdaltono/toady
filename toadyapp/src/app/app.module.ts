@@ -19,11 +19,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { RestService } from './rest.service';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: UserDetailsComponent },
   { path: 'task/:taskid', component: TaskComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'add', component: NewtaskComponent },
   { path: '', redirectTo: 'home' },
   { path: '**', redirectTo: 'home' }
@@ -39,7 +41,8 @@ const appRoutes: Routes = [
     NavBarComponent,
     NewtaskComponent,
     CommentsComponent,
-    TextareaAutoresizeDirective
+    TextareaAutoresizeDirective,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

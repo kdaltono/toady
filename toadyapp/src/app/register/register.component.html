@@ -1,0 +1,19 @@
+<div class='login-area'>
+    <h2>Login</h2>
+    <form (ngSubmit)="onRegisterSubmit()" #loginform="ngForm">
+        <div>
+            <p>Username</p>
+            <input type="text" name="username" ngModel>
+            <p>First name</p>
+            <input type="text" name="firstname" ngModel>
+            <p>Last name</p>
+            <input type="text" name="lastname" ngModel>
+            <p>Password</p>
+            <input type="password" name="password1" ngModel>
+            <p>Confirm password</p>
+            <input type="password" name="password2" ngModel>
+        </div>
+        <button style="margin-top: 20px;" type="submit">Register</button>
+    </form>
+</div>
+<app-messages></app-messages>

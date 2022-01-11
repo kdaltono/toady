@@ -27,7 +27,8 @@ export class RestService {
   private insertCommentURL = 'http://localhost:8080/comm/add';
   private deleteCommentURL = 'http://localhost:8080/comm/del';
   private taskStatusURL = 'http://localhost:8080/status';
-  private updateStatusURL = 'http://localhost:8080/tasks/status/u'
+  private updateStatusURL = 'http://localhost:8080/tasks/status/u';
+  private insertNewUserURL = 'http://localhost:8080/users/register';
 
   constructor(
     private http: HttpClient,
@@ -174,6 +175,27 @@ export class RestService {
     this.http.put<any>(this.updateStatusURL, reqObject, { headers }).subscribe(
       () => {
         this.messageService.add('Task Status update successful');
+      }
+    )
+  }
+
+  insertNewUser(username: string, firstname: string, lastname: string, password: string): void {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      username: username,
+      firstname: firstname,
+      lastname: lastname,
+      password: password
+    };
+
+    this.http.post(this.insertNewUserURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add("New user inserted successfully")
+        this.router.navigate(['/login'])
+      },
+      error => {
+        this.messageService.add("Error: " + JSON.stringify(error))
       }
     )
   }

@@ -89,6 +89,21 @@ User.findById = (userId, result) => {
     })
 }
 
+User.insertNewUser = (username, firstname, lastname, password) => {
+    // Update my.ini set global max_packet to much larger than it currently is
+    const query = 'INSERT INTO users (username, first_name, last_name, password, account_type_id) VALUES(?, ?, ?, ?, 1)'
+
+    sql.query(query, [username, firstname, lastname, password], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, null)
+    })
+}
+
 User.findByUsername = (username, result) => {
     const query = "SELECT * FROM users WHERE username = ?"
 

@@ -47,3 +47,15 @@ exports.getDisplayInformation = (req, res) => {
         }
     })
 }
+
+exports.insertNewUser = (req, res) => {
+    User.insertNewUser(req.body.username, req.body.firstname, req.body.lastname, req.body.password, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Could not insert user: ${req.body.username}, ${req.body.firstname} ${req.body.lastname}, ${req.body.password}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}
