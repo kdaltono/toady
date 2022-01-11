@@ -1,12 +1,13 @@
 <div class='login-area'>
-    <h2>Login</h2>
+    <h2 class='login-heading'>Login</h2>
     <form (ngSubmit)="onLoginSubmit()" #loginform="ngForm">
         <div>
-            <p>Enter a username</p>
+            <p class='form-heading'>Username</p>
             <input type="text" name="username" ngModel>
-            <p>Enter a password</p>
+            <p class='form-heading'>Password</p>
             <input type="password" name="password" ngModel>
         </div>
         <button style="margin-top: 20px;" type="submit">Login</button>
     </form>
+    <p class='registerLink'>Don't have an account? <a [routerLink]="['/register']">Register here.</a></p>
 </div>
