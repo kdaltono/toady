@@ -1,6 +1,13 @@
+<!-- <mat-drawer-container autosize>
+    
+
+    <mat-drawer #drawer class='sidenav-window' mode='side'>
+    </mat-drawer>
+</mat-drawer-container> -->
+
 <div class='navbar'>
     <button mat-icon-button class='navlink'>
-        <mat-icon>menu</mat-icon>
+        <mat-icon (click)='toggleSideNav()'>menu</mat-icon>
     </button>
     <h1 class='logo'>toady</h1>
 

@@ -20,6 +20,7 @@ import { MaterialModule } from './shared/modules/material/material.module';
 import { RestService } from './rest.service';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 import { RegisterComponent } from './register/register.component';
+import { SidenavService } from './sidenav.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
   providers: [
     JWTAuthService, 
     RestService,
+    SidenavService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

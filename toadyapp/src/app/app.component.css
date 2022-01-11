@@ -6,3 +6,34 @@ html, body {
     height: 100%;
     overflow-x: hidden;
 }
+
+.app-content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.sidenav {
+    padding: 10px;
+    background-color: #9C4274;
+    width: 200px;
+    border-right: 1px solid black;
+}
+
+.sidenav-header {
+    color: white;
+    font-size: 30px;
+    height: 30px;
+    border: 0px;
+    padding: 5px 0px 0px 5px;
+}
+
+.sidenav-item {
+    color: white;
+    font-size: 20px;
+    padding: 5px 0px 0px 5px;
+}
