@@ -24,8 +24,9 @@ export class RegisterComponent implements OnInit {
 
     if (password1 === password2) {
       this.restService.insertNewUser(username, firstname, lastname, password1);
+      
     } else {
-      // Make the user aware that the passwords are not equal
+      // TODO: Make the user aware that the passwords are not equal
 
     }
   }

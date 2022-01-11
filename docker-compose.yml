@@ -21,6 +21,7 @@ services:
   toady_db:
     image: mariadb:10.5.8
     container_name: toady_db
+    command: --max_allowed_packet=32505856
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: toady

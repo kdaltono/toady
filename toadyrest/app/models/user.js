@@ -89,9 +89,9 @@ User.findById = (userId, result) => {
     })
 }
 
-User.insertNewUser = (username, firstname, lastname, password) => {
+User.insertNewUser = (username, firstname, lastname, password, result) => {
     // Update my.ini set global max_packet to much larger than it currently is
-    const query = 'INSERT INTO users (username, first_name, last_name, password, account_type_id) VALUES(?, ?, ?, ?, 1)'
+    const query = 'INSERT INTO users (username, first_name, last_name, current_password, account_type_id) VALUES (?, ?, ?, ?, 1)'
 
     sql.query(query, [username, firstname, lastname, password], (err, res) => {
         if (err) {
@@ -100,7 +100,7 @@ User.insertNewUser = (username, firstname, lastname, password) => {
             return
         }
 
-        result(null, null)
+        result(null, res.insertId)
     })
 }
 
