@@ -6,18 +6,23 @@
 </mat-drawer-container> -->
 
 <div class='navbar'>
-    <button mat-icon-button class='navlink'>
-        <mat-icon (click)='toggleSideNav()'>menu</mat-icon>
-    </button>
+    <ng-template [ngIf]='isLoggedIn()'>
+        <button mat-icon-button class='navlink'>
+            <mat-icon (click)='toggleSideNav()'>menu</mat-icon>
+        </button>
+    </ng-template>
+    
     <h1 class='logo'>toady</h1>
 
     <button mat-icon-button class='navlink' routerLink='/home'>
         <mat-icon>home</mat-icon>
     </button>
-    <button mat-icon-button class='navlink' routerLink='/login'>
-        <mat-icon>login</mat-icon>
-    </button>
-
+    <ng-template [ngIf]='!isLoggedIn()'>
+        <button mat-icon-button class='navlink' routerLink='/login'>
+            <mat-icon>login</mat-icon>
+        </button>
+    </ng-template>
+    
     <button mat-icon-button class='navlink left-navlink' routerLink='/add'>
         <mat-icon>add</mat-icon>
     </button>

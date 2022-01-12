@@ -45,7 +45,8 @@ export class JWTAuthService {
   }
 
   setLocalStorage(responseObj: any) {
-    const expiresAt = moment().add(responseObj.expiresIn);
+    const expirationArr = responseObj.expiresIn.match(/[a-zA-Z]+|[0-9]+/g);
+    const expiresAt = moment().add(+expirationArr[0], expirationArr[1]);
     localStorage.setItem('id_token', responseObj.token);
     localStorage.setItem('user_id', responseObj.user_id);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
@@ -68,6 +69,8 @@ export class JWTAuthService {
   }
 
   public isLoggedIn(): boolean {
+    this.messageService.add('moment(): ' + moment().toString());
+    this.messageService.add('getExpiration(): ' + this.getExpiration().toString());
     return moment().isBefore(this.getExpiration());
   }
 

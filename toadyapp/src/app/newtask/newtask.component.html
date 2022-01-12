@@ -10,6 +10,7 @@
                 <p class='new-task-form-item'>Description</p>
                 <textarea name="taskdesc" ngModel class='new-task-form-item new-task-desc' rows="6" appTextareaAutoresize></textarea>
             </div>
+            <!-- TODO: Replace this with material chips, looks nicer and can double as a select -->
             <div class='new-task-form-section'>
                 <p class='new-task-form-item'>Assign Users</p>
                 <select [(ngModel)]='selectedUsers' class='new-task-form-item' multiple size="4">

@@ -18,22 +18,36 @@ html, body {
 }
 
 .sidenav {
-    padding: 10px;
-    background-color: #9C4274;
+    background-color: #711448;
     width: 200px;
     border-right: 1px solid black;
 }
 
 .sidenav-header {
+    height: 60px;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+
+.sidenav-title {
     color: white;
+    -webkit-text-stroke: 0.5px black;
+    font-weight: bold;
     font-size: 30px;
     height: 30px;
     border: 0px;
-    padding: 5px 0px 0px 5px;
+    padding: 17px 0px 0px 16px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.sidenav-list {
+    padding: 0px;
 }
 
 .sidenav-item {
     color: white;
     font-size: 20px;
-    padding: 5px 0px 0px 5px;
+    -webkit-text-stroke: 0.5px black;
 }

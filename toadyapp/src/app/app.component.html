@@ -1,8 +1,12 @@
 <mat-sidenav-container autosize class='app-content'>
     <mat-sidenav #sidenav class='sidenav' mode='side'>
-        <h1 class='sidenav-header'>Menu</h1>
-        <p class='sidenav-item'>Reports</p>
-        <p class='sidenav-item'>Logout</p>
+        <div class='sidenav-header'>
+            <h1 class='sidenav-title'>Menu</h1>
+        </div>
+        <mat-action-list class='sidenav-list'>
+            <button mat-list-item class='sidenav-item'> Reports </button>
+            <button mat-list-item class='sidenav-item' (click)='logout()'> Logout </button>
+        </mat-action-list>
     </mat-sidenav>
     <mat-sidenav-content>
         <app-nav-bar></app-nav-bar>

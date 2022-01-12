@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { JWTAuthService } from './jwtauth.service';
 import { SidenavService } from './sidenav.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +14,17 @@ export class AppComponent {
   title = 'toadyapp';
 
   constructor(
-    private sidenavService: SidenavService
+    private sidenavService: SidenavService,
+    private jwtAuthService: JWTAuthService,
+    private router: Router
   ) {}
 
   ngAfterViewInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
+  }
+
+  logout(): void {
+    this.jwtAuthService.logout();
+    this.router.navigate(['/login']);
   }
 }

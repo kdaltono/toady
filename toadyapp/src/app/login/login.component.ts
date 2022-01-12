@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MessageService } from '../message.service';
 import { JWTAuthService } from '../jwtauth.service';
+import { SidenavService } from '../sidenav.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private jwtAuthService: JWTAuthService
+    private jwtAuthService: JWTAuthService,
+    private sidenavService: SidenavService
   ) { }
 
   onLoginSubmit() {
@@ -26,5 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sidenavService.close();
   }
 }
