@@ -15,7 +15,7 @@ UserToTask.insertNewRecord = (taskId, userId, result) => {
             return
         }
 
-        result(null, null)
+        result(null, res.insertId)
     })
 }
 

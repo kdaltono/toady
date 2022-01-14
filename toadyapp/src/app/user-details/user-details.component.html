@@ -2,12 +2,14 @@
 
 <ng-template #showTasks>
     <div class='task-container' *ngFor="let task of displayTasks">
-        <p class='task-text'>
-            <!-- Test this pls -->
-            <a class='task-title' [routerLink]="['/task', task.task_id]">
-                {{task.task_title}}
-            </a> - assigned to: {{task.usernames}}
-        </p>
+        <div class='task-details'>
+            <p class='task-text'>
+                <a class='task-title' [routerLink]="['/task', task.task_id]">
+                    {{task.task_title}}
+                </a>
+            </p>
+            <p class='task-text'>assigned to: {{task.usernames}}</p>
+        </div>
         <p class='task-status'>
             {{task.status_text}}
         </p>

@@ -1,29 +1,31 @@
-<!-- <mat-drawer-container autosize>
-    
-
-    <mat-drawer #drawer class='sidenav-window' mode='side'>
-    </mat-drawer>
-</mat-drawer-container> -->
-
 <div class='navbar'>
+    <!--
+        TODO: Update the icons so that only relevant ones are visible
+        when a user is logged in or logged out. ie, users shouldn't see
+        the home or add task buttons when they aren't logged in.
+
+        Should also look into animations to make the nav bar adjusting look 
+        a bit nicer, or maybe have the logo center and the icons on the left
+        and right of the logo
+     -->
+
     <ng-template [ngIf]='isLoggedIn()'>
         <button mat-icon-button class='navlink'>
             <mat-icon (click)='toggleSideNav()'>menu</mat-icon>
         </button>
+        <button mat-icon-button class='navlink' routerLink='/home'>
+            <mat-icon>home</mat-icon>
+        </button>
+        <h1 class='logo'>toady</h1>
+        <button mat-icon-button class='navlink left-navlink' routerLink='/add'>
+            <mat-icon>add</mat-icon>
+        </button>
     </ng-template>
     
-    <h1 class='logo'>toady</h1>
-
-    <button mat-icon-button class='navlink' routerLink='/home'>
-        <mat-icon>home</mat-icon>
-    </button>
     <ng-template [ngIf]='!isLoggedIn()'>
+        <h1 class='logo'>toady</h1>
         <button mat-icon-button class='navlink' routerLink='/login'>
             <mat-icon>login</mat-icon>
         </button>
     </ng-template>
-    
-    <button mat-icon-button class='navlink left-navlink' routerLink='/add'>
-        <mat-icon>add</mat-icon>
-    </button>
 </div>

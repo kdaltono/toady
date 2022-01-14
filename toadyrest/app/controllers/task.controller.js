@@ -66,18 +66,31 @@ exports.insertNewTask = (req, res) => {
             })
         } else {
             const assigned_users = req.body.assigned_users
-            
+            let errString = '';    
+
+            // Can't set headers after they are sent
+            // This error comes from this poit onwards, not sure why as the response isn't being
+            // sent multiple times, will have to check why this happens
             for (const user of assigned_users) {
+                console.log(`Created new task: ` + JSON.stringify(data))
+        
                 UserToTask.insertNewRecord(data, user.user_id, (err, data) => {
                     if (err) {
-                        res.status(500).send({
-                            message: `Error creating user to task: ${data}, ${user.user_id}`
-                        })
+                        errString += `Error creating user to task: ${data}, ${user.user_id} `
+                        console.log(`Error creating user to task: ${data}, ${user.user_id}`)
                     } else {
-                        res.send({
-                            message: 'Success'
-                        })
+                        console.log('Added new user to task record for: ' + user.user_id)
                     }
+                })
+            }
+            // Avoid sending multiple responses, only send one for the multiple insertions
+            if (errString !== '') {
+                res.status(500).send({
+                    message: `Error: ${errString}`
+                })
+            } else {
+                res.send({
+                    message: 'Success'
                 })
             }
         }

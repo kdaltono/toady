@@ -1,7 +1,6 @@
 .task-container {
     background-color: #fefbfd;
     margin: 10px 100px 0px 100px;
-    height: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -25,6 +24,12 @@
     margin-right: 10px;
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+.task-details {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px 10px 0px;
 }
 
 .load-spinner {
