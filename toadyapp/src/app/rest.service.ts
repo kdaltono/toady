@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { User } from './user';
 import { DisplayTask } from './displaytask';
+import { DisplayUser } from './displayuser';
 import { Task } from './task'
 import { MessageService } from './message.service';
 import { environment } from '../environments/environment';
@@ -29,6 +30,7 @@ export class RestService {
   private taskStatusURL = 'http://localhost:8080/status';
   private updateStatusURL = 'http://localhost:8080/tasks/status/u';
   private insertNewUserURL = 'http://localhost:8080/users/register';
+  private getAssignedUsersURL = 'http://localhost:8080/tasks/users/a/';
 
   constructor(
     private http: HttpClient,
@@ -37,8 +39,8 @@ export class RestService {
     private jwtAuthService: JWTAuthService
   ) { }
 
-  getUsers(): Observable<SimplifiedUser[]> {
-    return this.http.get<SimplifiedUser[]>(this.restUrl)
+  getUsers(): Observable<DisplayUser[]> {
+    return this.http.get<DisplayUser[]>(this.restUrl)
         .pipe(
           tap(
             event => {
@@ -48,7 +50,7 @@ export class RestService {
               this.handleErrorResponse(error);
             }
           ),
-          catchError(this.handleError<SimplifiedUser[]>('getUsers', []))
+          catchError(this.handleError<DisplayUser[]>('getUsers', []))
     );
   }
 
@@ -177,6 +179,21 @@ export class RestService {
         this.messageService.add('Task Status update successful');
       }
     )
+  }
+
+  getAssignedUsersForTask(task_id: string): Observable<DisplayUser[]> {
+    return this.http.get<DisplayUser[]>(this.getAssignedUsersURL + task_id)
+      .pipe(
+        tap (
+          event => {
+            this.log(`Fetched assigned users for task ID: ${task_id}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<DisplayUser[]>('getAssignedUsersForTask'))
+      )
   }
 
   insertNewUser(username: string, firstname: string, lastname: string, password: string): void {

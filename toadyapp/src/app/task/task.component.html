@@ -1,10 +1,34 @@
 <div class='task-area'>
+    <mat-form-field class='assigned-users-form' appearance="fill">
+        <mat-label>Assigned Users</mat-label>
+        <mat-select [formControl]="formControl" multiple>
+            <mat-select-trigger>
+                <mat-chip-list class='assigned-users' aria-label="Assigned Users" 
+                    aria-orientation="horizontal">
+                    <mat-chip *ngFor="let user of assignableUsers"
+                        (removed)="remove(user.user_id)" 
+                        [removable]="true">
+                        {{user.full_name}}
+        
+                        <button matChipRemove (click)="remove(user.user_id)">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                </mat-chip-list>
+            </mat-select-trigger>
+
+            <mat-option *ngFor="let user of assignableUsers" [value]="user.user_id">
+                {{user.full_name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!-- 
+    <p>Assigned users: {{assignedUsers | json}}</p>
+    <p>Assignable users: {{assignableUsers | json}}</p>
+    -->
+
     <div class='task-header'>
         <h1 class='task-title'>{{taskDetails?.task_id}}: {{taskDetails?.task_title}}</h1>
-
-        <!-- 
-            Need to get the statuses from REST API, and then display them all here and
-            select the current taskDetail's as the default one -->
         <select class='status-select' [(ngModel)]="selectedStatus.status_id">
             <option *ngFor="let status of taskStatuses" [ngValue]="status.status_id">
                 {{status.status_text}}
@@ -16,3 +40,4 @@
 </div>
 <app-comments
     [taskId]="taskId"></app-comments>
+<app-messages></app-messages>

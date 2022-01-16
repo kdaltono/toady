@@ -6,6 +6,38 @@ const Task = function(task) {
     this.task_desc = task.task_desc
 }
 
+Task.getAssignedUsers = (taskId, result) => {
+    const query = 
+    "SELECT " +
+        "u.user_id, " +
+        "u.first_name, " +
+        "u.last_name, " +
+        "CONCAT(u.first_name, \" \", u.last_name) as full_name, " +
+        "u.username " +
+    "FROM " +
+        "tasks t left join user_to_task utt " +
+        "on (t.task_id = utt.task_id) left join users u " +
+        "on (utt.user_id = u.user_id) " +
+    "where " +
+        "t.task_id = 17"
+
+    sql.query(query, taskId, (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        if (res.length) {
+            console.log("Found assigned users: " + res[0])
+            result(null, res[0])
+            return
+        }
+
+        result({ kind: "not_found" }, null)
+    })
+}
+
 Task.getTaskInformation = (taskId, result) => {
     const query = 
     "select " +

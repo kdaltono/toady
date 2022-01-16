@@ -24,3 +24,12 @@
     white-space: pre-wrap;
     margin: 10px 0px 0px 0px;
 }
+
+.assigned-users {
+    display: flex;
+    flex-direction: row;
+}
+
+.assigned-users-form {
+    width: 100%;
+}

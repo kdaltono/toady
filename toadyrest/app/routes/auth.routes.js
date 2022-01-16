@@ -33,6 +33,7 @@ module.exports = app => {
 
     app.get('/tasks/:userId', passport.authenticate('jwt', { session: false }), tasks.getDisplayDescription)
     app.get('/tasks/t/:taskId', passport.authenticate('jwt', { session: false }), tasks.getTaskDetails)
+    app.get('/tasks/users/a/:taskId', passport.authenticate('jwt', { session: false }), tasks.getAssignedUsers)
     app.post('/tasks/i', passport.authenticate('jwt', { session: false }), tasks.insertNewTask)
     app.put('/tasks/status/u', passport.authenticate('jwt', { session: false }), tasks.updateStatus)
 
