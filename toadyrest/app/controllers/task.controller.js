@@ -109,11 +109,11 @@ exports.getAssignedUsers = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Could not find assigned users for task: ${req.body.task_id}`
+                    message: `Could not find assigned users for task: ${req.params.taskId}`
                 })
             } else {
                 res.status(500).send({
-                    message: `Error getting assigned users for task: ${req.body.task_id}`
+                    message: `Error getting assigned users for task: ${req.params.taskId}`
                 })
             }
         } else {

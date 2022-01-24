@@ -69,8 +69,7 @@ export class JWTAuthService {
   }
 
   public isLoggedIn(): boolean {
-    this.messageService.add('moment(): ' + moment().toString());
-    this.messageService.add('getExpiration(): ' + this.getExpiration().toString());
+    // TODO: Figure out why this function is being called so much
     return moment().isBefore(this.getExpiration());
   }
 

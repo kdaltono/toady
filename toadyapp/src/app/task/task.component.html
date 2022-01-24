@@ -1,31 +1,23 @@
 <div class='task-area'>
-    <mat-form-field class='assigned-users-form' appearance="fill">
-        <mat-label>Assigned Users</mat-label>
-        <mat-select [formControl]="formControl" multiple>
-            <mat-select-trigger>
-                <mat-chip-list class='assigned-users' aria-label="Assigned Users" 
-                    aria-orientation="horizontal">
-                    <mat-chip *ngFor="let user of assignableUsers"
-                        (removed)="remove(user.user_id)" 
-                        [removable]="true">
-                        {{user.full_name}}
-        
-                        <button matChipRemove (click)="remove(user.user_id)">
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                </mat-chip-list>
-            </mat-select-trigger>
+    <form [formGroup]="reactiveForm" class='assign-users-form'>
+        <mat-form-field class='assign-users-field'>
+            <mat-label>Assigned Users</mat-label>
+    
+            <mat-select formControlName="assignedUsersControl" multiple [compareWith]="compareFn">
+                <mat-select-trigger>
+                    <mat-chip-list class='mat-chip-list user-chip-list' aria-orientation="horizontal">
+                        <mat-chip *ngFor='let user of reactiveForm.get("assignedUsersControl")!.value'>
+                            {{ user.full_name }}
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-select-trigger>
+                <mat-option *ngFor="let user of assignableUsers" [value]="user">{{ user.full_name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
 
-            <mat-option *ngFor="let user of assignableUsers" [value]="user.user_id">
-                {{user.full_name}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <!-- 
-    <p>Assigned users: {{assignedUsers | json}}</p>
-    <p>Assignable users: {{assignableUsers | json}}</p>
-    -->
+    <!-- <p>Value 1: {{ reactiveForm.get("assignedUsersControl")!.value | json }}</p>
+    <p>Value 2: {{ reactiveForm.get("assignedUsersControl")!.value.value | json }}</p> -->
 
     <div class='task-header'>
         <h1 class='task-title'>{{taskDetails?.task_id}}: {{taskDetails?.task_title}}</h1>

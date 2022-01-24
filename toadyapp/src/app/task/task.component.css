@@ -25,11 +25,15 @@
     margin: 10px 0px 0px 0px;
 }
 
-.assigned-users {
-    display: flex;
-    flex-direction: row;
+.assign-users-form {
+    width: 100%;
 }
 
-.assigned-users-form {
+.assign-users-field {
     width: 100%;
+}
+
+.user-chip-list {
+    display: flex;
+    flex-direction: row;
 }

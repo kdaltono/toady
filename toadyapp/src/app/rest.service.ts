@@ -182,7 +182,8 @@ export class RestService {
   }
 
   getAssignedUsersForTask(task_id: string): Observable<DisplayUser[]> {
-    return this.http.get<DisplayUser[]>(this.getAssignedUsersURL + task_id)
+    const url = this.getAssignedUsersURL + task_id;
+    return this.http.get<DisplayUser[]>(url)
       .pipe(
         tap (
           event => {

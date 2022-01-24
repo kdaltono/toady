@@ -19,7 +19,7 @@ Task.getAssignedUsers = (taskId, result) => {
         "on (t.task_id = utt.task_id) left join users u " +
         "on (utt.user_id = u.user_id) " +
     "where " +
-        "t.task_id = 17"
+        "t.task_id = ?"
 
     sql.query(query, taskId, (err, res) => {
         if (err) {
@@ -29,8 +29,8 @@ Task.getAssignedUsers = (taskId, result) => {
         }
 
         if (res.length) {
-            console.log("Found assigned users: " + res[0])
-            result(null, res[0])
+            console.log("Found assigned users: " + JSON.stringify(res))
+            result(null, res)
             return
         }
 

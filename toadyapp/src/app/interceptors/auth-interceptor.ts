@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 headers: req.headers.set("Authorization", idToken)
             });
 
-            this.messageService.add(`Intercept: ${idToken}`)
             return next.handle(cloned);
         } else {
             return next.handle(req);
