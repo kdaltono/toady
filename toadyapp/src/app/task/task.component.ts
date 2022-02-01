@@ -5,9 +5,10 @@ import { Task } from '../task';
 import { TaskStatus } from '../task_status';
 import { DisplayUser } from '../displayuser';
 import { MessageService } from '../message.service';
-import { SimplifiedUser } from '../simplifieduser';
 import { FormControl, FormGroup } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { pairwise } from 'rxjs';
+import * as _ from 'underscore';
+import { AssignUserService } from './assignuser/assign-user.service';
 
 @Component({
   selector: 'app-task',
@@ -29,11 +30,13 @@ export class TaskComponent implements OnInit {
   assignedUsers: DisplayUser[] = [];
   assignableUsers: DisplayUser[] = [];
   reactiveForm: FormGroup = {} as FormGroup;
+  difference: string = ''
 
   constructor(
     private route: ActivatedRoute,
     private restService: RestService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private assignUsers: AssignUserService
   ) { }
 
   ngOnInit(): void {
@@ -49,8 +52,18 @@ export class TaskComponent implements OnInit {
     const topCtrl = this.reactiveForm.get('assignedUsersControl')
     console.log(topCtrl)
     if (topCtrl) {
-      topCtrl.valueChanges.subscribe(data => {
-        this.messageService.add(JSON.stringify(data));
+      topCtrl.valueChanges
+        .pipe(pairwise())
+        .subscribe(([prev, next]: [DisplayUser[], DisplayUser[]]) => {
+          if (prev.length > next.length) {
+            // Removals
+            let removed = _.filter(prev, function(obj){ return !_.findWhere(next, obj) })
+            this.assignUsers.removeUserFromTask(removed[0].user_id, +this.taskId);
+          } else {
+            // Additions
+            let added = _.filter(next, function(obj){ return !_.findWhere(prev, obj) })
+            this.assignUsers.assignUserToTask(added[0].user_id, +this.taskId);
+          }
       })
     }
   }
@@ -118,8 +131,6 @@ export class TaskComponent implements OnInit {
     this.restService.getAssignedUsersForTask(this.taskId)
       .subscribe(data => {
         this.assignedUsers = data;
-        this.messageService.add("Assigned users: " + JSON.stringify(data));
-        // TODO: The assignedUsers variable needs to always be an array. This is giving a single object, but the ngFor needs an array
         this.reactiveForm.get("assignedUsersControl")!.setValue(this.assignedUsers);
       })
   }
@@ -127,7 +138,6 @@ export class TaskComponent implements OnInit {
   getAssignableUsers() {
     this.restService.getUsers().subscribe(data => {
       this.assignableUsers = data
-      this.messageService.add("Assignable users: " + JSON.stringify(data));
     });
   }
 

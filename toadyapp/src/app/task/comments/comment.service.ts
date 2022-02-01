@@ -26,6 +26,9 @@ export class CommentService {
   ) { }
 
   loadTaskComments(taskId: string) {
+    // Clear comments array
+    this.commentArray = [];
+    this.updateCommentArray();
     this.taskId = taskId;
     this.currentUserId = this.jwtAuthService.getCurrentUserID();
 
@@ -74,6 +77,7 @@ export class CommentService {
     this.committedComments.forEach((comment) => {
       this.restService.insertNewComment(this.taskId, this.currentUserId, comment.comment_text);
     })
+    this.commentArray = [];
   }
 
   deleteComment(comment: Comment) {

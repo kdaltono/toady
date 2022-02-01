@@ -25,15 +25,9 @@ exports.getDisplayDescription = (req, res) => {
 exports.getTaskComments = (req, res) => {
     TaskComments.getTaskComments(req.params.taskId, (err, data) => {
         if (err) {
-            if (err.kind === "not_found") {
-                res.status(404).send({
-                    message: `Could not find task ID: ${req.params.taskId}`
-                })
-            } else {
-                res.status(500).send({
-                    message: `Error retrieving task ID: ${req.params.taskId}`
-                })
-            }
+            res.status(500).send({
+                message: `Error retrieving task ID: ${req.params.taskId} \n ${JSON.stringify(err)}`
+            })
         } else {
             res.send(data)
         }
@@ -147,5 +141,41 @@ exports.updateStatus = (req, res) => {
                 message: 'Success'
             })
         }
+    })
+}
+
+exports.assignUsers = (req, res) => {
+    assignedUsers = req.body.assignedUsers
+
+    assignedUsers.forEach(function(utt) {
+        UserToTask.insertRecord(utt.task_id, utt.user_id, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: `Error assigning user to task: ${utt.user_id} to ${utt.task_id}`
+                })
+            } else {
+                res.send({
+                    message: 'Success'
+                })
+            }
+        })
+    });
+}
+
+exports.unassignUsers = (req, res) => {
+    unassignedUsers = req.body.unassignedUsers
+
+    unassignedUsers.forEach(function(utt) {
+        UserToTask.removeRecord(utt.task_id, utt.user_id, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: `Error removing user to task: ${utt.user_id} to ${utt.task_id}`
+                })
+            } else {
+                res.send({
+                    message: 'Success'
+                })
+            }
+        })
     })
 }

@@ -45,13 +45,7 @@ TaskComments.getTaskComments = (taskId, result) => {
             return
         }
 
-        if (res.length) {
-            console.log('Found comments: ' + res)
-            result(null, res)
-            return
-        }
-
-        result({kind: 'not_found'}, null)
+        result(null, res)
     })
 }
 

@@ -13,6 +13,8 @@ import { environment } from '../environments/environment';
 import { JWTAuthService } from './jwtauth.service';
 import { SimplifiedUser } from './simplifieduser';
 import { TaskStatus } from './task_status';
+import { UserToTask } from './user_to_task';
+import { assign } from 'underscore';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,8 @@ export class RestService {
   private updateStatusURL = 'http://localhost:8080/tasks/status/u';
   private insertNewUserURL = 'http://localhost:8080/users/register';
   private getAssignedUsersURL = 'http://localhost:8080/tasks/users/a/';
+  private unassignUserURL = 'http://localhost:8080/assign/d';
+  private assignUserURL = 'http://localhost:8080/assign/a';
 
   constructor(
     private http: HttpClient,
@@ -214,6 +218,40 @@ export class RestService {
       },
       error => {
         this.messageService.add("Error: " + JSON.stringify(error))
+      }
+    )
+  }
+
+  assignUsers(assignedUsers: UserToTask[]): void {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      assignedUsers: assignedUsers
+    }
+
+    this.http.post(this.assignUserURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add("Assigned users successfully");
+      },
+      error => {
+        this.messageService.add("Error assigning users: " + JSON.stringify(error));
+      }
+    )
+  }
+
+  unassignUsers(unassignedUsers: UserToTask[]): void {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      unassignedUsers: unassignedUsers
+    }
+
+    this.http.post(this.unassignUserURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add("Unassigned users successfully")
+      },
+      error => {
+        this.messageService.add("Error unassigning users: " + JSON.stringify(error));
       }
     )
   }

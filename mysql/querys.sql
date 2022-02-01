@@ -142,3 +142,30 @@ SELECT
         t.task_title 
     ORDER BY 
         t.task_id;
+
+SELECT
+    u.user_id,
+    u.first_name,
+    u.last_name,
+    CONCAT(u.first_name, " ", u.last_name),
+    u.username
+FROM
+    tasks t left join user_to_task utt
+    on (t.task_id = utt.task_id) left join users u
+    on (utt.user_id = u.user_id)
+where
+    t.task_id = 17;
+
+select
+    u.user_id,
+    tc.comment_id,
+    CONCAT(u.first_name, " ", u.last_name) AS full_name,
+    tc.comment_text,
+    tc.dstamp 
+from 
+    task_comments tc LEFT JOIN users u 
+    ON (tc.user_id = u.user_id) 
+where
+    tc.task_id = 30 
+order by 
+    tc.dstamp ASC;

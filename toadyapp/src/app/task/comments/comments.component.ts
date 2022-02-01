@@ -7,6 +7,7 @@ import { JWTAuthService } from 'src/app/jwtauth.service';
 import { Comment } from 'src/app/comment';
 import { interval } from 'rxjs';
 import { CommentService } from './comment.service';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-comments',
@@ -17,7 +18,8 @@ export class CommentsComponent implements OnInit {
 
   constructor(
     private commentService: CommentService,
-    private jwtAuthService: JWTAuthService
+    private jwtAuthService: JWTAuthService,
+    private messageService: MessageService
   ) { }
 
   @Input() taskId!: string;
@@ -28,13 +30,13 @@ export class CommentsComponent implements OnInit {
   deleteComment: boolean = false;
   selectedComment!: Comment | undefined;
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+    this.messageService.add("Comments ngOnInit() called");
     this.commentService.loadTaskComments(this.taskId);
     this.commentService.getInstance().subscribe(comments => {
       this.taskComments = comments;
     });
 
-    // This doesn't get called when page is refreshed...
     window.onbeforeunload = () => this.ngOnDestroy();
   }
 

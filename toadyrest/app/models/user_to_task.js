@@ -5,7 +5,7 @@ const UserToTask = function(userToTask) {
     this.userId = userToTask.userId
 }
 
-UserToTask.insertNewRecord = (taskId, userId, result) => {
+UserToTask.insertRecord = (taskId, userId, result) => {
     const query = 'INSERT INTO user_to_task(task_id, user_id) VALUES (?, ?)'
 
     sql.query(query, [taskId, userId], (err, res) => {
@@ -16,6 +16,20 @@ UserToTask.insertNewRecord = (taskId, userId, result) => {
         }
 
         result(null, res.insertId)
+    })
+}
+
+UserToTask.removeRecord = (taskId, userId, result) => {
+    const query = 'DELETE FROM user_to_task WHERE task_id = ? AND user_id = ?'
+
+    sql.query(query, [taskId, userId], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, null)
     })
 }
 
