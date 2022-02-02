@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { User } from './user';
 import { DisplayTask } from './displaytask';
+import { Pond } from './pond';
 import { DisplayUser } from './displayuser';
 import { Task } from './task'
 import { MessageService } from './message.service';
@@ -35,6 +36,9 @@ export class RestService {
   private getAssignedUsersURL = 'http://localhost:8080/tasks/users/a/';
   private unassignUserURL = 'http://localhost:8080/assign/d';
   private assignUserURL = 'http://localhost:8080/assign/a';
+  private getUserAssignedPondsURL = 'http://localhost:8080/pond/u/';
+  private getPondAssignedUsersURL = 'http://localhost:8080/pond/p/';
+  private getPondDataURL = 'http://localhost:8080/pond/';
 
   constructor(
     private http: HttpClient,
@@ -198,6 +202,54 @@ export class RestService {
           }
         ),
         catchError(this.handleError<DisplayUser[]>('getAssignedUsersForTask'))
+      )
+  }
+
+  getUserAssignedPonds(user_id: string): Observable<Pond[]> {
+    const url = this.getUserAssignedPondsURL + user_id;
+    return this.http.get<Pond[]>(url)
+      .pipe(
+        tap (
+          event => {
+            this.log(`Fetched ponds for user ID: ${user_id}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<Pond[]>('getUserAssignedPonds'))
+      )
+  }
+
+  getPondData(pond_id: string): Observable<Pond> {
+    const url = this.getPondDataURL + pond_id;
+    return this.http.get<Pond>(url)
+      .pipe(
+        tap (
+          event => {
+            this.log(`Fetched ponds data for pond ID: ${pond_id}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<Pond>('getPondData'))
+      )
+  }
+
+  getPondAssignedUsers(pond_id: string): Observable<DisplayUser[]> {
+    const url = this.getPondAssignedUsers + pond_id;
+    return this.http.get<DisplayUser[]>(url)
+      .pipe(
+        tap (
+          event => {
+            this.log(`Fetched users for pond ID: ${pond_id}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<DisplayUser[]>('getPondAssignedUsers'))
       )
   }
 

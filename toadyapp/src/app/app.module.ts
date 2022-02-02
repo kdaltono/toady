@@ -21,6 +21,8 @@ import { RestService } from './rest.service';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 import { RegisterComponent } from './register/register.component';
 import { SidenavService } from './sidenav.service';
+import { PondComponent } from './pond/pond.component';
+import { PondListComponent } from './pond-list/pond-list.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,6 +30,8 @@ const appRoutes: Routes = [
   { path: 'task/:taskid', component: TaskComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'add', component: NewtaskComponent },
+  { path: 'pond/:pondid', component: PondComponent },
+  { path: 'pondlist', component: PondListComponent },
   { path: '', redirectTo: 'home' },
   { path: '**', redirectTo: 'home' }
 ]
@@ -43,7 +47,9 @@ const appRoutes: Routes = [
     NewtaskComponent,
     CommentsComponent,
     TextareaAutoresizeDirective,
-    RegisterComponent
+    RegisterComponent,
+    PondComponent,
+    PondListComponent
   ],
   imports: [
     BrowserModule,

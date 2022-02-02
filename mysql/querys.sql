@@ -169,3 +169,29 @@ where
     tc.task_id = 30 
 order by 
     tc.dstamp ASC;
+
+SELECT
+    ponds.pond_id,
+    ponds.pond_name,
+    CONCAT(users.first_name, " ", users.last_name) as created_by,
+    ponds.dstamp,
+    ponds.is_active
+FROM
+    ponds left join user_to_pond utp
+    on (ponds.pond_id = utp.pond_id) left join users
+    on (ponds.created_by = users.user_id)
+WHERE
+    utp.user_id = 2;
+
+SELECT
+    u.user_id,
+    CONCAT(u.first_name, " ", u.last_name) AS full_name,
+    u.first_name,
+    u.last_name,
+    u.username
+FROM
+    ponds p left join user_to_pond utp
+    on (p.pond_id = utp.pond_id) left join users u
+    on (utp.user_id = u.user_id)
+WHERE
+    p.pond_id = 1;

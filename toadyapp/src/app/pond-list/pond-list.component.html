@@ -1,0 +1,4 @@
+<div *ngFor="let pond of ponds">
+    <a [routerLink]="'/pond/' + pond.pond_id">{{pond.pond_name}}</a>
+</div>
+<app-messages></app-messages>

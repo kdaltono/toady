@@ -49,6 +49,28 @@ CREATE TABLE IF NOT EXISTS tasks(
         REFERENCES task_status(status_id)
 );
 
+CREATE TABLE IF NOT EXISTS ponds(
+    pond_id INTEGER AUTO_INCREMENT NOT NULL,
+    pond_name VARCHAR(50) NOT NULL,
+    created_by INTEGER NOT NULL,
+    dstamp DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    PRIMARY KEY (pond_id),
+    FOREIGN KEY (created_by)
+        REFERENCES users(user_id)
+);
+
+INSERT INTO ponds(pond_name, created_by) VALUES ("Test Pond", 1);
+
+CREATE TABLE IF NOT EXISTS user_to_pond(
+    pond_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    is_manager BOOLEAN DEFAULT FALSE NOT NULL,
+    PRIMARY KEY (pond_id, user_id)
+);
+
+INSERT INTO user_to_pond (pond_id, user_id, is_manager) VALUES (1, 1, TRUE);
+
 CREATE TABLE IF NOT EXISTS task_comments(
     comment_id INTEGER AUTO_INCREMENT NOT NULL,
     task_id INTEGER NOT NULL,

@@ -5,6 +5,7 @@ module.exports = app => {
     const tasks = require('../controllers/task.controller')
     const users = require('../controllers/user.controller')
     const status = require('../controllers/status.controller')
+    const pond = require('../controllers/pond.controller')
 
     app.post('/login', function(req, res, data) {
         User.findByUsername(req.body.username, function(err, user) {
@@ -49,5 +50,9 @@ module.exports = app => {
 
     app.post('/assign/a', passport.authenticate('jwt', { session: false }), tasks.assignUsers)
     app.post('/assign/d', passport.authenticate('jwt', { session: false }), tasks.unassignUsers)
+
+    app.get('/pond/u/:userId', passport.authenticate('jwt', { session: false }), pond.getUserAssignedPonds)
+    app.get('/pond/p/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondAssignedUsers)
+    app.get('/pond/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondData)
 }
 
