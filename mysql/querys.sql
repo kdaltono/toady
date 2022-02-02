@@ -195,3 +195,38 @@ FROM
     on (utp.user_id = u.user_id)
 WHERE
     p.pond_id = 1;
+
+SELECT
+    ponds.pond_id,
+    ponds.pond_name,
+    CONCAT(users.first_name, " ", users.last_name) as created_by,
+    ponds.dstamp,
+    ponds.is_active
+FROM
+    ponds left join users 
+    on (ponds.created_by = users.user_id)
+WHERE
+    ponds.pond_id = 1;
+
+SELECT  
+    pads.order_value,
+    pads.pad_name
+FROM    
+    ponds left join pads
+    on (pads.parent_pond_id = ponds.pond_id)
+WHERE
+    ponds.pond_id = 1
+order by
+    pads.order_value;
+
+select
+    t.task_id,
+    t.task_title,
+    t.task_desc,
+    st.status_text
+from
+    pad p left join tasks t 
+    on (p.pad_id = t.pad_id) left join task_status st
+    on (t.status_id = st.status_id)
+where
+    p.pad_id = 1;

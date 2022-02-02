@@ -1,4 +1,6 @@
 const Pond = require('../models/pond')
+const Pad = require('../models/pad')
+const e = require('express')
 
 exports.getUserAssignedPonds = (req, res) => {
     Pond.getUserAssignedPonds(req.params.userId, (err, data) => {
@@ -29,6 +31,18 @@ exports.getPondData = (req, res) => {
         if (err) {
             res.status(500).send({
                 message: `Can't find pond ID: ${req.params.pondId}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}
+
+exports.getTasksForPad = (req, res) => {
+    Pad.getTasksForPad(req.params.padId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Can't find pad ID: ${req.params.padId}`
             })
         } else {
             res.send(data)

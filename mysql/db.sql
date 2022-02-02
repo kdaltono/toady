@@ -49,6 +49,10 @@ CREATE TABLE IF NOT EXISTS tasks(
         REFERENCES task_status(status_id)
 );
 
+ALTER TABLE tasks ADD COLUMN pond_id INTEGER NOT NULL;
+UPDATE tasks SET pond_id = 1;
+ALTER TABLE tasks ADD FOREIGN KEY (pond_id) REFERENCES ponds(pond_id);
+
 CREATE TABLE IF NOT EXISTS ponds(
     pond_id INTEGER AUTO_INCREMENT NOT NULL,
     pond_name VARCHAR(50) NOT NULL,
@@ -59,6 +63,20 @@ CREATE TABLE IF NOT EXISTS ponds(
     FOREIGN KEY (created_by)
         REFERENCES users(user_id)
 );
+
+CREATE TABLE IF NOT EXISTS pad(
+    pad_id INTEGER AUTO_INCREMENT NOT NULL,
+    pad_name VARCHAR(50) NOT NULL,
+    parent_pond_id INTEGER NOT NULL,
+    order_value INTEGER NOT NULL,
+    PRIMARY KEY (pad_id, parent_pond_id, order_value),
+    FOREIGN KEY (parent_pond_id)
+        REFERENCES users(user_id)
+);
+
+INSERT INTO pad(pad_name, parent_pond_id, order_value) VALUES ("Start", 1, 1);
+INSERT INTO pad(pad_name, parent_pond_id, order_value) VALUES ("Middle", 1, 2);
+INSERT INTO pad(pad_name, parent_pond_id, order_value) VALUES ("End", 1, 3);
 
 INSERT INTO ponds(pond_name, created_by) VALUES ("Test Pond", 1);
 
@@ -108,3 +126,4 @@ INSERT INTO tasks(task_title, task_desc, status_id) VALUES ("Test task 2", "Task
 INSERT INTO user_to_task(task_id, user_id) VALUES (1, 1);
 INSERT INTO user_to_task(task_id, user_id) VALUES (2, 2);
 INSERT INTO user_to_task(task_id, user_id) VALUES (2, 1);
+
