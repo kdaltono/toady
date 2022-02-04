@@ -31,7 +31,6 @@ export class CommentsComponent implements OnInit {
   selectedComment!: Comment | undefined;
 
   ngOnInit(): void {  
-    this.messageService.add("Comments ngOnInit() called");
     this.commentService.loadTaskComments(this.taskId);
     this.commentService.getInstance().subscribe(comments => {
       this.taskComments = comments;

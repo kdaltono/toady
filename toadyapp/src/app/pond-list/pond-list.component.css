@@ -1,0 +1,42 @@
+.pond-container {
+    background-color: #fefbfd;
+    margin: 10px 100px 0px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.pond-card {
+    width: 100%;
+    border-radius: 10px !important;
+}
+
+.pond-list-title {
+    font-size: large;
+    padding: 10px 0px 10px 0px;
+    margin: 0px;
+    text-align: center;
+    width: 100%;
+}
+
+.pond-details {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px 10px 0px;
+}
+
+.pond-text {
+    margin: 0px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.sidenav-list {
+    padding: 0px;
+    width: 100%;
+}
+
+.sidenav-item {
+    font-size: 20px;
+    height: 35px !important;
+}

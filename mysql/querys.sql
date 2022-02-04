@@ -225,8 +225,22 @@ select
     t.task_desc,
     st.status_text
 from
-    pad p left join tasks t 
+    pads p left join tasks t 
     on (p.pad_id = t.pad_id) left join task_status st
     on (t.status_id = st.status_id)
 where
     p.pad_id = 1;
+
+SELECT
+    u.user_id,
+    CONCAT(u.first_name, " ", u.last_name) AS full_name,
+    u.first_name,
+    u.last_name,
+    u.username,
+    utp.is_manager
+FROM
+    users u left join user_to_pond utp
+    on (utp.user_id = u.user_id) left join ponds p
+    on (p.pond_id = utp.pond_id)
+WHERE
+    p.pond_id = 1;

@@ -23,6 +23,7 @@ import { RegisterComponent } from './register/register.component';
 import { SidenavService } from './sidenav.service';
 import { PondComponent } from './pond/pond.component';
 import { PondListComponent } from './pond-list/pond-list.component';
+import { PadComponent } from './pond/pad/pad.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     TextareaAutoresizeDirective,
     RegisterComponent,
     PondComponent,
-    PondListComponent
+    PondListComponent,
+    PadComponent
   ],
   imports: [
     BrowserModule,

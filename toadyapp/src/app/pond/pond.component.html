@@ -1,3 +1,29 @@
-{{pondId}}
-{{pond.pond_name}}
-{{pond.created_by}}
+<div class="pond-area">
+    <h1>{{pondId}}: {{pond.pond_name}}</h1>
+    <p>Created by {{pond.created_by}}</p>
+
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Pads"> 
+            <!-- Need to have an ngFor to display all of the pads in order -->           
+            <app-pad [pondId]="pondId"></app-pad>
+        </mat-tab>
+        <mat-tab label="Assigned Users">
+            <form [formGroup]="reactiveForm" class='assign-users-form'>
+                <mat-form-field class='assign-users-field'>
+                    <mat-select formControlName="assignedUsersControl" multiple [compareWith]="compareFn">
+                        <mat-select-trigger>
+                            <mat-chip-list class='mat-chip-list user-chip-list' aria-orientation="horizontal">
+                                <mat-chip *ngFor='let user of reactiveForm.get("assignedUsersControl")!.value'>
+                                    {{ user.full_name }}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let user of assignableUsers" [value]="user">{{ user.full_name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<app-messages></app-messages>

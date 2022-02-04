@@ -9,6 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 
 const materialModules = [
   MatIconModule,
@@ -19,7 +21,9 @@ const materialModules = [
   MatChipsModule,
   MatFormFieldModule,
   MatSelectModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  MatTabsModule,
+  MatCardModule
 ]
 
 @NgModule({

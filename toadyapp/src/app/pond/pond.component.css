@@ -1,0 +1,21 @@
+.pond-area {
+    background-color: #fefbfd;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin: 10px 100px 0px 100px;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 400px;
+}
+
+.assign-users-form {
+    width: 100%;
+}
+
+.user-chip-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.assign-users-field {
+    width: 100%;
+}

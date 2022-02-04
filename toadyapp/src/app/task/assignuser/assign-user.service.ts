@@ -3,6 +3,7 @@ import { interval, Observable, Subscription } from 'rxjs';
 import { MessageService } from 'src/app/message.service';
 import { RestService } from 'src/app/rest.service';
 import { UserToTask } from 'src/app/user_to_task';
+import { UserToPond } from 'src/app/user_to_pond';
 import * as _ from 'underscore';
 
 @Injectable({
@@ -10,8 +11,11 @@ import * as _ from 'underscore';
 })
 export class AssignUserService {
 
-  private removedUsers: UserToTask[] = [];
-  private addedUsers: UserToTask[] = [];
+  private removedTaskUsers: UserToTask[] = [];
+  private addedTaskUsers: UserToTask[] = [];
+
+  private removedPondUsers: UserToPond[] = [];
+  private addedPondUsers: UserToPond[] = [];
 
   private delay: number = 5000;
   private timer: Subscription = {} as Subscription;
@@ -26,40 +30,55 @@ export class AssignUserService {
     )
   }
 
+  private getFinalArray(array1: any[], array2: any[]): any[] {
+    return _.filter(array1, function(obj){ return !_.findWhere(array2, obj) })
+  }
+
   private commitChanges() {
-    if (this.addedUsers.length == 0 && this.removedUsers.length == 0) {
-      return;
+    if (this.addedTaskUsers.length > 0) {
+      let finalAddedUsers = this.getFinalArray(this.addedTaskUsers, this.removedTaskUsers);
+      this.restService.assignUsers(finalAddedUsers);
     }
-
-    let listAddedUsers = this.addedUsers;
-    let listRemovedUsers = this.removedUsers;
-    let finalRemovedUsers = _.filter(listRemovedUsers, function(obj){ return !_.findWhere(listAddedUsers, obj) });
-    let finalAddedUsers = _.filter(listAddedUsers, function(obj){ return !_.findWhere(listRemovedUsers, obj) });
-
-    // Add users and clear the array
-    if (finalAddedUsers.length > 0) {
-      this.restService.assignUsers(finalAddedUsers);  
-    }
-    if (finalRemovedUsers.length > 0) {
+    if (this.removedTaskUsers.length > 0) {
+      let finalRemovedUsers = this.getFinalArray(this.removedTaskUsers, this.addedTaskUsers);
       this.restService.unassignUsers(finalRemovedUsers);
     }
-    this.addedUsers = [];
-    this.removedUsers = [];
+
+    this.addedTaskUsers = [];
+    this.removedTaskUsers = [];
   }
 
   assignUserToTask(userId: number, taskId: number): void {
-    this.addedUsers.push({
+    this.addedTaskUsers.push({
       user_id: userId,
       task_id: taskId
     })
-    this.addedUsers = _.uniq(this.addedUsers);
+    this.addedTaskUsers = _.uniq(this.addedTaskUsers);
   }
 
   removeUserFromTask(userId: number, taskId: number): void {
-    this.removedUsers.push({
+    this.removedTaskUsers.push({
       user_id: userId,
       task_id: taskId
     })
-    this.removedUsers = _.uniq(this.removedUsers);
+    this.removedTaskUsers = _.uniq(this.removedTaskUsers);
+  }
+
+  assignUserToPond(userId: number, pondId: number, isManager: boolean): void {
+    this.addedPondUsers.push({
+      user_id: userId,
+      pond_id: pondId,
+      is_manager: isManager
+    })
+    this.addedPondUsers = _.uniq(this.addedPondUsers);
+  }
+
+  removeUserFromPond(userId: number, pondId: number): void {
+    this.removedPondUsers.push({
+      user_id: userId,
+      pond_id: pondId,
+      is_manager: false
+    })
+    this.removedPondUsers = _.uniq(this.removedPondUsers);
   }
 }

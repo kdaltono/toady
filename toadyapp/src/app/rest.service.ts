@@ -39,6 +39,7 @@ export class RestService {
   private getUserAssignedPondsURL = 'http://localhost:8080/pond/u/';
   private getPondAssignedUsersURL = 'http://localhost:8080/pond/p/';
   private getPondDataURL = 'http://localhost:8080/pond/';
+  private getPadTasksURL = 'http://localhost:8080/pad/';
 
   constructor(
     private http: HttpClient,
@@ -238,7 +239,7 @@ export class RestService {
   }
 
   getPondAssignedUsers(pond_id: string): Observable<DisplayUser[]> {
-    const url = this.getPondAssignedUsers + pond_id;
+    const url = this.getPondAssignedUsersURL + pond_id;
     return this.http.get<DisplayUser[]>(url)
       .pipe(
         tap (
@@ -250,6 +251,22 @@ export class RestService {
           }
         ),
         catchError(this.handleError<DisplayUser[]>('getPondAssignedUsers'))
+      )
+  }
+
+  getPadTasks(pad_id: string): Observable<DisplayTask[]> {
+    const url = this.getPadTasksURL + pad_id;
+    return this.http.get<DisplayTask[]>(url)
+      .pipe(
+        tap (
+          event => {
+            this.log(`Fetched tasks for pad ID: ${pad_id}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<DisplayTask[]>('getPadTasks'))
       )
   }
 
