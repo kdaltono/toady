@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pond } from '../pond';
 import { DisplayUser } from '../displayuser';
@@ -6,6 +6,7 @@ import { RestService } from '../rest.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { pairwise } from 'rxjs';
 import * as _ from 'underscore';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-pond',
@@ -19,11 +20,14 @@ export class PondComponent implements OnInit {
   assignedUsers: DisplayUser[] = [];
   assignableUsers: DisplayUser[] = [];
   reactiveForm: FormGroup = {} as FormGroup;
+  @ViewChild("matTab", { static: false }) matTab!: MatTabGroup;
 
   constructor(
     private route: ActivatedRoute,
     private restService: RestService
   ) { }
+
+  
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({

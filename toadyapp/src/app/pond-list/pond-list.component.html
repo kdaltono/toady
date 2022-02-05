@@ -1,9 +1,3 @@
-<!--<div class='pond-container' *ngFor="let pond of ponds">
-    <div class='pond-details'>
-        <a class='pond-text' [routerLink]="'/pond/' + pond.pond_id">{{pond.pond_name}}</a>
-    </div>
-</div>-->
-
 <div class='pond-container'>
     <mat-card class='pond-card'>
         <mat-card-title>
@@ -12,9 +6,6 @@
 
         <mat-card-content>
             <mat-action-list class='sidenav-list' *ngFor="let pond of ponds">
-                <!-- <button mat-list-item class='sidenav-item'> Reports </button>
-                <button mat-list-item class='sidenav-item' (click)='logout()'> Logout </button>
-                <button mat-list-item class='sidenav-item' routerLink="pondlist"> Ponds </button> -->
                 <button mat-list-item class='sidenav-item' [routerLink]="'/pond/' + pond.pond_id">
                     {{pond.pond_name}}
                 </button>
@@ -22,19 +13,3 @@
         </mat-card-content>
     </mat-card>
 </div>
-
-<!--
-    <div class='task-container' *ngFor="let task of displayTasks">
-        <div class='task-details'>
-            <p class='task-text'>
-                <a class='task-title' [routerLink]="['/task', task.task_id]">
-                    {{task.task_title}}
-                </a>
-            </p>
-            <p class='task-text'>assigned to: {{task.usernames}}</p>
-        </div>
-        <p class='task-status'>
-            {{task.status_text}}
-        </p>
-    </div>
--->
