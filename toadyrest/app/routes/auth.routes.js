@@ -54,6 +54,7 @@ module.exports = app => {
     app.get('/pond/u/:userId', passport.authenticate('jwt', { session: false }), pond.getUserAssignedPonds)
     app.get('/pond/p/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondAssignedUsers)
     app.get('/pond/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondData)
+    app.get('/pond/pads/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondPadData)
 
     app.get('/pad/:padId', passport.authenticate('jwt', { session: false }), pond.getTasksForPad)
 }

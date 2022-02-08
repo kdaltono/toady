@@ -49,3 +49,15 @@ exports.getTasksForPad = (req, res) => {
         }
     })
 }
+
+exports.getPondPadData = (req, res) => {
+    Pond.getPondPadData(req.params.pondId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Can't find pad ID: ${req.params.pondId}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}

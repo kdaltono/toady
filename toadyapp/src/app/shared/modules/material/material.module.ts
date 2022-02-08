@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 const materialModules = [
   MatIconModule,
@@ -23,7 +24,8 @@ const materialModules = [
   MatSelectModule,
   ReactiveFormsModule,
   MatTabsModule,
-  MatCardModule
+  MatCardModule,
+  MatDividerModule
 ]
 
 @NgModule({

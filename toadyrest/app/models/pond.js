@@ -33,6 +33,30 @@ Pond.getPondData = (pond_id, result) => {
     })
 }
 
+Pond.getPondPadData = (pond_id, result) => {
+    var query = 
+    "SELECT " +
+        "pads.pad_id, " +
+        "pads.pad_name, " +
+        "pads.parent_pond_id, " +
+        "pads.order_value " +
+    "FROM " +
+        "pads left join ponds " +
+        "on (pads.parent_pond_id = ponds.pond_id) " +
+    "WHERE " +
+        "ponds.pond_id = ?";
+
+    sql.query(query, pond_id, (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, res);
+    })
+}
+
 Pond.getUserAssignedPonds = (user_id, result) => {
     var query = 
     "SELECT " +

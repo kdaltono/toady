@@ -5,9 +5,17 @@
 
         <mat-card-content>
             <mat-tab-group #matTab mat-align-tabs="center">
-                <mat-tab label="Pads"> 
+                <mat-tab label="Pads">
+                    <div class='pads-div'>
+                        <div class='pad-div'>
+                            <app-pad [pondId]="pondId"></app-pad>
+                        </div>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <div class='cont-task-div'>
+                            <p>Continous Tasks</p>
+                        </div>
+                    </div> 
                     <!-- Need to have an ngFor to display all of the pads in order -->           
-                    <app-pad [pondId]="pondId"></app-pad>
                 </mat-tab>
                 <mat-tab label="Assigned Users">
                     <form [formGroup]="reactiveForm" class='assign-users-form'>
@@ -27,7 +35,9 @@
                 </mat-tab>
             </mat-tab-group>
         </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-button>Add Task</button>
+            <button mat-button>Add Pad</button>
+        </mat-card-actions>
     </mat-card>
 </div>
-
-<app-messages></app-messages>

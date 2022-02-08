@@ -244,3 +244,15 @@ FROM
     on (p.pond_id = utp.pond_id)
 WHERE
     p.pond_id = 1;
+
+SELECT
+    pads.pad_id,
+    pads.pad_name,
+    pads.parent_pond_id,
+    pads.order_id
+FROM
+    pads left join ponds 
+    on (pads.parent_pond_id = ponds.pond_id)
+WHERE
+    ponds.pond_id = 1;
+    

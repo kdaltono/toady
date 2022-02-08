@@ -1,1 +1,19 @@
-<p>Pond ID: {{pondId}}</p>
+<div>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab *ngFor="let padData of padTasks" id="{{padData.pad.order_value}}" label="{{padData.pad.pad_name}}">
+            <div class='task-container' *ngFor="let task of padData.tasks">
+                <div class='task-details'>
+                    <p class='task-text'>
+                        <a class='task-title' [routerLink]="['/task', task.task_id]">
+                            {{task.task_title}}
+                        </a>
+                    </p>
+                    <p class='task-text'>assigned to: {{task.usernames}}</p>
+                </div>
+                <p class='task-status'>
+                    {{task.status_text}}
+                </p>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

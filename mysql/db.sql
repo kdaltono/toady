@@ -131,3 +131,23 @@ INSERT INTO user_to_task(task_id, user_id) VALUES (1, 1);
 INSERT INTO user_to_task(task_id, user_id) VALUES (2, 2);
 INSERT INTO user_to_task(task_id, user_id) VALUES (2, 1);
 
+INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("Start Task 1", "Start Description 1", 1, 1, 1);
+INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("Start Task 2", "Start Description 2", 1, 1, 1);
+INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("Start Task 3", "Start Description 3", 1, 1, 1);
+
+INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("Middle Task 1", "Middle Description 1", 1, 1, 2);
+INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("Middle Task 2", "Middle Description 2", 1, 1, 2);
+    INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("Middle Task 3", "Middle Description 3", 1, 1, 2);
+
+INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("End Task 1", "End Description 1", 1, 1, 3);
+INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("End Task 2", "End Description 2", 1, 1, 3);
+INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
+    VALUES ("End Task 3", "End Description 3", 1, 1, 3);

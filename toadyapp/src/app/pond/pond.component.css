@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    min-height: 100%;
 }
 
 .assign-users-form {
@@ -22,4 +23,19 @@
 .pond-card {
     width: 100%;
     border-radius: 10px !important;
+    min-height: 100%;
+    margin-bottom: 5px;
+}
+
+.pads-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.pad-div {
+    width: 60%;
+}
+
+.cont-task-div {
+    width: 40%;
 }

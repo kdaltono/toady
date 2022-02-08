@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { User } from './user';
 import { DisplayTask } from './displaytask';
+import { Pad } from './pad';
 import { Pond } from './pond';
 import { DisplayUser } from './displayuser';
 import { Task } from './task'
@@ -40,6 +41,7 @@ export class RestService {
   private getPondAssignedUsersURL = 'http://localhost:8080/pond/p/';
   private getPondDataURL = 'http://localhost:8080/pond/';
   private getPadTasksURL = 'http://localhost:8080/pad/';
+  private getPondPadDataURL = 'http://localhost:8080/pond/pads/';
 
   constructor(
     private http: HttpClient,
@@ -251,6 +253,22 @@ export class RestService {
           }
         ),
         catchError(this.handleError<DisplayUser[]>('getPondAssignedUsers'))
+      )
+  }
+
+  getPondPadData(pondId: string): Observable<Pad[]> {
+    const url = this.getPondPadDataURL + pondId
+    return this.http.get<Pad[]>(url)
+      .pipe(
+        tap (
+          event => {
+            this.log(`Fetched pads for Pond ID: ${pondId}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<Pad[]>('getPondPadData'))
       )
   }
 
