@@ -1,5 +1,4 @@
-<div class='new-task-area'>
-    <h1 class='new-task-title'>Create New Task</h1>
+<!--<div class='new-task-area'>
     <form (ngSubmit)="onNewTaskSubmit()" #newtaskform="ngForm">
         <div class='new-task-form'>
             <div class='new-task-form-section'>
@@ -10,7 +9,7 @@
                 <h2 class='new-task-form-item'>Description</h2>
                 <textarea name="taskdesc" ngModel class='new-task-form-item new-task-desc' rows="6" appTextareaAutoresize></textarea>
             </div>
-            <!-- TODO: Replace this with material chips, looks nicer and can double as a select -->
+            TODO: Replace this with material chips, looks nicer and can double as a select
             <div class='new-task-form-section'>
                 <h2 class='new-task-form-item'>Assign Users</h2>
                 <select [(ngModel)]='selectedUsers' class='new-task-form-item' multiple size="4">
@@ -19,5 +18,48 @@
             </div>
         </div>
         <button type="submit" class='new-task-form-section'>Create Task</button>
-    </form>
+    </form> 
+</div> -->
+
+<div class='new-task-area'>
+    <mat-card class='task-card'>
+        <mat-card-title>
+            <h1 class='new-task-title'>Create New Task</h1>
+        </mat-card-title>
+        <mat-card-content>
+            <form (ngSubmit)="onNewTaskSubmit()" #newtaskform="ngForm">
+                <div class='new-task-form'>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Pond</mat-label>
+                        <mat-select>
+                            <mat-option>Pond Example 1</mat-option>
+                            <mat-option>Pond Example 2</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Pad</mat-label>
+                        <mat-select>
+                            <mat-option>Pad Example 1</mat-option>
+                            <mat-option>Pad Example 2</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Task Title</mat-label>
+                        <input type="text" matInput name="tasktitle" ngModel>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Task Description</mat-label>
+                        <textarea matInput name="textdesc" rows="6" appTextareaAutoresize></textarea>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Assign Users</mat-label>
+                        <mat-select [(ngModel)]='selectedUsers' multiple>
+                            <mat-option *ngFor="let u of users" [value]="u">{{u.full_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <button mat-button type="submit" class='new-task-form-section'>Create Task</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
 </div>

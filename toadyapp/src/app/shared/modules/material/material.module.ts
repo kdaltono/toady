@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 const materialModules = [
   MatIconModule,
@@ -25,7 +27,9 @@ const materialModules = [
   ReactiveFormsModule,
   MatTabsModule,
   MatCardModule,
-  MatDividerModule
+  MatDividerModule,
+  FormsModule,
+  MatInputModule
 ]
 
 @NgModule({
