@@ -53,10 +53,11 @@ exports.getTaskDetails = (req, res) => {
 }
 
 exports.insertNewTask = (req, res) => {
-    Task.insertNewTask(req.body.task_title, req.body.task_desc, (err, data) => {
+    Task.insertNewTask(req.body.task_title, req.body.task_desc, req.body.pad_id, req.body.pond_id, (err, data) => {
         if (err) {
             res.status(500).send({
-                message: `Error creating task: ${req.body.task_title}, ${req.body.task_desc}, ${req.body.assigned_users}`
+                message: `Error creating task: ${req.body.task_title}, ${req.body.task_desc}, ${req.body.assigned_users}, ` +
+                            `${req.body.pad_id}, ${req.body.pond_id}`
             })
         } else {
             const assigned_users = req.body.assigned_users

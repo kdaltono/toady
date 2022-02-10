@@ -125,14 +125,17 @@ export class RestService {
       )
   }
 
-  insertNewTask(taskTitle: string, taskDescription: string, assignedUsers: SimplifiedUser[]) {
+  insertNewTask(taskTitle: string, taskDescription: string, assignedUsers: SimplifiedUser[], 
+                padId: string, pondId: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     const reqObject = {
       task_title: taskTitle,
       task_desc: taskDescription,
-      assigned_users: assignedUsers
-    }
+      assigned_users: assignedUsers,
+      pad_id: padId,
+      pond_id: pondId
+    };
 
     this.http.post(this.insertNewTaskURL, reqObject, { headers: headers }).subscribe(
       () => {

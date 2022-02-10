@@ -24,23 +24,21 @@
 <div class='new-task-area'>
     <mat-card class='task-card'>
         <mat-card-title>
-            <h1 class='new-task-title'>Create New Task</h1>
+            <h1>Create New Task</h1>
         </mat-card-title>
         <mat-card-content>
             <form (ngSubmit)="onNewTaskSubmit()" #newtaskform="ngForm">
                 <div class='new-task-form'>
                     <mat-form-field appearance="fill">
                         <mat-label>Pond</mat-label>
-                        <mat-select>
-                            <mat-option>Pond Example 1</mat-option>
-                            <mat-option>Pond Example 2</mat-option>
+                        <mat-select [(ngModel)]="selectedPond" (selectionChange)="loadPads()">
+                            <mat-option *ngFor="let pond of ponds" [value]="pond">{{pond.pond_name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Pad</mat-label>
-                        <mat-select>
-                            <mat-option>Pad Example 1</mat-option>
-                            <mat-option>Pad Example 2</mat-option>
+                        <mat-select [(ngModel)]="selectedPad">
+                            <mat-option *ngFor="let pad of pads" [value]="pad">{{pad.pad_name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
@@ -49,7 +47,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Task Description</mat-label>
-                        <textarea matInput name="textdesc" rows="6" appTextareaAutoresize></textarea>
+                        <textarea type="text" matInput name="taskdesc" ngModel appTextareaAutoresize></textarea>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Assign Users</mat-label>
@@ -63,3 +61,4 @@
         </mat-card-content>
     </mat-card>
 </div>
+<app-messages></app-messages>
