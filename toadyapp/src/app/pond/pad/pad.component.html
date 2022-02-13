@@ -1,5 +1,5 @@
-<div>
-    <mat-tab-group mat-align-tabs="center">
+<div class='pad-container'>
+    <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex">
         <mat-tab *ngFor="let padData of padTasks" id="{{padData.pad.order_value}}" label="{{padData.pad.pad_name}}">
             <div class='task-container' *ngFor="let task of padData.tasks">
                 <div class='task-details'>

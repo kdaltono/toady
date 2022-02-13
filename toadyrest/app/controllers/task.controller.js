@@ -64,7 +64,7 @@ exports.insertNewTask = (req, res) => {
             let errString = '';    
 
             for (const user of assigned_users) {
-                UserToTask.insertNewRecord(data, user.user_id, (err, data) => {
+                UserToTask.insertRecord(data, user.user_id, (err, data) => {
                     if (err) {
                         errString += `Error creating user to task: ${data}, ${user.user_id} `
                     }

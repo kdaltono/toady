@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DisplayTask } from 'src/app/displaytask';
 import { RestService } from 'src/app/rest.service';
 import { Pad } from 'src/app/pad';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-pad',
@@ -12,9 +13,11 @@ export class PadComponent implements OnInit {
 
   @Input() pondId!: string;
   padTasks: { pad: Pad, tasks: DisplayTask[]}[] = [];
+  tabIndex: number = 0;
 
   constructor(
-    private restService: RestService
+    private restService: RestService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -29,22 +32,21 @@ export class PadComponent implements OnInit {
       data => {
         pads = data;
         pads.forEach(pad => {
-          let padTasks: DisplayTask[] = [];
           this.restService.getPadTasks(pad.pad_id.toString()).subscribe(
             tasks => {
-              padTasks = tasks;
               this.padTasks.push({
                 pad: pad,
-                tasks: padTasks
+                tasks: tasks
               })
+              this.padTasks = this.padTasks.sort(this.padSortFunction);
             }
           )
         })
       }
     )
-    this.padTasks = this.padTasks.sort(this.padSortFunction);
   }
 
+  // TODO: This doesnt sort properly, sometimes it works and sometimes it doesn't
   padSortFunction(a: { pad: Pad, tasks: DisplayTask[] }, b: { pad: Pad, tasks: DisplayTask[] }) {
     if (a.pad.order_value < b.pad.order_value) {
       return -1;

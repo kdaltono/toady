@@ -36,7 +36,7 @@
             </mat-tab-group>
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-button>Add Task</button>
+            <button mat-button [routerLink]="['/add']" [queryParams]="{pond_id: pondId}">Add Task</button>
             <button mat-button>Add Pad</button>
         </mat-card-actions>
     </mat-card>
