@@ -57,6 +57,8 @@ ALTER TABLE tasks ADD COLUMN pad_id INTEGER NOT NULL;
 UPDATE tasks SET pad_id = 1;
 ALTER TABLE tasks ADD FOREIGN KEY (pad_id) REFERENCES pads(pad_id);
 
+ALTER TABLE tasks ADD COLUMN is_continuous BOOLEAN DEFAULT FALSE NOT NULL;
+
 CREATE TABLE IF NOT EXISTS ponds(
     pond_id INTEGER AUTO_INCREMENT NOT NULL,
     pond_name VARCHAR(50) NOT NULL,
@@ -151,3 +153,13 @@ INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id)
     VALUES ("End Task 2", "End Description 2", 1, 1, 3);
 INSERT INTO tasks(task_title, task_desc, status_id, pond_id, pad_id) 
     VALUES ("End Task 3", "End Description 3", 1, 1, 3);
+
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 31);
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 32);
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 33);
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 34);
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 35);
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 36);
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 37);
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 38);
+INSERT INTO user_to_task(user_id, task_id) VALUES (1, 39);

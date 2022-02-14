@@ -42,6 +42,7 @@ export class RestService {
   private getPondDataURL = 'http://localhost:8080/pond/';
   private getPadTasksURL = 'http://localhost:8080/pad/';
   private getPondPadDataURL = 'http://localhost:8080/pond/pads/';
+  private getContinuousTasksURL = 'http://localhost:8080/pond/tasks/';
 
   constructor(
     private http: HttpClient,
@@ -125,8 +126,23 @@ export class RestService {
       )
   }
 
+  getContinuousTasks(pondId: string): Observable<DisplayTask[]> {
+    return this.http.get<DisplayTask[]>(this.getContinuousTasksURL + pondId)
+      .pipe(
+        tap(
+          event => {
+            this.log(`Fetched comments for pond ID: ${pondId}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<DisplayTask[]>('getContinuousTasks'))
+      )
+  }
+
   insertNewTask(taskTitle: string, taskDescription: string, assignedUsers: SimplifiedUser[], 
-                padId: string, pondId: string) {
+                padId: string, pondId: string, isContinuous: boolean) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     const reqObject = {
@@ -134,7 +150,8 @@ export class RestService {
       task_desc: taskDescription,
       assigned_users: assignedUsers,
       pad_id: padId,
-      pond_id: pondId
+      pond_id: pondId,
+      is_continuous: isContinuous
     };
 
     this.http.post(this.insertNewTaskURL, reqObject, { headers: headers }).subscribe(

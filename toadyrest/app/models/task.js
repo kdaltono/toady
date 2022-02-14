@@ -69,10 +69,11 @@ Task.getTaskInformation = (taskId, result) => {
     })
 }
 
-Task.insertNewTask = (taskTitle, taskDescription, padId, pondId, result) => {
-    const query = 'INSERT INTO tasks(task_title, task_desc, status_id, pad_id, pond_id) VALUES (?, ?, 1, ?, ?)'
+Task.insertNewTask = (taskTitle, taskDescription, padId, pondId, isContinuous, result) => {
+    const query = 'INSERT INTO tasks(task_title, task_desc, status_id, pad_id, pond_id, is_continuous)' + 
+    ' VALUES (?, ?, 1, ?, ?, ?)'
 
-    sql.query(query, [taskTitle, taskDescription, padId, pondId], (err, res) => {
+    sql.query(query, [taskTitle, taskDescription, padId, pondId, isContinuous], (err, res) => {
         if (err) {
             console.log("Error: " + err)
             result(err, null)

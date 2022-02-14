@@ -31,6 +31,8 @@ export class NewtaskComponent implements OnInit {
   pads: Pad[] = [];
   selectedPad: number = 0;
 
+  isContinuous: boolean = false;
+
   constructor(
     private restService: RestService,
     private authService: JWTAuthService,
@@ -91,7 +93,7 @@ export class NewtaskComponent implements OnInit {
     
     // Need to find a way to submit a new task
     this.restService.insertNewTask(taskTitle, taskDescription, 
-      this.selectedUsers, padId.toString(), pondId.toString());
+      this.selectedUsers, padId.toString(), pondId.toString(), this.isContinuous);
   }
 
   comparePonds(a: any, b: any): boolean {

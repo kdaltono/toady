@@ -61,3 +61,15 @@ exports.getPondPadData = (req, res) => {
         }
     })
 }
+
+exports.getContinuousTasks = (req, res) => {
+    Pond.getContinuousTasks(req.params.pondId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Can't find pond ID: ${req.params.pondId}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}

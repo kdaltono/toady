@@ -7,6 +7,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { pairwise } from 'rxjs';
 import * as _ from 'underscore';
 import { MatTabGroup } from '@angular/material/tabs';
+import { DisplayTask } from '../displaytask';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-pond',
@@ -19,15 +21,16 @@ export class PondComponent implements OnInit {
   pond: Pond = {} as Pond;
   assignedUsers: DisplayUser[] = [];
   assignableUsers: DisplayUser[] = [];
+  continuousTasks: DisplayTask[] = [];
+
   reactiveForm: FormGroup = {} as FormGroup;
   @ViewChild("matTab", { static: false }) matTab!: MatTabGroup;
 
   constructor(
     private route: ActivatedRoute,
-    private restService: RestService
+    private restService: RestService,
+    private messageService: MessageService
   ) { }
-
-  
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
@@ -63,6 +66,16 @@ export class PondComponent implements OnInit {
     this.getParameter();
     this.getAssignedUsers();
     this.getAssignableUsers();
+    this.getContinuousTasks();
+  }
+
+  getContinuousTasks(): void {
+    this.restService.getContinuousTasks(this.pondId).subscribe(
+      data => {
+        this.continuousTasks = data;
+        this.messageService.add(`Continuous Tasks: ${JSON.stringify(this.continuousTasks)}`)
+      }
+    )
   }
 
   getParameter(): void {

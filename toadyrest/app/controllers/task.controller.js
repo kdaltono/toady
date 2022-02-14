@@ -53,7 +53,10 @@ exports.getTaskDetails = (req, res) => {
 }
 
 exports.insertNewTask = (req, res) => {
-    Task.insertNewTask(req.body.task_title, req.body.task_desc, req.body.pad_id, req.body.pond_id, (err, data) => {
+    Task.insertNewTask(req.body.task_title, req.body.task_desc, req.body.pad_id, req.body.pond_id, 
+        req.body.is_continuous, (err, data) => {
+        // TODO: The is_continuous value is being sent incorrectly as a boolean. It is causing
+        // an error when being ran as a query
         if (err) {
             res.status(500).send({
                 message: `Error creating task: ${req.body.task_title}, ${req.body.task_desc}, ${req.body.assigned_users}, ` +
