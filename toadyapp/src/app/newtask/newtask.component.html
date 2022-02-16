@@ -6,7 +6,6 @@
         <mat-card-content>
             <form (ngSubmit)="onNewTaskSubmit()" #newtaskform="ngForm">
                 <div class='new-task-form'>
-                    <p>Continuous: {{isContinuous}}</p>
                     <mat-form-field appearance="fill">
                         <mat-label>Pond</mat-label>
                         <mat-select [formControl]="pondSelect" [(ngModel)]="selectedPond" (selectionChange)="loadPads()" [compareWith]="comparePonds">
@@ -14,8 +13,9 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
+                        <!-- TODO: Would be nice if this reverted to empty select when it is disabled -->
                         <mat-label>Pad</mat-label>
-                        <mat-select [(ngModel)]="selectedPad">
+                        <mat-select [formControl]="padSelect" [(ngModel)]="selectedPad" [disabled]="isContinuous">
                             <mat-option *ngFor="let pad of pads" [value]="pad.pad_id">{{pad.pad_name}}</mat-option>
                         </mat-select>
                     </mat-form-field>

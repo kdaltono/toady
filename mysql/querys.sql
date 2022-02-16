@@ -137,6 +137,7 @@ SELECT
         ON (t.status_id = ts.status_id) 
     WHERE 
         ts.is_complete = false 
+        and t.is_continuous = true
     GROUP BY 
         t.task_id, 
         t.task_title 
@@ -249,7 +250,7 @@ SELECT
     pads.pad_id,
     pads.pad_name,
     pads.parent_pond_id,
-    pads.order_id
+    pads.order_value
 FROM
     pads left join ponds 
     on (pads.parent_pond_id = ponds.pond_id)

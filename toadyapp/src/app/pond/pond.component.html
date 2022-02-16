@@ -6,28 +6,22 @@
         <mat-card-content>
             <mat-tab-group #matTab mat-align-tabs="center">
                 <mat-tab label="Pads">
-                    <div class='pads-div'>
-                        <div class='pad-div'>
-                            <app-pad [pondId]="pondId"></app-pad>
+                    <app-pad [pondId]="pondId"></app-pad>
+                </mat-tab>
+                <mat-tab label="Continuous Tasks">
+                    <div class='task-container' *ngFor="let task of continuousTasks">
+                        <div class='task-details'>
+                            <p class='task-text'>
+                                <a class='task-title' [routerLink]="['/task', task.task_id]">
+                                    {{task.task_title}}
+                                </a>
+                            </p>
+                            <p class='task-text'>assigned to: {{task.usernames}}</p>
                         </div>
-                        <mat-divider [vertical]="true"></mat-divider>
-                        <div class='cont-task-div'>
-                            <div class='task-container' *ngFor="let task of continuousTasks">
-                                <div class='task-details'>
-                                    <p class='task-text'>
-                                        <a class='task-title' [routerLink]="['/task', task.task_id]">
-                                            {{task.task_title}}
-                                        </a>
-                                    </p>
-                                    <p class='task-text'>assigned to: {{task.usernames}}</p>
-                                </div>
-                                <p class='task-status'>
-                                    {{task.status_text}}
-                                </p>
-                            </div>
-                        </div>
-                    </div> 
-                    <!-- Need to have an ngFor to display all of the pads in order -->           
+                        <p class='task-status'>
+                            {{task.status_text}}
+                        </p>
+                    </div>
                 </mat-tab>
                 <mat-tab label="Assigned Users">
                     <form [formGroup]="reactiveForm" class='assign-users-form'>

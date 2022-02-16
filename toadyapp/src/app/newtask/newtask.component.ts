@@ -28,6 +28,7 @@ export class NewtaskComponent implements OnInit {
   ponds: Pond[] = [];
   selectedPond: Pond = {} as Pond;
 
+  padSelect: FormControl = new FormControl();
   pads: Pad[] = [];
   selectedPad: number = 0;
 
@@ -93,7 +94,7 @@ export class NewtaskComponent implements OnInit {
     
     // Need to find a way to submit a new task
     this.restService.insertNewTask(taskTitle, taskDescription, 
-      this.selectedUsers, padId.toString(), pondId.toString(), this.isContinuous);
+      this.selectedUsers, this.isContinuous ? this.pads[0].pad_id.toString() : padId.toString(), pondId.toString(), this.isContinuous);
   }
 
   comparePonds(a: any, b: any): boolean {

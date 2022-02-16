@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { DisplayTask } from 'src/app/displaytask';
 import { RestService } from 'src/app/rest.service';
 import { Pad } from 'src/app/pad';
