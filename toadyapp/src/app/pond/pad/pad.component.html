@@ -6,18 +6,8 @@
                     {{padData.pad.pad_name}}
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <div class='task-container' *ngFor="let task of padData.tasks">
-                <div class='task-details'>
-                    <p class='task-text'>
-                        <a class='task-title' [routerLink]="['/task', task.task_id]">
-                            {{task.task_title}}
-                        </a>
-                    </p>
-                    <p class='task-text'>assigned to: {{task.usernames}}</p>
-                </div>
-                <p class='task-status'>
-                    {{task.status_text}}
-                </p>
+            <div class="container" *ngFor="let task of padData.tasks">
+                <task-detail [task]="task"></task-detail>
             </div>
         </mat-expansion-panel>
     </mat-accordion>

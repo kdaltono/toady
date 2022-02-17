@@ -1,18 +1,8 @@
 <div *ngIf='tasksLoaded; then showTasks else showLoading'></div>
 
 <ng-template #showTasks>
-    <div class='task-container' *ngFor="let task of displayTasks">
-        <div class='task-details'>
-            <p class='task-text'>
-                <a class='task-title' [routerLink]="['/task', task.task_id]">
-                    {{task.task_title}}
-                </a>
-            </p>
-            <p class='task-text'>assigned to: {{task.usernames}}</p>
-        </div>
-        <p class='task-status'>
-            {{task.status_text}}
-        </p>
+    <div class='container' *ngFor="let task of displayTasks">
+        <task-detail [task]="task"></task-detail>
     </div>
 </ng-template>
 

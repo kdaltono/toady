@@ -24,6 +24,7 @@ import { SidenavService } from './sidenav.service';
 import { PondComponent } from './pond/pond.component';
 import { PondListComponent } from './pond-list/pond-list.component';
 import { PadComponent } from './pond/pad/pad.component';
+import { TaskdetailComponent } from './taskdetail/taskdetail.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     PondComponent,
     PondListComponent,
-    PadComponent
+    PadComponent,
+    TaskdetailComponent
   ],
   imports: [
     BrowserModule,

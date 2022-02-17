@@ -9,18 +9,8 @@
                     <app-pad [pondId]="pondId"></app-pad>
                 </mat-tab>
                 <mat-tab label="Continuous Tasks">
-                    <div class='task-container' *ngFor="let task of continuousTasks">
-                        <div class='task-details'>
-                            <p class='task-text'>
-                                <a class='task-title' [routerLink]="['/task', task.task_id]">
-                                    {{task.task_title}}
-                                </a>
-                            </p>
-                            <p class='task-text'>assigned to: {{task.usernames}}</p>
-                        </div>
-                        <p class='task-status'>
-                            {{task.status_text}}
-                        </p>
+                    <div class=".container" *ngFor="let task of continuousTasks">
+                        <task-detail [task]="task"></task-detail>
                     </div>
                 </mat-tab>
                 <mat-tab label="Assigned Users">

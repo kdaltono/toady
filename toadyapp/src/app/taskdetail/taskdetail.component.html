@@ -1,0 +1,13 @@
+<div class='task-container mat-elevation-z4'
+    matRipple
+    [routerLink]="['/task', task.task_id]">
+    <div class='task-details'>
+        <p class='task-text'>
+            {{task.task_title}}
+        </p>
+        <p class='task-text'>assigned to: {{task.usernames}}</p>
+    </div>
+    <p class='task-status'>
+        {{task.status_text}}
+    </p>
+</div>
