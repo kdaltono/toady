@@ -19,7 +19,8 @@ Pad.getTasksForPad = (padId, result) => {
         "on (p.pad_id = t.pad_id) left join task_status st " +
         "on (t.status_id = st.status_id) " +
     "where " +
-        "p.pad_id = ?"
+        "p.pad_id = ?" +
+        "AND t.is_continuous = FALSE"
     
     sql.query(query, padId, (err, res) => {
         if (err) {

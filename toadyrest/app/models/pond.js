@@ -77,16 +77,44 @@ Pond.getPondData = (pond_id, result) => {
 
 Pond.getPondPadData = (pond_id, result) => {
     var query = 
-    "SELECT " +
+    "select " +
+	    "pads.pad_name, " +
+        "pads.order_value, " +
         "pads.pad_id, " +
-        "pads.pad_name, " +
         "pads.parent_pond_id, " +
-        "pads.order_value " +
-    "FROM " +
-        "pads left join ponds " +
-        "on (pads.parent_pond_id = ponds.pond_id) " +
-    "WHERE " +
-        "ponds.pond_id = ?";
+        "case " +
+		    "when task_data.complete_count = task_data.task_count then " +
+			    "TRUE " +
+		    "else " +
+			    "FALSE " +
+	    "end as pad_is_complete " +
+    "from " +
+	    "pads left join ponds " +
+        "on (pads.parent_pond_id = ponds.pond_id) left join ( " +
+		    "select " +
+			    "tasks.pond_id, " +
+			    "tasks.pad_id, " +
+			    "COUNT(case when task_status.is_complete = TRUE THEN 1 END) AS complete_count, " +
+			    "COUNT(tasks.task_id) AS task_count " +
+		    "from " +
+			    "tasks left join task_status " +
+			    "on (tasks.status_id = task_status.status_id) " +
+		    "where " +
+			    "tasks.is_continuous = false " +
+		    "group by " +
+			    "tasks.pond_id, " +
+			    "tasks.pad_id " +
+        ") task_data " +
+        "on (task_data.pad_id = pads.pad_id  " +
+		"and task_data.pond_id = ponds.pond_id) " +
+    "where " +
+	    "ponds.pond_id = ? " +
+    "group by " +
+	    "pads.pad_name, " +
+        "pads.order_value, " +
+        "pads.pad_id " +
+    "order by " +
+	    "pads.order_value ";
 
     sql.query(query, pond_id, (err, res) => {
         if (err) {

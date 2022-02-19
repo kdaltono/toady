@@ -5,6 +5,9 @@
                 <mat-panel-title>
                     {{padData.pad.pad_name}}
                 </mat-panel-title>
+                <mat-panel-description *ngIf="padData.pad.pad_is_complete">
+                    <p class="pad_complete">Complete</p>
+                </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="container" *ngFor="let task of padData.tasks">
                 <task-detail [task]="task"></task-detail>

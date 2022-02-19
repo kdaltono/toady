@@ -5,3 +5,13 @@
 .pad-container {
     height: 100%;
 }
+
+.mat-expansion-panel-header-description {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.pad_complete {
+    margin: 0px;
+}
