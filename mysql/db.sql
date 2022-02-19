@@ -80,6 +80,8 @@ CREATE TABLE IF NOT EXISTS pads(
         REFERENCES users(user_id)
 );
 
+ALTER TABLE pads ADD COLUMN review_text TEXT;
+
 INSERT INTO pads(pad_name, parent_pond_id, order_value) VALUES ("Start", 1, 1);
 INSERT INTO pads(pad_name, parent_pond_id, order_value) VALUES ("Middle", 1, 2);
 INSERT INTO pads(pad_name, parent_pond_id, order_value) VALUES ("End", 1, 3);

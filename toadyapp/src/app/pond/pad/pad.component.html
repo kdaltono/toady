@@ -12,6 +12,18 @@
             <div class="container" *ngFor="let task of padData.tasks">
                 <task-detail [task]="task"></task-detail>
             </div>
+            <div class="review-container" *ngIf="padData.pad.pad_is_complete">
+                <mat-divider></mat-divider>
+                <h3 class="review-title">Review</h3>
+                <mat-form-field>
+                    <textarea class="review-text" type="text" matInput 
+                        name="taskdesc" appTextareaAutoresize [(ngModel)]="padData.pad.review_text"></textarea>
+                </mat-form-field>
+                {{padData.pad.review_text}}
+                <div class="review-buttons">
+                    <button mat-button (click)="updateReview(padData.pad)">Update</button>
+                </div>
+            </div>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

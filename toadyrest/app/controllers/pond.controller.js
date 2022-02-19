@@ -73,3 +73,15 @@ exports.getContinuousTasks = (req, res) => {
         }
     })
 }
+
+exports.updatePadReviewText = (req, res) => {
+    Pad.updatePadReviewText(req.body.pad_id, req.body.review_text, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Can't find pond ID: ${req.body.pond_id}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}

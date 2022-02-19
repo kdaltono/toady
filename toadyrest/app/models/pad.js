@@ -7,6 +7,20 @@ const Pad = function(pad) {
     this.order_value = pad.order_value
 }
 
+Pad.updatePadReviewText = (padId, reviewText, result) => {
+    var query = "UPDATE pads SET review_text = ? WHERE pad_id = ?"
+
+    sql.query(query, [reviewText, padId], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
+}
+
 Pad.getTasksForPad = (padId, result) => {
     var query = 
     "select " +
@@ -34,12 +48,3 @@ Pad.getTasksForPad = (padId, result) => {
 }
 
 module.exports = Pad
-/*
-    pad_id INTEGER AUTO_INCREMENT NOT NULL,
-    pad_name VARCHAR(50) NOT NULL,
-    parent_pond_id INTEGER NOT NULL,
-    order_value INTEGER NOT NULL,
-    PRIMARY KEY (pad_id, parent_pond_id, order_value),
-    FOREIGN KEY (parent_pond_id)
-        REFERENCES users(user_id)
- */

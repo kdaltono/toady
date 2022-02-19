@@ -58,4 +58,5 @@ module.exports = app => {
     app.get('/pond/tasks/:pondId', passport.authenticate('jwt', { session: false }), pond.getContinuousTasks)
 
     app.get('/pad/:padId', passport.authenticate('jwt', { session: false }), pond.getTasksForPad)
+    app.post('/pad/review', passport.authenticate('jwt', { session: false }), pond.updatePadReviewText)
 }

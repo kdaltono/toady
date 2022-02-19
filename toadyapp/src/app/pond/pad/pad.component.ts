@@ -56,4 +56,9 @@ export class PadComponent implements OnInit {
     }
     return 0;
   }
+
+  updateReview(pad: Pad): void {
+    // TODO: Update the review text
+    this.restService.updatePadReviewText(pad.pad_id.toString(), pad.review_text)
+  }
 }

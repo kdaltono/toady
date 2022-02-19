@@ -82,6 +82,7 @@ Pond.getPondPadData = (pond_id, result) => {
         "pads.order_value, " +
         "pads.pad_id, " +
         "pads.parent_pond_id, " +
+        "pads.review_text, " + 
         "case " +
 		    "when task_data.complete_count = task_data.task_count then " +
 			    "TRUE " +

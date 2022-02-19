@@ -16,7 +16,7 @@ import { JWTAuthService } from './jwtauth.service';
 import { SimplifiedUser } from './simplifieduser';
 import { TaskStatus } from './task_status';
 import { UserToTask } from './user_to_task';
-import { assign } from 'underscore';
+import { assign, head } from 'underscore';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +43,7 @@ export class RestService {
   private getPadTasksURL = 'http://localhost:8080/pad/';
   private getPondPadDataURL = 'http://localhost:8080/pond/pads/';
   private getContinuousTasksURL = 'http://localhost:8080/pond/tasks/';
+  private updatePadReviewTextURL = 'http://localhost:8080/pad/review';
 
   constructor(
     private http: HttpClient,
@@ -179,6 +180,21 @@ export class RestService {
         this.messageService.add('New comment inserted successfully')
       }
     )
+  }
+
+  updatePadReviewText(pad_id: string, review_text: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      pad_id: pad_id,
+      review_text: review_text
+    }
+
+    this.http.post(this.updatePadReviewTextURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add("Pad Review Text updated successfully");
+      }
+    );
   }
 
   deleteComment(commentId: string, commentText: string, userId: string) {
