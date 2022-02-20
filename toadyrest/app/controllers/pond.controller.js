@@ -85,3 +85,15 @@ exports.updatePadReviewText = (req, res) => {
         }
     })
 }
+
+exports.updateStartAndEndDate = (req, res) => {
+    Pad.updateStartAndEndDate(req.body.start_dstamp, req.body.end_dstamp, req.body.pad_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Can't find pad ID: ${req.body.pad_id}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}

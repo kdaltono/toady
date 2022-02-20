@@ -81,6 +81,8 @@ CREATE TABLE IF NOT EXISTS pads(
 );
 
 ALTER TABLE pads ADD COLUMN review_text TEXT;
+ALTER TABLE pads ADD COLUMN start_dstamp DATETIME;
+ALTER TABLE pads ADD COLUMN end_dstamp DATETIME;
 
 INSERT INTO pads(pad_name, parent_pond_id, order_value) VALUES ("Start", 1, 1);
 INSERT INTO pads(pad_name, parent_pond_id, order_value) VALUES ("Middle", 1, 2);

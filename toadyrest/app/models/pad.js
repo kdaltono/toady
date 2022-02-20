@@ -21,6 +21,20 @@ Pad.updatePadReviewText = (padId, reviewText, result) => {
     })
 }
 
+Pad.updateStartAndEndDate = (start_dstamp, end_dstamp, pad_id, result) => {
+    var query = "UPDATE pads SET start_dstamp = ?, end_dstamp = ? WHERE pad_id = ?";
+
+    sql.query(query, [start_dstamp, end_dstamp, pad_id], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
+}
+
 Pad.getTasksForPad = (padId, result) => {
     var query = 
     "select " +

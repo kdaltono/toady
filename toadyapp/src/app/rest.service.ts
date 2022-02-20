@@ -44,6 +44,7 @@ export class RestService {
   private getPondPadDataURL = 'http://localhost:8080/pond/pads/';
   private getContinuousTasksURL = 'http://localhost:8080/pond/tasks/';
   private updatePadReviewTextURL = 'http://localhost:8080/pad/review';
+  private updateStartAndEndDateURL = 'http://localhost:8080/pad/dates';
 
   constructor(
     private http: HttpClient,
@@ -178,6 +179,22 @@ export class RestService {
     this.http.post(this.insertCommentURL, reqObject, { headers: headers }).subscribe(
       () => {
         this.messageService.add('New comment inserted successfully')
+      }
+    )
+  }
+
+  updatePadStartAndEndDates(start_dstamp: string, end_dstamp: string, pad_id: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      start_dstamp: start_dstamp,
+      end_dstamp: end_dstamp,
+      pad_id: pad_id
+    };
+
+    this.http.post(this.updateStartAndEndDateURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add('Updated start and end dates successfully')
       }
     )
   }
