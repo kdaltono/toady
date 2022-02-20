@@ -97,3 +97,15 @@ exports.updateStartAndEndDate = (req, res) => {
         }
     })
 }
+
+exports.updateOrderValues = (req, res) => {
+    Pad.updateOrderValues(req.body.padOrderValues, (err, res) => {
+        if (err) {
+            res.status(500).send({
+                message: `Couldn't update pad's order_values: ${req.body.padOrderValues}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}

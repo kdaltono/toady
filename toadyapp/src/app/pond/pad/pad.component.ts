@@ -4,6 +4,7 @@ import { RestService } from 'src/app/rest.service';
 import { Pad } from 'src/app/pad';
 import { MessageService } from 'src/app/message.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-pad',
@@ -77,5 +78,24 @@ export class PadComponent implements OnInit {
 
       this.restService.updatePadStartAndEndDates(insertStartDate, insertEndDate, pad.pad_id.toString())
     }
+  }
+
+  drop(event: CdkDragDrop<any>) {
+    // TODO: Maybe this should be a service like the comments and task statuses
+    moveItemInArray(this.padTasks, event.previousIndex, event.currentIndex);
+    this.padTasks[event.previousIndex].pad.order_value = event.previousIndex;
+    this.padTasks[event.currentIndex].pad.order_value = event.currentIndex;
+
+    let min = Math.min(event.previousIndex, event.currentIndex);
+    let max = Math.max(event.previousIndex, event.currentIndex);
+
+    var padOrderValues: { pad_id: number, order_value: number }[] = [];
+
+    for (var i = min; i <= max; i++) {
+      this.padTasks[i].pad.order_value = i + 1;
+      padOrderValues.push({pad_id: this.padTasks[i].pad.pad_id, order_value: i + 1});
+    }
+
+    this.restService.updatePadOrderValues(padOrderValues);
   }
 }

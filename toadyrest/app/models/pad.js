@@ -35,6 +35,30 @@ Pad.updateStartAndEndDate = (start_dstamp, end_dstamp, pad_id, result) => {
     })
 }
 
+Pad.updateOrderValues = (padOrderValues, result) => {
+    var query = "UPDATE pads SET order_value = ? WHERE pad_id = ?"
+    var errors = ''
+    var results = ''
+
+    padOrderValues.forEach(pad => {
+        sql.query(query, [pad.order_value, pad.pad_id], (err, res) => {
+            if (err) {
+                console.log("Error: " + err)
+                errors += err
+                return
+            }
+            results += res
+        })
+    })
+
+    if (errors) {
+        result(errors, null)
+        return
+    }
+    
+    result(null, results)
+}
+
 Pad.getTasksForPad = (padId, result) => {
     var query = 
     "select " +

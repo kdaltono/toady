@@ -60,4 +60,5 @@ module.exports = app => {
     app.get('/pad/:padId', passport.authenticate('jwt', { session: false }), pond.getTasksForPad)
     app.post('/pad/review', passport.authenticate('jwt', { session: false }), pond.updatePadReviewText)
     app.post('/pad/dates', passport.authenticate('jwt', { session: false }), pond.updateStartAndEndDate)
+    app.post('/pad/orders', passport.authenticate('jwt', { session: false }), pond.updateOrderValues)
 }

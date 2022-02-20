@@ -1,6 +1,6 @@
-<div class='pad-container'>
-    <mat-accordion multi>
-        <mat-expansion-panel *ngFor="let padData of padTasks">
+<div cdkDropList (cdkDropListDropped)="drop($event)" class='pad-container'>
+    <mat-accordion multi="false">
+        <mat-expansion-panel cdkDrag *ngFor="let padData of padTasks">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{padData.pad.pad_name}}
