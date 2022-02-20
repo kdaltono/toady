@@ -121,3 +121,15 @@ exports.insertPadForPond = (req, res) => {
         }
     })
 }
+
+exports.deletePad = (req, res) => {
+    Pad.deletePad(req.body.pad_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Couldn't delete pad ID: ${req.body.pad_id}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}

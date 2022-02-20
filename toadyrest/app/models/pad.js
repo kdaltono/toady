@@ -109,4 +109,18 @@ Pad.getTasksForPad = (padId, result) => {
     })
 }
 
+Pad.deletePad = (pad_id, result) => {
+    var query = "DELETE FROM pads WHERE pad_id = ?"
+
+    sql.query(query, pad_id, (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
+}
+
 module.exports = Pad

@@ -245,6 +245,20 @@ export class RestService {
     )
   }
 
+  deletePad(pad_id: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      pad_id: pad_id
+    };
+
+    this.http.delete(this.insertPadURL, {headers: headers, body: reqObject}).subscribe(
+      () => {
+        this.messageService.add("Successfully delete pad")
+      }
+    )
+  }
+
   deleteComment(commentId: string, commentText: string, userId: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 

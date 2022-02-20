@@ -62,4 +62,5 @@ module.exports = app => {
     app.put('/pad/dates', passport.authenticate('jwt', { session: false }), pond.updateStartAndEndDate)
     app.put('/pad/orders', passport.authenticate('jwt', { session: false }), pond.updateOrderValues)
     app.post('/pad', passport.authenticate('jwt', { session: false }), pond.insertPadForPond)
+    app.delete('/pad', passport.authenticate('jwt', { session: false }), pond.deletePad)
 }

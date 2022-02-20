@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Inject } from '@angular/core';
 import { DisplayTask } from 'src/app/displaytask';
 import { RestService } from 'src/app/rest.service';
 import { Pad } from 'src/app/pad';
 import { MessageService } from 'src/app/message.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pad',
@@ -16,12 +17,11 @@ export class PadComponent implements OnInit {
   @Input() pondId!: string;
   padTasks: { pad: Pad, tasks: DisplayTask[]}[] = [];
   tabIndex: number = 0;
-
   padsLoaded: boolean = false;
 
   constructor(
     private restService: RestService,
-    private messageService: MessageService
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -29,10 +29,6 @@ export class PadComponent implements OnInit {
   }
 
   updateUI(): void {
-    // TODO: This shouldn't just load all of the tasks, it should really only load
-    // the ones that you view
-
-    // TODO: Add delay like in the main homescreen
     this.padsLoaded = false;
     this.padTasks = [];
 
@@ -43,6 +39,8 @@ export class PadComponent implements OnInit {
   }
 
   populatePadData(): void {
+    // TODO: This shouldn't just load all of the tasks, it should really only load
+    // the ones that you view
     let pads: Pad[] = []
     this.restService.getPondPadData(this.pondId).subscribe(
       data => {
@@ -91,6 +89,13 @@ export class PadComponent implements OnInit {
       let insertEndDate = `${endDate.getUTCFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`
 
       this.restService.updatePadStartAndEndDates(insertStartDate, insertEndDate, pad.pad_id.toString())
+    }
+  }
+
+  deletePad(pad: Pad): void {
+    if (confirm('Are you sure you want to delete this pad?')) {
+      this.restService.deletePad(pad.pad_id.toString())
+      this.updateUI();
     }
   }
 

@@ -21,10 +21,15 @@
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
                 </mat-form-field>
-                <!-- Need to have a nicer way to show that there are no tasks here -->
-                <div class="container" *ngFor="let task of padData.tasks">
-                    <task-detail [task]="task"></task-detail>
+                <mat-divider></mat-divider>
+
+                <div class="pad-task-container">
+                    <div class="no-task-text" *ngIf="!(padData.tasks.length > 0)">No tasks yet...</div>
+                    <div class="container" *ngFor="let task of padData.tasks">
+                        <task-detail [task]="task"></task-detail>
+                    </div>
                 </div>
+
                 <div class="review-container" *ngIf="padData.pad.pad_is_complete">
                     <mat-divider></mat-divider>
                     <h3 class="review-title">Review</h3>
@@ -34,6 +39,9 @@
                     </mat-form-field>
                 </div>
                 <div class="review-buttons">
+                    <button *ngIf="!padData.pad.pad_is_complete" mat-button (click)="deletePad(padData.pad)">
+                        Remove Pad
+                    </button>
                     <button mat-button (click)="updatePad(padData.pad)">Update</button>
                 </div>
             </mat-expansion-panel>

@@ -33,8 +33,7 @@
         </mat-card-content>
         <mat-card-actions align="end">
             <button mat-button [routerLink]="['/add']" [queryParams]="{pond_id: pondId}">Add Task</button>
-            <button mat-button (click)="openPadDialog()">Add Pad</button>
+            <button mat-button (click)="openPadUpdateDialog()">Add Pad</button>
         </mat-card-actions>
     </mat-card>
 </div>
-<app-messages></app-messages>

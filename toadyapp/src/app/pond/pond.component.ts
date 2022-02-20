@@ -109,7 +109,7 @@ export class PondComponent implements OnInit {
     });
   }
 
-  openPadDialog(): void {
+  openPadUpdateDialog(): void {
     const dialogRef = this.dialog.open(PadDialog, {
       width: '250px',
       data: ''
@@ -130,8 +130,8 @@ export class PondComponent implements OnInit {
 }
 
 @Component({
-  selector: 'new-pad-dialog',
-  templateUrl: 'paddialog.component.html'
+  selector: 'pad-update-dialog',
+  templateUrl: 'pad-update-dialog.component.html'
 })
 export class PadDialog {
   constructor(
