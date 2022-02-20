@@ -99,10 +99,22 @@ exports.updateStartAndEndDate = (req, res) => {
 }
 
 exports.updateOrderValues = (req, res) => {
-    Pad.updateOrderValues(req.body.padOrderValues, (err, res) => {
+    Pad.updateOrderValues(req.body.padOrderValues, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: `Couldn't update pad's order_values: ${req.body.padOrderValues}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}
+
+exports.insertPadForPond = (req, res) => {
+    Pad.insertNewPadForPond(req.body.pond_id, req.body.pad_name, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Couldn't insert pad: ${req.body.pad_name}`
             })
         } else {
             res.send(data)

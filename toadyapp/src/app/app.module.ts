@@ -21,7 +21,7 @@ import { RestService } from './rest.service';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 import { RegisterComponent } from './register/register.component';
 import { SidenavService } from './sidenav.service';
-import { PondComponent } from './pond/pond.component';
+import { PondComponent, PadDialog } from './pond/pond.component';
 import { PondListComponent } from './pond-list/pond-list.component';
 import { PadComponent } from './pond/pad/pad.component';
 import { TaskdetailComponent } from './taskdetail/taskdetail.component';
@@ -53,7 +53,8 @@ const appRoutes: Routes = [
     PondComponent,
     PondListComponent,
     PadComponent,
-    TaskdetailComponent
+    TaskdetailComponent,
+    PadDialog
   ],
   imports: [
     BrowserModule,

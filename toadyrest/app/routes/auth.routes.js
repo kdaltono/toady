@@ -58,7 +58,8 @@ module.exports = app => {
     app.get('/pond/tasks/:pondId', passport.authenticate('jwt', { session: false }), pond.getContinuousTasks)
 
     app.get('/pad/:padId', passport.authenticate('jwt', { session: false }), pond.getTasksForPad)
-    app.post('/pad/review', passport.authenticate('jwt', { session: false }), pond.updatePadReviewText)
-    app.post('/pad/dates', passport.authenticate('jwt', { session: false }), pond.updateStartAndEndDate)
-    app.post('/pad/orders', passport.authenticate('jwt', { session: false }), pond.updateOrderValues)
+    app.put('/pad/review', passport.authenticate('jwt', { session: false }), pond.updatePadReviewText)
+    app.put('/pad/dates', passport.authenticate('jwt', { session: false }), pond.updateStartAndEndDate)
+    app.put('/pad/orders', passport.authenticate('jwt', { session: false }), pond.updateOrderValues)
+    app.post('/pad', passport.authenticate('jwt', { session: false }), pond.insertPadForPond)
 }

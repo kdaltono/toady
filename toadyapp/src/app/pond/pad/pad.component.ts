@@ -17,6 +17,8 @@ export class PadComponent implements OnInit {
   padTasks: { pad: Pad, tasks: DisplayTask[]}[] = [];
   tabIndex: number = 0;
 
+  padsLoaded: boolean = false;
+
   constructor(
     private restService: RestService,
     private messageService: MessageService
@@ -29,6 +31,18 @@ export class PadComponent implements OnInit {
   updateUI(): void {
     // TODO: This shouldn't just load all of the tasks, it should really only load
     // the ones that you view
+
+    // TODO: Add delay like in the main homescreen
+    this.padsLoaded = false;
+    this.padTasks = [];
+
+    setTimeout(() => {
+      this.populatePadData();
+      this.padsLoaded = true;
+    }, 1000);
+  }
+
+  populatePadData(): void {
     let pads: Pad[] = []
     this.restService.getPondPadData(this.pondId).subscribe(
       data => {

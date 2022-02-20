@@ -20,6 +20,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const materialModules = [
   MatExpansionModule,
@@ -41,7 +42,8 @@ const materialModules = [
   MatRippleModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  DragDropModule
+  DragDropModule,
+  MatDialogModule
 ]
 
 @NgModule({

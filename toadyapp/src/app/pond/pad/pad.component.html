@@ -1,38 +1,48 @@
 <div cdkDropList (cdkDropListDropped)="drop($event)" class='pad-container'>
-    <mat-accordion multi="false">
-        <mat-expansion-panel cdkDrag *ngFor="let padData of padTasks">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    {{padData.pad.pad_name}}
-                </mat-panel-title>
-                <mat-panel-description *ngIf="padData.pad.pad_is_complete">
-                    <p class="pad_complete">Complete</p>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-form-field appearance="fill">
-                <mat-label>Active Time</mat-label>
-                <mat-date-range-input [formGroup]="padData.pad.activeTime" [rangePicker]="picker">
-                    <input matStartDate formControlName="start" placeholder="Start date">
-                    <input matEndDate formControlName="end" placeholder="End date">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
-            <!--<h3>Days remaining: {{calculateDifference(padData.pad)}}</h3>-->
-            <div class="container" *ngFor="let task of padData.tasks">
-                <task-detail [task]="task"></task-detail>
-            </div>
-            <div class="review-container" *ngIf="padData.pad.pad_is_complete">
-                <mat-divider></mat-divider>
-                <h3 class="review-title">Review</h3>
-                <mat-form-field>
-                    <textarea class="review-text" type="text" matInput 
-                        name="taskdesc" appTextareaAutoresize [(ngModel)]="padData.pad.review_text"></textarea>
+    <div *ngIf="padsLoaded; then showPads else showLoading"></div>
+
+    <ng-template #showPads>
+        <mat-accordion multi="false">
+            <mat-expansion-panel cdkDrag *ngFor="let padData of padTasks">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{padData.pad.pad_name}}
+                    </mat-panel-title>
+                    <mat-panel-description *ngIf="padData.pad.pad_is_complete">
+                        <p class="pad_complete">Complete</p>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-form-field appearance="fill">
+                    <mat-label>Active Time</mat-label>
+                    <mat-date-range-input [formGroup]="padData.pad.activeTime" [rangePicker]="picker">
+                        <input matStartDate formControlName="start" placeholder="Start date">
+                        <input matEndDate formControlName="end" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
                 </mat-form-field>
-            </div>
-            <div class="review-buttons">
-                <button mat-button (click)="updatePad(padData.pad)">Update</button>
-            </div>
-        </mat-expansion-panel>
-    </mat-accordion>
+                <!-- Need to have a nicer way to show that there are no tasks here -->
+                <div class="container" *ngFor="let task of padData.tasks">
+                    <task-detail [task]="task"></task-detail>
+                </div>
+                <div class="review-container" *ngIf="padData.pad.pad_is_complete">
+                    <mat-divider></mat-divider>
+                    <h3 class="review-title">Review</h3>
+                    <mat-form-field>
+                        <textarea class="review-text" type="text" matInput 
+                            name="taskdesc" appTextareaAutoresize [(ngModel)]="padData.pad.review_text"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="review-buttons">
+                    <button mat-button (click)="updatePad(padData.pad)">Update</button>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </ng-template>
+
+    <ng-template #showLoading>
+        <div class='load-spinner'>
+            <mat-spinner></mat-spinner>
+        </div>
+    </ng-template>
 </div>

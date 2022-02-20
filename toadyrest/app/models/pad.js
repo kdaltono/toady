@@ -55,8 +55,32 @@ Pad.updateOrderValues = (padOrderValues, result) => {
         result(errors, null)
         return
     }
-    
+
     result(null, results)
+}
+
+Pad.insertNewPadForPond = (pond_id, pad_name, result) => {
+    var query = 
+    "INSERT " +
+	    "INTO pads(pad_name, parent_pond_id, order_value) " +
+    "VALUES " +
+	    "(?, ?, ( " +
+		    "SELECT " +
+			    "max(p2.order_value) + 1 " +
+		    "from " +
+			    "pads p2 " +
+		    "where " +
+			    "p2.parent_pond_id = ? ))"
+
+    sql.query(query, [pad_name, pond_id, pond_id], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
 }
 
 Pad.getTasksForPad = (padId, result) => {

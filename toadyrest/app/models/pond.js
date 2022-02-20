@@ -147,7 +147,7 @@ Pond.getUserAssignedPonds = (user_id, result) => {
         
     sql.query(query, user_id, (err, res) => {
         if (err) {
-            console.log("Error with query: " + query + "\nError: " + err)
+            console.log("Error: " + err)
             result(err, null)
             return
         }

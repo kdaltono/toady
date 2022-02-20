@@ -46,6 +46,7 @@ export class RestService {
   private updatePadReviewTextURL = 'http://localhost:8080/pad/review';
   private updateStartAndEndDateURL = 'http://localhost:8080/pad/dates';
   private updatePadOrderValuesURL = 'http://localhost:8080/pad/orders';
+  private insertPadURL = 'http://localhost:8080/pad';
 
   constructor(
     private http: HttpClient,
@@ -193,7 +194,7 @@ export class RestService {
       pad_id: pad_id
     };
 
-    this.http.post(this.updateStartAndEndDateURL, reqObject, { headers: headers }).subscribe(
+    this.http.put<any>(this.updateStartAndEndDateURL, reqObject, { headers }).subscribe(
       () => {
         this.messageService.add('Updated start and end dates successfully')
       }
@@ -208,7 +209,7 @@ export class RestService {
       review_text: review_text
     }
 
-    this.http.post(this.updatePadReviewTextURL, reqObject, { headers: headers }).subscribe(
+    this.http.put<any>(this.updatePadReviewTextURL, reqObject, { headers }).subscribe(
       () => {
         this.messageService.add("Pad Review Text updated successfully");
       }
@@ -222,9 +223,24 @@ export class RestService {
       padOrderValues: padOrderValues
     }
 
-    this.http.post(this.updatePadOrderValuesURL, reqObject, { headers: headers }).subscribe(
+    this.http.put<any>(this.updatePadOrderValuesURL, reqObject, { headers }).subscribe(
       () => {
         this.messageService.add("Updated Pad Order Values successfully");
+      }
+    )
+  }
+
+  insertNewPad(pond_id: string, pad_name: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      pond_id: pond_id,
+      pad_name: pad_name
+    }
+
+    this.http.post(this.insertPadURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add("Inserted new pad successfully");
       }
     )
   }

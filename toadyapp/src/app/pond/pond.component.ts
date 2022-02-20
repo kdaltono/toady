@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pond } from '../pond';
 import { DisplayUser } from '../displayuser';
@@ -9,6 +9,8 @@ import * as _ from 'underscore';
 import { MatTabGroup } from '@angular/material/tabs';
 import { DisplayTask } from '../displaytask';
 import { MessageService } from '../message.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PadComponent } from './pad/pad.component';
 
 @Component({
   selector: 'app-pond',
@@ -25,11 +27,13 @@ export class PondComponent implements OnInit {
 
   reactiveForm: FormGroup = {} as FormGroup;
   @ViewChild("matTab", { static: false }) matTab!: MatTabGroup;
+  @ViewChild('pad') padComponent!: PadComponent;
 
   constructor(
     private route: ActivatedRoute,
     private restService: RestService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -105,7 +109,37 @@ export class PondComponent implements OnInit {
     });
   }
 
+  openPadDialog(): void {
+    const dialogRef = this.dialog.open(PadDialog, {
+      width: '250px',
+      data: ''
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.messageService.add("Attempted to add pad: " + result);
+        this.restService.insertNewPad(this.pondId.toString(), result);
+        this.padComponent.updateUI();
+      }
+    })
+  }
+
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.user_id === c2.user_id : c1 === c2;
+  }
+}
+
+@Component({
+  selector: 'new-pad-dialog',
+  templateUrl: 'paddialog.component.html'
+})
+export class PadDialog {
+  constructor(
+    public dialogRef: MatDialogRef<PadDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
