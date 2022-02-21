@@ -3,6 +3,7 @@ const TaskDisplay = require('../models/task_display')
 const TaskComments = require('../models/task_comments')
 const Task = require('../models/task')
 const UserToTask = require('../models/user_to_task')
+const jsonwebtoken = require('jsonwebtoken')
 
 exports.getDisplayDescription = (req, res) => {
     TaskDisplay.getUserDisplayTasks(req.params.userId, (err, data) => {
@@ -89,7 +90,10 @@ exports.insertNewTask = (req, res) => {
 }
 
 exports.insertNewComment = (req, res) => {
-    TaskComments.addComment(req.body.task_id, req.body.user_id, req.body.comment_text, (err, data) => {
+    // Ensure that user_id from the sender is used, rather than the one included in request
+    const token = jsonwebtoken.decode(req.headers.authorization.slice(7), { complete: true })
+
+    TaskComments.addComment(req.body.task_id, token.payload.content.user.user_id, req.body.comment_text, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: `Error inserting comment: Task ${req.body.task_id} from ${req.body.user_id}: ${req.body.comment_text}`
@@ -121,7 +125,9 @@ exports.getAssignedUsers = (req, res) => {
 }
 
 exports.deleteComment = (req, res) => {
-    TaskComments.deleteComment(req.body.comment_id, req.body.comment_text, req.body.user_id, (err, data) => {
+    const token = jsonwebtoken.decode(req.headers.authorization.slice(7), { complete: true })
+
+    TaskComments.deleteComment(req.body.comment_id, req.body.comment_text, token.payload.content.user.user_id, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: `Error deleting comment: Comment text: ${req.body.comment_text}`
