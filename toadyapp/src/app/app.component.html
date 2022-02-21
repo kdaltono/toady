@@ -4,9 +4,9 @@
             <h1 class='sidenav-title'>Menu</h1>
         </div>
         <mat-action-list class='sidenav-list'>
-            <button mat-list-item class='sidenav-item'> Reports </button>
+            <button mat-list-item class='sidenav-item' (click)="sidenavService.close()"> Reports </button>
             <button mat-list-item class='sidenav-item' (click)='logout()'> Logout </button>
-            <button mat-list-item class='sidenav-item' routerLink="pondlist"> Ponds </button>
+            <button mat-list-item class='sidenav-item' (click)="sidenavService.close()" routerLink="pondlist"> Ponds </button>
         </mat-action-list>
     </mat-sidenav>
     <mat-sidenav-content>

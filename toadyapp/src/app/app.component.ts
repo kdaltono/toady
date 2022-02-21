@@ -14,7 +14,7 @@ export class AppComponent {
   title = 'toadyapp';
 
   constructor(
-    private sidenavService: SidenavService,
+    public sidenavService: SidenavService,
     private jwtAuthService: JWTAuthService,
     private router: Router
   ) {}
