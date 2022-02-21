@@ -1,13 +1,23 @@
-<div class='login-area'>
-    <h2 class='login-heading'>Login</h2>
-    <form (ngSubmit)="onLoginSubmit()" #loginform="ngForm">
-        <div>
-            <p class='form-heading'>Username</p>
-            <input type="text" name="username" ngModel>
-            <p class='form-heading'>Password</p>
-            <input type="password" name="password" ngModel>
-        </div>
-        <button style="margin-top: 20px;" type="submit">Login</button>
-    </form>
-    <p class='registerLink'>Don't have an account? <a [routerLink]="['/register']">Register here.</a></p>
+<div class="login-card">
+    <mat-card>
+        <mat-card-title style="text-align: center;">
+            Login
+        </mat-card-title>
+        <form (ngSubmit)="onLoginSubmit()" #loginform="ngForm">
+            <mat-card-content class="login-form">
+                <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input matInput name="username" ngModel>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput name="password" type="password" ngModel>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-button type="button" [routerLink]="['/register']">Create an Account</button>
+                <button mat-button type="submit">Login</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
 </div>
