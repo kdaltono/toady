@@ -1,18 +1,36 @@
-<div class='login-area'>
-    <h2 class='register-heading'>Register</h2>
-    <form (ngSubmit)="onRegisterSubmit()" #loginform="ngForm">
-        <div>
-            <p class='form-heading'>Username</p>
-            <input type="text" name="username" ngModel>
-            <p class='form-heading'>First name</p>
-            <input type="text" name="firstname" ngModel>
-            <p class='form-heading'>Last name</p>
-            <input type="text" name="lastname" ngModel>
-            <p class='form-heading'>Password</p>
-            <input type="password" name="password1" ngModel>
-            <p class='form-heading'>Confirm password</p>
-            <input type="password" name="password2" ngModel>
-        </div>
-        <button style="margin-top: 20px;" type="submit">Register</button>
-    </form>
+<div class="register-area">
+    <div class="register-card">
+        <mat-card>
+            <mat-card-title style="text-align: center;">
+                Register
+            </mat-card-title>
+            <form (ngSubmit)="onRegisterSubmit()" #loginform="ngForm">
+                <mat-card-content class="register-form">
+                    <mat-form-field>
+                        <mat-label>Username</mat-label>
+                        <input matInput name="username" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>First Name</mat-label>
+                        <input matInput name="firstname" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Last Name</mat-label>
+                        <input matInput name="lastname" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" name="password1" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput type="password" name="password2" ngModel>
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions class="button-section">
+                    <button mat-button type="submit">Register</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
 </div>

@@ -1,16 +1,15 @@
 .login-area {
-    background-color: #fefbfd;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    padding: 20px;
-    border-radius: 10px;
-    margin: 50px 200px 0px 200px;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .login-card {
-    margin: 50px 200px 0px 200px;
+    /*margin: 50px 200px 0px 200px;*/
+    width: 400px;
+    height: 500px;
 }
 
 .login-form {
@@ -20,16 +19,20 @@
     justify-content: center;
 }
 
-.form-heading {
-    padding: 10px 0px 0px 0px;
-    margin: 0px;
+.mat-card-title {
+    padding-top: 16px !important;
 }
 
-.registerLink {
-    padding: 10px 0px 0px 0px;
-    margin: 0px;
+.mat-card-content {
+    margin-bottom: 0px !important;
 }
 
-.login-heading {
-    margin: 0px;
+.mat-card-actions {
+    margin-bottom: 0px !important;
+}
+
+.button-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
