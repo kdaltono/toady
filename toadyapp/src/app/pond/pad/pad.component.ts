@@ -6,6 +6,7 @@ import { MessageService } from 'src/app/message.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { JWTAuthService } from 'src/app/jwtauth.service';
 
 @Component({
   selector: 'app-pad',
@@ -21,6 +22,7 @@ export class PadComponent implements OnInit {
 
   constructor(
     private restService: RestService,
+    public jwtAuthService: JWTAuthService,
     public dialog: MatDialog
   ) { }
 

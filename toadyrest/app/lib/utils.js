@@ -10,7 +10,9 @@ function issueJWT(user) {
         content: {
             user: {
                 username: username,
-                user_id: user.user_id
+                user_id: user.user_id,
+                account_type_id: user.account_type_id,
+                account_type_level: user.account_type_level
             }
         }
     }
@@ -21,7 +23,9 @@ function issueJWT(user) {
         token: "Bearer " + signedToken,
         user_id: user.user_id,
         full_name: `${user.first_name} ${user.last_name}`,
-        expires: expiresIn
+        expires: expiresIn,
+        account_type_id: user.account_type_id,
+        account_type_level: user.account_type_level
     }
 }
 

@@ -107,7 +107,21 @@ User.insertNewUser = (username, firstname, lastname, password, result) => {
 }
 
 User.findByUsername = (username, result) => {
-    const query = "SELECT * FROM users WHERE username = ?"
+    /*const query = "SELECT * FROM users WHERE username = ?"*/
+    const query = "select " +
+	    "u.user_id, " +
+        "u.username, " +
+        "CONCAT(u.first_name, ' ', u.last_name) as full_name, " +
+        "u.first_name, " +
+        "u.last_name, " +
+        "u.account_type_id, " +
+        "at.account_type_level, " +
+        "u.current_password " +
+    "from " +
+	    "users u left join account_types at " +
+        "on (u.account_type_id = at.account_type_id) " +
+    "where " +
+	    "u.username = ?"
 
     sql.query(query, username, (err, res) => {
         if (err) {
