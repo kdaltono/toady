@@ -25,6 +25,7 @@ import { PondComponent, PadDialog } from './pond/pond.component';
 import { PondListComponent } from './pond-list/pond-list.component';
 import { PadComponent } from './pond/pad/pad.component';
 import { TaskdetailComponent } from './taskdetail/taskdetail.component';
+import { NewPondComponent } from './pond/new-pond/new-pond.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
   { path: 'add', component: NewtaskComponent },
   { path: 'pond/:pondid', component: PondComponent },
   { path: 'pondlist', component: PondListComponent },
+  { path: 'add/pond', component: NewPondComponent },
   { path: '', redirectTo: 'home' },
   { path: '**', redirectTo: 'home' }
 ]
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     PondListComponent,
     PadComponent,
     TaskdetailComponent,
-    PadDialog
+    PadDialog,
+    NewPondComponent
   ],
   imports: [
     BrowserModule,

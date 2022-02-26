@@ -1,0 +1,15 @@
+.new-pond-area {
+    margin: 10px 100px 0px 100px;
+    padding: 20px;
+}
+
+.pond-card {
+    width: 100%;
+    border-radius: 10px !important;
+    min-height: 100%;
+    margin-bottom: 5px;
+}
+
+.new-pond-form-section {
+    margin-top: 20px;
+}

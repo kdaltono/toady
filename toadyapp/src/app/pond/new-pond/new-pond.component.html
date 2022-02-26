@@ -1,0 +1,19 @@
+<!-- TODO: This form needs to look better -->
+<div class="new-pond-area">
+    <mat-card class="pond-card">
+        <mat-card-title>
+            Create new Pond
+        </mat-card-title>
+        <form (ngSubmit)="onNewPondSubmit()" #newpondform="ngForm">
+            <mat-card-content class="new-pond-form-section">
+                <mat-form-field appearance="fill">
+                    <mat-label>Pond Name</mat-label>
+                    <input type="text" matInput name="pondname" ngModel>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-button type="submit">Create</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

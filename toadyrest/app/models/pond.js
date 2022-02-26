@@ -132,7 +132,8 @@ Pond.getPondPadData = (pond_id, result) => {
 
 Pond.getUserAssignedPonds = (user_id, result) => {
     var query = 
-    "SELECT " +
+    // TODO: Remove the distinct when fixing the assigning issues
+    "SELECT DISTINCT " +
         "ponds.pond_id, " +
         "ponds.pond_name, " +
         "CONCAT(users.first_name, \" \", users.last_name) as created_by, " +
@@ -141,9 +142,9 @@ Pond.getUserAssignedPonds = (user_id, result) => {
     "FROM " +
         "ponds left join user_to_pond utp " +
         "on (ponds.pond_id = utp.pond_id) left join users " +
-        "on (ponds.created_by = users.user_id) " +
+        "on (ponds.created_by = users.user_id) " /*+
     "WHERE " +
-        "utp.user_id = ?"
+        "utp.user_id = ?"*/
         
     sql.query(query, user_id, (err, res) => {
         if (err) {
@@ -175,6 +176,20 @@ Pond.getPondAssignedUsers = (pond_id, result) => {
         if (err) {
             console.log("Error with query: " + query + "\nError: " + err)
             result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
+}
+
+Pond.insertNewPond = (pond_name, created_by, result) => {
+    var query = "insert into ponds (pond_name, created_by) values (?, ?)"
+
+    sql.query(query, [pond_name, created_by], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null);
             return
         }
 

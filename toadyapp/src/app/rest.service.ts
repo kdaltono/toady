@@ -47,6 +47,7 @@ export class RestService {
   private updateStartAndEndDateURL = 'http://localhost:8080/pad/dates';
   private updatePadOrderValuesURL = 'http://localhost:8080/pad/orders';
   private insertPadURL = 'http://localhost:8080/pad';
+  private insertNewPondURL = 'http://localhost:8080/pond';
 
   constructor(
     private http: HttpClient,
@@ -181,6 +182,21 @@ export class RestService {
     this.http.post(this.insertCommentURL, reqObject, { headers: headers }).subscribe(
       () => {
         this.messageService.add('New comment inserted successfully')
+      }
+    )
+  }
+
+  insertNewPond(pondName: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      pond_name: pondName
+    }
+
+    this.http.post(this.insertNewPondURL, reqObject, { headers: headers }).subscribe(
+      () => {
+        this.messageService.add('Inserted new pond successfully');
+        this.router.navigate(['/pondlist']);
       }
     )
   }

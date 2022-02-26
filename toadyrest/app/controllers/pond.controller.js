@@ -1,6 +1,7 @@
 const Pond = require('../models/pond')
 const Pad = require('../models/pad')
 const e = require('express')
+const jsonwebtoken = require('jsonwebtoken')
 
 exports.getUserAssignedPonds = (req, res) => {
     Pond.getUserAssignedPonds(req.params.userId, (err, data) => {
@@ -115,6 +116,21 @@ exports.insertPadForPond = (req, res) => {
         if (err) {
             res.status(500).send({
                 message: `Couldn't insert pad: ${req.body.pad_name}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}
+
+exports.insertPond = (req, res) => {
+    const token = jsonwebtoken.decode(req.headers.authorization.slice(7), { complete: true })
+    const user_id = token.payload.content.user.user_id
+
+    Pond.insertNewPond(req.body.pond_name, user_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Couldn't create pond: ${req.body.pond_name}`
             })
         } else {
             res.send(data)
