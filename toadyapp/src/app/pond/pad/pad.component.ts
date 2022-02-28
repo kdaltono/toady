@@ -19,6 +19,7 @@ export class PadComponent implements OnInit {
   padTasks: { pad: Pad, tasks: DisplayTask[]}[] = [];
   tabIndex: number = 0;
   padsLoaded: boolean = false;
+  @Input() accountLevel!: number;
 
   constructor(
     private restService: RestService,
@@ -65,6 +66,10 @@ export class PadComponent implements OnInit {
         })
       }
     )
+  }
+
+  accountHasPrivileges(): boolean {
+    return this.accountLevel > 5;
   }
 
   // TODO: This doesnt sort properly, sometimes it works and sometimes it doesn't

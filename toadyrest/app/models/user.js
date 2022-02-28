@@ -114,12 +114,9 @@ User.findByUsername = (username, result) => {
         "CONCAT(u.first_name, ' ', u.last_name) as full_name, " +
         "u.first_name, " +
         "u.last_name, " +
-        "u.account_type_id, " +
-        "at.account_type_level, " +
         "u.current_password " +
     "from " +
-	    "users u left join account_types at " +
-        "on (u.account_type_id = at.account_type_id) " +
+	    "users u " +
     "where " +
 	    "u.username = ?"
 

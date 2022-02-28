@@ -4,7 +4,7 @@
     <ng-template #showPads>
         <mat-accordion multi="false">
             <mat-expansion-panel cdkDrag *ngFor="let padData of padTasks"
-                [cdkDragDisabled]="!jwtAuthService.getUserHasPrivilege()">
+                [cdkDragDisabled]="!accountHasPrivileges()">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         {{padData.pad.pad_name}}

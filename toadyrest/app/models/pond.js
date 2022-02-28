@@ -50,23 +50,31 @@ Pond.getContinuousTasks = (pond_id, result) => {
     })
 }
 
-Pond.getPondData = (pond_id, result) => {
-    var query = 
-    "SELECT " +
+Pond.getPondData = (pond_id, current_user_id, result) => {
+    var query = "SELECT " + 
         "ponds.pond_id, " +
         "ponds.pond_name, " +
         "CONCAT(users.first_name, \" \", users.last_name) as created_by, " +
         "ponds.dstamp, " +
-        "ponds.is_active " +
+        "ponds.is_active, " +
+        "user_data.account_type_level " +
     "FROM " +
         "ponds left join users " +
-        "on (ponds.created_by = users.user_id) " +
+        "on (ponds.created_by = users.user_id), " +
+        "(select " +
+            "at.account_type_level " +
+        "from " +
+            "user_to_pond utp left join account_types at " +
+            "on (utp.account_type_id = at.account_type_id) " +
+        "where " +
+            "utp.user_id = ? " +
+        ") user_data " +
     "WHERE " +
-        "ponds.pond_id = ?"
+        "ponds.pond_id = ? "
 
-    sql.query(query, pond_id, (err, res) => {
+    sql.query(query, [current_user_id, pond_id], (err, res) => {
         if (err) {
-            console.log("Error: " + err)
+            console.log("Error: " + err + "\nUser ID: " + query)
             result(err, null)
             return
         }

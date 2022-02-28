@@ -23,9 +23,7 @@ module.exports = app => {
                         token: tokenObject.token, 
                         expiresIn: tokenObject.expires, 
                         user_id: tokenObject.user_id, 
-                        full_name: tokenObject.full_name,
-                        account_type_id: tokenObject.account_type_id,
-                        account_type_level: tokenObject.account_type_level
+                        full_name: tokenObject.full_name
                     })
                 } else {
                     res.status(401).json({ success: false, msg: 'Incorrect password' })

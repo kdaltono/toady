@@ -6,7 +6,7 @@
         <mat-card-content>
             <mat-tab-group #matTab mat-align-tabs="center">
                 <mat-tab label="Pads">
-                    <app-pad #pad [pondId]="pondId"></app-pad>
+                    <app-pad #pad [pondId]="pondId" [accountLevel]="pond.account_type_level"></app-pad>
                 </mat-tab>
                 <mat-tab label="Continuous Tasks">
                     <div class=".container" *ngFor="let task of continuousTasks">

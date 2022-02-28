@@ -3,5 +3,6 @@ export interface Pond {
     pond_name: string,
     created_by: string,
     dstamp: string,
-    is_active: boolean
+    is_active: boolean,
+    account_type_level: number
 };

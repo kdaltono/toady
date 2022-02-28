@@ -18,14 +18,18 @@ CREATE TABLE IF NOT EXISTS users(
     username VARCHAR(30) NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    account_type_id INTEGER NOT NULL,
     current_password VARCHAR(30) NOT NULL,
-    PRIMARY KEY (user_id),
-    FOREIGN KEY (account_type_id) 
-        REFERENCES account_types(account_type_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
+    PRIMARY KEY (user_id)
 );
+
+CREATE TABLE IF NOT EXISTS user_to_pond(
+    user_id INTEGER NOT NULL,
+    pond_id INTEGER NOT NULL,
+    account_type_id INTEGER NOT NULL,
+    UNIQUE KEY (user_id, pond_id, account_type_id)
+);
+
+
 
 CREATE TABLE IF NOT EXISTS task_status(
     status_id INTEGER AUTO_INCREMENT NOT NULL,
@@ -89,15 +93,6 @@ INSERT INTO pads(pad_name, parent_pond_id, order_value) VALUES ("Middle", 1, 2);
 INSERT INTO pads(pad_name, parent_pond_id, order_value) VALUES ("End", 1, 3);
 
 INSERT INTO ponds(pond_name, created_by) VALUES ("Test Pond", 1);
-
-CREATE TABLE IF NOT EXISTS user_to_pond(
-    pond_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
-    is_manager BOOLEAN DEFAULT FALSE NOT NULL,
-    PRIMARY KEY (pond_id, user_id)
-);
-
-INSERT INTO user_to_pond (pond_id, user_id, is_manager) VALUES (1, 1, TRUE);
 
 CREATE TABLE IF NOT EXISTS task_comments(
     comment_id INTEGER AUTO_INCREMENT NOT NULL,

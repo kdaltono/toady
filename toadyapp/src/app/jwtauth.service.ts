@@ -51,8 +51,6 @@ export class JWTAuthService {
     localStorage.setItem('user_id', responseObj.user_id);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('full_name', responseObj.full_name);
-    localStorage.setItem('account_type_id', responseObj.account_type_id);
-    localStorage.setItem('account_type_level', responseObj.account_type_level);
   }
 
   logout() {
@@ -60,12 +58,6 @@ export class JWTAuthService {
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user_id');
     localStorage.removeItem('full_name');
-    localStorage.removeItem('account_type_id');
-    localStorage.removeItem('account_type_level');
-  }
-
-  getUserHasPrivilege(): boolean {
-    return +localStorage.getItem('account_type_level')! > 5;
   }
 
   getFullName(): string {
@@ -74,10 +66,6 @@ export class JWTAuthService {
 
   getCurrentUserID(): string {
     return localStorage.getItem('user_id')!;
-  }
-
-  getAccountTypeLevel(): string {
-    return localStorage.getItem('account_type_level')!;
   }
 
   public isLoggedIn(): boolean {

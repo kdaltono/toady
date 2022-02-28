@@ -28,7 +28,10 @@ exports.getPondAssignedUsers = (req, res) => {
 }
 
 exports.getPondData = (req, res) => {
-    Pond.getPondData(req.params.pondId, (err, data) => {
+    const token = jsonwebtoken.decode(req.headers.authorization.slice(7), { complete: true })
+    const user_id = token.payload.content.user.user_id
+
+    Pond.getPondData(req.params.pondId, user_id, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: `Can't find pond ID: ${req.params.pondId}`
