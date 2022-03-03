@@ -1,0 +1,16 @@
+<form [formGroup]="reactiveForm" class='assign-users-form'>
+    <mat-form-field class='assign-users-field'>
+        <mat-label>Assigned Users</mat-label>
+
+        <mat-select formControlName="assignedUsersControl" multiple [compareWith]="compareFn">
+            <mat-select-trigger>
+                <mat-chip-list class='mat-chip-list user-chip-list' aria-orientation="horizontal">
+                    <mat-chip *ngFor='let user of reactiveForm.get("assignedUsersControl")!.value'>
+                        {{ user.full_name }}
+                    </mat-chip>
+                </mat-chip-list>
+            </mat-select-trigger>
+            <mat-option *ngFor="let user of assignableUsers" [value]="user">{{ user.full_name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>

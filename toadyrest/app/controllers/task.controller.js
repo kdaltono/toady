@@ -158,17 +158,22 @@ exports.assignUsers = (req, res) => {
     assignedUsers = req.body.assignedUsers
 
     assignedUsers.forEach(function(utt) {
+        var errors;
         UserToTask.insertRecord(utt.task_id, utt.user_id, (err, data) => {
             if (err) {
-                res.status(500).send({
-                    message: `Error assigning user to task: ${utt.user_id} to ${utt.task_id}`
-                })
-            } else {
-                res.send({
-                    message: 'Success'
-                })
+                errors += `Error assigning user to task: ${utt.user_id} to ${utt.task_id}`   
             }
         })
+
+        if (errors) {
+            res.status(500).send({
+                message: errors
+            })
+        } else {
+            res.send({
+                message: 'Success'
+            })
+        }
     });
 }
 
@@ -176,16 +181,21 @@ exports.unassignUsers = (req, res) => {
     unassignedUsers = req.body.unassignedUsers
 
     unassignedUsers.forEach(function(utt) {
+        var errors;
         UserToTask.removeRecord(utt.task_id, utt.user_id, (err, data) => {
             if (err) {
-                res.status(500).send({
-                    message: `Error removing user to task: ${utt.user_id} to ${utt.task_id}`
-                })
-            } else {
-                res.send({
-                    message: 'Success'
-                })
+                errors += `Error removing user to task: ${utt.user_id} to ${utt.task_id}`  
             }
         })
+
+        if (errors) {
+            res.status(500).send({
+                message: errors
+            })
+        } else {
+            res.send({
+                message: 'Success'
+            })
+        }
     })
 }

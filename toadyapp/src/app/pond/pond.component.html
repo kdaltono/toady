@@ -9,7 +9,7 @@
                     <app-pad #pad [pondId]="pondId" [accountLevel]="pond.account_type_level"></app-pad>
                 </mat-tab>
                 <mat-tab label="Continuous Tasks">
-                    <div class=".container" *ngFor="let task of continuousTasks">
+                    <div class=".container" *ngFor="let task of pondService.continuousTasks">
                         <task-detail [task]="task"></task-detail>
                     </div>
                 </mat-tab>
@@ -24,7 +24,7 @@
                                         </mat-chip>
                                     </mat-chip-list>
                                 </mat-select-trigger>
-                                <mat-option *ngFor="let user of assignableUsers" [value]="user">{{ user.full_name }}</mat-option>
+                                <mat-option *ngFor="let user of pondService.assignableUsers" [value]="user">{{ user.full_name }}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </form>

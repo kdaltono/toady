@@ -11,6 +11,7 @@ import { DisplayTask } from '../displaytask';
 import { MessageService } from '../message.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PadComponent } from './pad/pad.component';
+import { PondService } from './pond.service';
 
 @Component({
   selector: 'app-pond',
@@ -33,6 +34,7 @@ export class PondComponent implements OnInit {
     private route: ActivatedRoute,
     private restService: RestService,
     private messageService: MessageService,
+    public pondService: PondService,
     public dialog: MatDialog
   ) { }
 
@@ -41,8 +43,9 @@ export class PondComponent implements OnInit {
       assignedUsersControl: new FormControl({ value: [] })
     });
     this.subscribeUserChange();
+    this.getParameter();
 
-    this.setValues();
+    this.pondService.updatePondData(this.pondId);
   }
 
   subscribeUserChange() {
@@ -66,22 +69,6 @@ export class PondComponent implements OnInit {
     }
   }
 
-  setValues() {
-    this.getParameter();
-    this.getAssignedUsers();
-    this.getAssignableUsers();
-    this.getContinuousTasks();
-  }
-
-  getContinuousTasks(): void {
-    this.restService.getContinuousTasks(this.pondId).subscribe(
-      data => {
-        this.continuousTasks = data;
-        this.messageService.add(`Continuous Tasks: ${JSON.stringify(this.continuousTasks)}`)
-      }
-    )
-  }
-
   getParameter(): void {
     this.route.params
       .subscribe(params => {
@@ -92,21 +79,6 @@ export class PondComponent implements OnInit {
           }
         )
     })
-  }
-
-  getAssignedUsers(): void {
-    this.restService.getPondAssignedUsers(this.pondId).subscribe(
-      data => {
-        this.assignedUsers = data;
-        this.reactiveForm.get("assignedUsersControl")!.setValue(this.assignedUsers);
-      }
-    )
-  }
-
-  getAssignableUsers() {
-    this.restService.getUsers().subscribe(data => {
-      this.assignableUsers = data
-    });
   }
 
   openPadUpdateDialog(): void {
