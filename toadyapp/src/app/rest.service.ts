@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { User } from './user';
-import { DisplayTask } from './displaytask';
-import { Pad } from './pad';
-import { Pond } from './pond';
-import { DisplayUser } from './displayuser';
-import { Task } from './task'
+import { DisplayTask } from './models/displaytask';
+import { Pad } from './models/pad';
+import { Pond } from './models/pond';
+import { DisplayUser } from './models/displayuser';
+import { Task } from './models/task'
 import { MessageService } from './message.service';
-import { environment } from '../environments/environment';
 import { JWTAuthService } from './jwtauth.service';
-import { SimplifiedUser } from './simplifieduser';
-import { TaskStatus } from './task_status';
-import { UserToTask } from './user_to_task';
-import { assign, head } from 'underscore';
+import { SimplifiedUser } from './models/simplifieduser';
+import { TaskStatus } from './models/task_status';
+import { UserToTask } from './models/user_to_task';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +21,6 @@ import { assign, head } from 'underscore';
 export class RestService {
 
   private restUrl = 'http://localhost:8080/users/a';
-  private protectedRoute = 'http://localhost:8080/protected';
   private displayTaskURL = 'http://localhost:8080/tasks/';
   private taskURL = 'http://localhost:8080/tasks/t/';
   private insertNewTaskURL = 'http://localhost:8080/tasks/i';

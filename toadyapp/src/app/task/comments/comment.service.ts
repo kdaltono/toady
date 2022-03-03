@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, interval, Subscription } from 'rxjs';
-import { Comment } from 'src/app/comment';
+import { BehaviorSubject } from 'rxjs';
+import { Comment } from 'src/app/models/comment';
 import { RestService } from 'src/app/rest.service';
 
 import * as moment from 'moment';

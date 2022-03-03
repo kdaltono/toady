@@ -2,10 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import * as moment from 'moment';
 
-import { RestService } from 'src/app/rest.service';
 import { JWTAuthService } from 'src/app/jwtauth.service';
-import { Comment } from 'src/app/comment';
-import { interval } from 'rxjs';
+import { Comment } from 'src/app/models/comment';
 import { CommentService } from './comment.service';
 import { MessageService } from 'src/app/message.service';
 

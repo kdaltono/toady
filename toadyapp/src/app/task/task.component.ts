@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../rest.service';
-import { Task } from '../task';
-import { TaskStatus } from '../task_status';
+import { Task } from '../models/task';
+import { TaskStatus } from '../models/task_status';
 import * as _ from 'underscore';
 
 @Component({

@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, ViewEncapsulation, Inject } from '@angular/core';
-import { DisplayTask } from 'src/app/displaytask';
+import { Component, OnInit, Input } from '@angular/core';
+import { DisplayTask } from 'src/app/models/displaytask';
 import { RestService } from 'src/app/rest.service';
-import { Pad } from 'src/app/pad';
-import { MessageService } from 'src/app/message.service';
+import { Pad } from 'src/app/models/pad';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { JWTAuthService } from 'src/app/jwtauth.service';
 
 @Component({

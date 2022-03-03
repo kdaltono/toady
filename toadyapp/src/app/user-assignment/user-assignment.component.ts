@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { pairwise } from 'rxjs';
-import { DisplayUser } from '../displayuser';
+import { DisplayUser } from '../models/displayuser';
 import * as _ from 'underscore';
 import { AssignUserService } from './assign-user.service';
 import { RestService } from '../rest.service';

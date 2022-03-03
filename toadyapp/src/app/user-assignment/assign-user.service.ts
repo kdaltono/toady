@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { interval, Observable, Subscription } from 'rxjs';
 import { MessageService } from 'src/app/message.service';
 import { RestService } from 'src/app/rest.service';
-import { UserToTask } from 'src/app/user_to_task';
-import { UserToPond } from 'src/app/user_to_pond';
+import { UserToTask } from 'src/app/models/user_to_task';
+import { UserToPond } from 'src/app/models/user_to_pond';
 import * as _ from 'underscore';
 
 @Injectable({

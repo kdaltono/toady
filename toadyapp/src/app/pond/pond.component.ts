@@ -1,13 +1,13 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Pond } from '../pond';
-import { DisplayUser } from '../displayuser';
+import { Pond } from '../models/pond';
+import { DisplayUser } from '../models/displayuser';
 import { RestService } from '../rest.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { pairwise } from 'rxjs';
 import * as _ from 'underscore';
 import { MatTabGroup } from '@angular/material/tabs';
-import { DisplayTask } from '../displaytask';
+import { DisplayTask } from '../models/displaytask';
 import { MessageService } from '../message.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PadComponent } from './pad/pad.component';

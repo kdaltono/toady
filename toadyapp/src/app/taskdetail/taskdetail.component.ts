@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DisplayTask } from '../displaytask';
+import { DisplayTask } from '../models/displaytask';
 
 @Component({
   selector: 'task-detail',

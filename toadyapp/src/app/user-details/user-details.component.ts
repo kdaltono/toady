@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../user';
+import { User } from '../models/user';
 import { RestService } from '../rest.service';
 import { MessageService } from '../message.service';
-import { DisplayTask } from '../displaytask';
+import { DisplayTask } from '../models/displaytask';
 
 @Component({
   selector: 'app-user-details',

@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { RestService } from '../rest.service';
-import { Pond } from '../pond';
-import { Pad } from '../pad';
+import { Pond } from '../models/pond';
+import { Pad } from '../models/pad';
 import { ActivatedRoute } from '@angular/router';
 
-import { SimplifiedUser } from '../simplifieduser';
+import { SimplifiedUser } from '../models/simplifieduser';
 import { JWTAuthService } from '../jwtauth.service';
 import { MessageService } from '../message.service';
 

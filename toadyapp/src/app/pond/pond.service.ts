@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Pond } from '../pond';
-import { DisplayTask } from '../displaytask';
-import { DisplayUser } from '../displayuser';
+import { Pond } from '../models/pond';
+import { DisplayTask } from '../models/displaytask';
+import { DisplayUser } from '../models/displayuser';
 import { RestService } from '../rest.service';
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

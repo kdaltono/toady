@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JWTAuthService } from '../jwtauth.service';
 import { MessageService } from '../message.service';
-import { Pond } from '../pond';
+import { Pond } from '../models/pond';
 import { RestService } from '../rest.service';
 
 @Component({
