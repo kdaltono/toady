@@ -14,6 +14,7 @@ import { JWTAuthService } from './jwtauth.service';
 import { SimplifiedUser } from './models/simplifieduser';
 import { TaskStatus } from './models/task_status';
 import { UserToTask } from './models/user_to_task';
+import { AccountType } from './models/account_type';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,8 @@ export class RestService {
   private updatePadOrderValuesURL = 'http://localhost:8080/pad/orders';
   private insertPadURL = 'http://localhost:8080/pad';
   private insertNewPondURL = 'http://localhost:8080/pond';
+  private getPondAccountTypesURL = 'http://localhost:8080/pond/a/';
+  private updatePondAccountTypesURL = 'http://localhost:8080/pond/a';
 
   constructor(
     private http: HttpClient,
@@ -124,6 +127,21 @@ export class RestService {
           }
         ),
         catchError(this.handleError<Comment>('getTaskComments'))
+      )
+  }
+
+  getPondAccountTypes(pondId: string): Observable<AccountType[]> {
+    return this.http.get<AccountType[]>(this.getPondAccountTypesURL + pondId)
+      .pipe(
+        tap(
+          event => {
+            this.log(`Fetched account types for pond ID: ${pondId}`)
+          },
+          error => {
+            this.handleErrorResponse(error)
+          }
+        ),
+        catchError(this.handleError<AccountType[]>('getPondAccountTypes'))
       )
   }
 
@@ -211,6 +229,20 @@ export class RestService {
         this.messageService.add('Updated start and end dates successfully')
       }
     )
+  }
+
+  updatePondAccountTypes(account_types: AccountType[]) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      account_types: account_types
+    };
+
+    this.http.put<any>(this.updatePondAccountTypesURL, reqObject, { headers }).subscribe(
+      () => {
+        this.messageService.add('Updated the pond account types successfully');
+      }
+    );
   }
 
   updatePadReviewText(pad_id: string, review_text: string) {

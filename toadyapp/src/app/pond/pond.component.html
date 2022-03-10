@@ -1,12 +1,35 @@
 <div class="pond-area">
     <mat-card class='pond-card'>
-        <mat-card-title>{{pondId}}: {{pond.pond_name}}</mat-card-title>
-        <mat-card-subtitle>Created by {{pond.created_by}}</mat-card-subtitle>
+        <div *ngIf="showSettings; then settingsView else pondView"></div>
 
-        <mat-card-content>
+        <ng-template #settingsView>
+            <mat-card-actions class="top-actions" align="start">
+                <button mat-icon-button (click)="alternateShowSettings()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </mat-card-actions>
+
+            <mat-card-title>{{pondId}}: {{pond.pond_name}}</mat-card-title>
+            <mat-card-subtitle>Created by {{pond.created_by}}</mat-card-subtitle>
+
+            <mat-card-content>
+                <pond-settings [pondId]="pondId"></pond-settings>
+            </mat-card-content>
+        </ng-template>
+
+        <ng-template #pondView>
+            <mat-card-actions class="top-actions" align="end">
+                <button mat-icon-button (click)="alternateShowSettings()">
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </mat-card-actions>
+
+            <mat-card-title>{{pondId}}: {{pond.pond_name}}</mat-card-title>
+            <mat-card-subtitle>Created by {{pond.created_by}}</mat-card-subtitle>
+
             <mat-tab-group #matTab mat-align-tabs="center">
                 <mat-tab label="Pads">
-                    <app-pad #pad [pondId]="pondId" [accountLevel]="pond.account_type_level"></app-pad>
+                    <app-pad #pad [pondId]="pondId"></app-pad>
                 </mat-tab>
                 <mat-tab label="Continuous Tasks">
                     <div class=".container" *ngFor="let task of pondService.continuousTasks">
@@ -30,10 +53,11 @@
                     </form>
                 </mat-tab>
             </mat-tab-group>
-        </mat-card-content>
-        <mat-card-actions align="end">
-            <button mat-button [routerLink]="['/add']" [queryParams]="{pond_id: pondId}">Add Task</button>
-            <button mat-button (click)="openPadUpdateDialog()">Add Pad</button>
-        </mat-card-actions>
+
+            <mat-card-actions align="end">
+                <button mat-button [routerLink]="['/add']" [queryParams]="{pond_id: pondId}">Add Task</button>
+                <button mat-button (click)="openPadUpdateDialog()">Add Pad</button>
+            </mat-card-actions>
+        </ng-template>
     </mat-card>
 </div>

@@ -25,6 +25,7 @@ export class PondComponent implements OnInit {
   assignedUsers: DisplayUser[] = [];
   assignableUsers: DisplayUser[] = [];
   continuousTasks: DisplayTask[] = [];
+  showSettings: boolean = false;
 
   reactiveForm: FormGroup = {} as FormGroup;
   @ViewChild("matTab", { static: false }) matTab!: MatTabGroup;
@@ -98,6 +99,10 @@ export class PondComponent implements OnInit {
 
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.user_id === c2.user_id : c1 === c2;
+  }
+
+  alternateShowSettings(): void {
+    this.showSettings = !this.showSettings;
   }
 }
 

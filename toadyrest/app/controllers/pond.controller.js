@@ -42,6 +42,41 @@ exports.getPondData = (req, res) => {
     })
 }
 
+exports.getPondAccountTypes = (req, res) => {
+    Pond.getPondAccountTypes(req.params.pondId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Can't find pond ID: ${req.params.pondId}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}
+
+exports.updatePondAccountTypes = (req, res) => {
+    let modifiedAccountTypes = req.body.account_types
+    var errors = "";
+
+    modifiedAccountTypes.forEach(accountType => {
+        Pond.updateAccountType(accountType, (err, data) => {
+            if (err) {
+                errors += `Can't find account type: ${accountType.account_type_id}`
+            }
+        })
+    })
+
+    if (errors) {
+        res.status(500).send({
+            message: errors
+        })
+    } else {
+        res.send({
+            message: 'Success'
+        })
+    }
+}
+
 exports.getTasksForPad = (req, res) => {
     Pad.getTasksForPad(req.params.padId, (err, data) => {
         if (err) {

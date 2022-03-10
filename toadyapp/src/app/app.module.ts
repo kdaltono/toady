@@ -27,6 +27,7 @@ import { PadComponent } from './pond/pad/pad.component';
 import { TaskdetailComponent } from './taskdetail/taskdetail.component';
 import { NewPondComponent } from './pond/new-pond/new-pond.component';
 import { UserAssignmentComponent } from './user-assignment/user-assignment.component';
+import { PondSettingsComponent } from './pond/pond-settings/pond-settings.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'add', component: NewtaskComponent },
   { path: 'pond/:pondid', component: PondComponent },
+  { path: 'pond/:pondid/settings', component: PondSettingsComponent },
   { path: 'pondlist', component: PondListComponent },
   { path: 'add/pond', component: NewPondComponent },
   { path: '', redirectTo: 'home' },
@@ -59,7 +61,8 @@ const appRoutes: Routes = [
     TaskdetailComponent,
     PadDialog,
     NewPondComponent,
-    UserAssignmentComponent
+    UserAssignmentComponent,
+    PondSettingsComponent
   ],
   imports: [
     BrowserModule,

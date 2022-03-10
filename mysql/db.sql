@@ -8,9 +8,17 @@ DROP TABLE task_status;
 
 CREATE TABLE IF NOT EXISTS account_types(
     account_type_id INTEGER AUTO_INCREMENT NOT NULL,
+    pond_id INTEGER NOT NULL,
     display_name VARCHAR(30) NOT NULL,
-    account_type_level INTEGER NOT NULL,
-    PRIMARY KEY (account_type_id)
+    can_modify_pads BOOLEAN NOT NULL DEFAULT FALSE,
+    can_create_pads BOOLEAN NOT NULL DEFAULT FALSE,
+    can_delete_pads BOOLEAN NOT NULL DEFAULT FALSE,
+    can_modify_tasks BOOLEAN NOT NULL DEFAULT FALSE,
+    can_create_tasks BOOLEAN NOT NULL DEFAULT FALSE,
+    can_modify_assigned_users BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (account_type_id),
+    FOREIGN KEY (pond_id)
+		REFERENCES ponds(pond_id)
 );
 
 CREATE TABLE IF NOT EXISTS users(
@@ -28,8 +36,6 @@ CREATE TABLE IF NOT EXISTS user_to_pond(
     account_type_id INTEGER NOT NULL,
     UNIQUE KEY (user_id, pond_id, account_type_id)
 );
-
-
 
 CREATE TABLE IF NOT EXISTS task_status(
     status_id INTEGER AUTO_INCREMENT NOT NULL,

@@ -46,6 +46,7 @@ Pond.getContinuousTasks = (pond_id, result) => {
             return;
         }
 
+        console.log("Returning pond data: " + JSON.stringify(res))
         result(null, res)
     })
 }
@@ -56,19 +57,10 @@ Pond.getPondData = (pond_id, current_user_id, result) => {
         "ponds.pond_name, " +
         "CONCAT(users.first_name, \" \", users.last_name) as created_by, " +
         "ponds.dstamp, " +
-        "ponds.is_active, " +
-        "user_data.account_type_level " +
+        "ponds.is_active " +
     "FROM " +
         "ponds left join users " +
-        "on (ponds.created_by = users.user_id), " +
-        "(select " +
-            "at.account_type_level " +
-        "from " +
-            "user_to_pond utp left join account_types at " +
-            "on (utp.account_type_id = at.account_type_id) " +
-        "where " +
-            "utp.user_id = ? " +
-        ") user_data " +
+        "on (ponds.created_by = users.user_id) " +
     "WHERE " +
         "ponds.pond_id = ? "
 
@@ -165,6 +157,20 @@ Pond.getUserAssignedPonds = (user_id, result) => {
     })
 }
 
+Pond.getPondAccountTypes = (pond_id, result) => {
+    query = "select * from account_types where pond_id = ?"
+
+    sql.query(query, pond_id, (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
+}
+
 Pond.getPondAssignedUsers = (pond_id, result) => {
     var query = 
     "SELECT " +
@@ -198,6 +204,33 @@ Pond.insertNewPond = (pond_name, created_by, result) => {
         if (err) {
             console.log("Error: " + err)
             result(err, null);
+            return
+        }
+
+        result(null, res)
+    })
+}
+
+Pond.updateAccountType = (at, result) => {
+    var query = "update " +
+	    "account_types " +
+    "set " +
+	    "display_name = ?, " +
+        "can_modify_pads = ?, " +
+        "can_delete_pads = ?, " +
+        "can_create_pads = ?, " +
+        "can_modify_assigned_users = ?, " +
+        "can_modify_tasks = ?, " +
+        "can_create_tasks = ? " +
+    "where " +
+	    "account_type_id = 1 ";
+
+    sql.query(query, [at.display_name, at.can_modify_pads, at.can_delete_pads, at.can_create_pads,
+        at.can_modify_assigned_users, at.can_modify_tasks, at.can_create_tasks, at.account_type_id],
+        (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
             return
         }
 

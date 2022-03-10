@@ -42,3 +42,8 @@
 .container {
     padding: 5px 50px 0px 50px;
 }
+
+.top-actions {
+    padding: 0px 0px 10px 0px;
+    margin: 0px;
+}

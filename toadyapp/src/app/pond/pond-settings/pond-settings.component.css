@@ -1,0 +1,4 @@
+.permission-checkboxes {
+    display: flex;
+    flex-direction: column;
+}

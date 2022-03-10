@@ -1,0 +1,23 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let accountType of modifiedPondAccountTypes">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{accountType.display_name}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="permission-checkboxes">
+            <mat-checkbox [checked]="accountType.can_modify_pads"
+                (change)="accountType.can_modify_pads = !accountType.can_modify_pads">
+                Can Modify Pads
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="accountType.can_delete_pads">Can Delete Pads</mat-checkbox>
+            <mat-checkbox [(ngModel)]="accountType.can_create_pads">Can Create Pads</mat-checkbox>
+            <mat-checkbox [(ngModel)]="accountType.can_modify_assigned_users">Can Modify Assigned Users</mat-checkbox>
+            <mat-checkbox [(ngModel)]="accountType.can_modify_tasks">Can Modify Tasks</mat-checkbox>
+            <mat-checkbox [(ngModel)]="accountType.can_create_tasks">Can Create Tasks</mat-checkbox>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<button mat-button (click)="attemptSave()">Save</button>
