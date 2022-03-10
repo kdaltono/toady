@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Create new Account Type</h1>
+<div mat-dialog-content>Are you sure you want to delete this account type?</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="dialogRef.close(true)" cdkFocusInitial>Yes</button>
+</div>

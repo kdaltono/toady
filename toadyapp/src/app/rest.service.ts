@@ -15,6 +15,7 @@ import { SimplifiedUser } from './models/simplifieduser';
 import { TaskStatus } from './models/task_status';
 import { UserToTask } from './models/user_to_task';
 import { AccountType } from './models/account_type';
+import { head } from 'underscore';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,8 @@ export class RestService {
   private insertNewPondURL = 'http://localhost:8080/pond';
   private getPondAccountTypesURL = 'http://localhost:8080/pond/a/';
   private updatePondAccountTypesURL = 'http://localhost:8080/pond/a';
+  private insertPondAccountTypeURL = 'http://localhost:8080/pond/a';
+  private deletePondAccountTypeURL = 'http://localhost:8080/pond/a';
 
   constructor(
     private http: HttpClient,
@@ -289,6 +292,17 @@ export class RestService {
     )
   }
 
+  insertNewPondAccountType(display_name: string, pond_id: string): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      display_name: display_name,
+      pond_id: pond_id
+    }
+
+    return this.http.post(this.insertPondAccountTypeURL, reqObject, { headers: headers })
+  }
+
   deletePad(pad_id: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -299,6 +313,20 @@ export class RestService {
     this.http.delete(this.insertPadURL, {headers: headers, body: reqObject}).subscribe(
       () => {
         this.messageService.add("Successfully delete pad")
+      }
+    )
+  }
+
+  deletePondAccountType(account_type_id: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    const reqObject = {
+      account_type_id: account_type_id
+    }
+
+    this.http.delete(this.deletePondAccountTypeURL, { headers: headers, body: reqObject }).subscribe(
+      () => {
+        this.messageService.add("Successfully deleted account type")
       }
     )
   }

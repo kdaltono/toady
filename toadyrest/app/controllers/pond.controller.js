@@ -54,6 +54,30 @@ exports.getPondAccountTypes = (req, res) => {
     })
 }
 
+exports.insertNewPondAccountType = (req, res) => {
+    Pond.insertNewAccountType(req.body.display_name, req.body.pond_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Error inserting new pond account type ${req.body.display_name}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}
+
+exports.deletePondAccountType = (req, res) => {
+    Pond.deletePondAccountType(req.body.account_type_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: `Error deleting account type ID: ${req.body.account_type_id}`
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}
+
 exports.updatePondAccountTypes = (req, res) => {
     let modifiedAccountTypes = req.body.account_types
     var errors = "";

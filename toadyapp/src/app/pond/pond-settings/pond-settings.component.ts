@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { AccountType } from 'src/app/models/account_type';
 import { RestService } from 'src/app/rest.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as _ from 'underscore';
 
 @Component({
@@ -16,7 +17,8 @@ export class PondSettingsComponent implements OnInit {
   modifiedPondAccountTypes: AccountType[] = [];
 
   constructor(
-    private restService: RestService
+    private restService: RestService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -47,5 +49,75 @@ export class PondSettingsComponent implements OnInit {
     })
 
     this.restService.updatePondAccountTypes(accountTypesToUpload);
+  }
+
+  addAccountType(): void {
+    const dialogRef = this.dialog.open(AccountTypeInsertDialog, {
+      width: '250px',
+      data: ''
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.restService.insertNewPondAccountType(result, this.pondId!).subscribe(
+          () => {
+            this.setValues();
+          }
+        )
+      }
+    })
+  }
+
+  confirmAccountTypeDeletion(accountType: AccountType): void {
+    const dialogRef = this.dialog.open(AccountTypeDeleteDialog, {
+      width: '250px'
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deletePondAccountType(accountType);
+      }
+    });
+  }
+
+  deletePondAccountType(accountType: AccountType): void {
+    this.restService.deletePondAccountType(accountType.account_type_id.toString());
+
+    this.pondAccountTypes = this.pondAccountTypes.filter(element => {
+      return element.account_type_id !== accountType.account_type_id
+    })
+
+    this.modifiedPondAccountTypes = this.modifiedPondAccountTypes.filter(element => {
+      return element.account_type_id !== accountType.account_type_id
+    })
+  }
+}
+
+@Component({
+  selector: 'account-type-insert-dialog',
+  templateUrl: 'account-type-insert-dialog.component.html'
+})
+export class AccountTypeInsertDialog {
+  constructor(
+    public dialogRef: MatDialogRef<AccountTypeInsertDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'account-type-delete-dialog',
+  templateUrl: 'account-type-delete-dialog.component.html'
+})
+export class AccountTypeDeleteDialog {
+  constructor(
+    public dialogRef: MatDialogRef<AccountTypeDeleteDialog>
+  ) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

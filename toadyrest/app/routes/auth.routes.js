@@ -55,6 +55,8 @@ module.exports = app => {
     app.get('/pond/p/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondAssignedUsers)
     app.get('/pond/a/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondAccountTypes)
     app.put('/pond/a', passport.authenticate('jwt', { session: false }), pond.updatePondAccountTypes)
+    app.post('/pond/a', passport.authenticate('jwt', { session: false }), pond.insertNewPondAccountType)
+    app.delete('/pond/a', passport.authenticate('jwt', { session: false }), pond.deletePondAccountType)
     app.get('/pond/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondData)
     app.get('/pond/pads/:pondId', passport.authenticate('jwt', { session: false }), pond.getPondPadData)
     app.get('/pond/tasks/:pondId', passport.authenticate('jwt', { session: false }), pond.getContinuousTasks)

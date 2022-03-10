@@ -211,6 +211,34 @@ Pond.insertNewPond = (pond_name, created_by, result) => {
     })
 }
 
+Pond.insertNewAccountType = (display_name, pond_id, result) => {
+    var query = "insert into account_types (display_name, pond_id) values (?, ?)"
+
+    sql.query(query, [display_name, pond_id], (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
+}
+
+Pond.deletePondAccountType = (account_type_id, result) => {
+    var query = "delete from account_types where account_type_id = ?"
+
+    sql.query(query, account_type_id, (err, res) => {
+        if (err) {
+            console.log("Error: " + err)
+            result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
+}
+
 Pond.updateAccountType = (at, result) => {
     var query = "update " +
 	    "account_types " +

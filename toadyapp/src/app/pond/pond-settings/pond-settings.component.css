@@ -2,3 +2,17 @@
     display: flex;
     flex-direction: column;
 }
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.account-type-action {
+    margin-right: 10px;
+}
+
+.delete-button {
+    float: right;
+}

@@ -2,22 +2,28 @@
     <mat-expansion-panel *ngFor="let accountType of modifiedPondAccountTypes">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                {{accountType.display_name}}
+                <input matInput [(ngModel)]="accountType.display_name"
+                    (click)="$event.stopPropagation()"
+                    (keydown.Space)="$event.stopImmediatePropagation()"
+                    [size]="accountType.display_name.length">
             </mat-panel-title>
         </mat-expansion-panel-header>
 
         <div class="permission-checkboxes">
-            <mat-checkbox [checked]="accountType.can_modify_pads"
-                (change)="accountType.can_modify_pads = !accountType.can_modify_pads">
-                Can Modify Pads
-            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="accountType.can_modify_pads">Can Modify Pads</mat-checkbox>
             <mat-checkbox [(ngModel)]="accountType.can_delete_pads">Can Delete Pads</mat-checkbox>
             <mat-checkbox [(ngModel)]="accountType.can_create_pads">Can Create Pads</mat-checkbox>
             <mat-checkbox [(ngModel)]="accountType.can_modify_assigned_users">Can Modify Assigned Users</mat-checkbox>
             <mat-checkbox [(ngModel)]="accountType.can_modify_tasks">Can Modify Tasks</mat-checkbox>
             <mat-checkbox [(ngModel)]="accountType.can_create_tasks">Can Create Tasks</mat-checkbox>
         </div>
+
+        <button mat-button class="delete-button" color="warn" 
+            (click)="confirmAccountTypeDeletion(accountType)">Delete</button>
     </mat-expansion-panel>
 </mat-accordion>
 
-<button mat-button (click)="attemptSave()">Save</button>
+<div class="buttons">
+    <button mat-button class="account-type-action" (click)="attemptSave()">Save</button>
+    <button mat-button class="account-type-action" (click)="addAccountType()">Add</button>
+</div>

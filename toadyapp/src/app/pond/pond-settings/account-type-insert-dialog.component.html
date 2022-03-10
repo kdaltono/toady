@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Create new Account Type</h1>
+<div mat-dialog-content>
+    <p>What is the name of the new Account Type?</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Account Type</mat-label>
+        <input matInput [(ngModel)]="data">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add</button>
+</div>
