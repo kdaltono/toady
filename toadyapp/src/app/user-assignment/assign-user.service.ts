@@ -14,9 +14,6 @@ export class AssignUserService {
   private removedTaskUsers: UserToTask[] = [];
   private addedTaskUsers: UserToTask[] = [];
 
-  private removedPondUsers: UserToPond[] = [];
-  private addedPondUsers: UserToPond[] = [];
-
   private delay: number = 5000;
   private timer: Subscription = {} as Subscription;
 
@@ -62,23 +59,5 @@ export class AssignUserService {
       task_id: taskId
     })
     this.removedTaskUsers = _.uniq(this.removedTaskUsers);
-  }
-
-  assignUserToPond(userId: number, pondId: number, isManager: boolean): void {
-    this.addedPondUsers.push({
-      user_id: userId,
-      pond_id: pondId,
-      is_manager: isManager
-    })
-    this.addedPondUsers = _.uniq(this.addedPondUsers);
-  }
-
-  removeUserFromPond(userId: number, pondId: number): void {
-    this.removedPondUsers.push({
-      user_id: userId,
-      pond_id: pondId,
-      is_manager: false
-    })
-    this.removedPondUsers = _.uniq(this.removedPondUsers);
   }
 }

@@ -108,6 +108,7 @@ export class AccountTypeInsertDialog {
   }
 }
 
+// TODO: Make this a generic dialog that can be reused
 @Component({
   selector: 'account-type-delete-dialog',
   templateUrl: 'account-type-delete-dialog.component.html'

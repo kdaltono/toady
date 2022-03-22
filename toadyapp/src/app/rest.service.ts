@@ -15,7 +15,7 @@ import { SimplifiedUser } from './models/simplifieduser';
 import { TaskStatus } from './models/task_status';
 import { UserToTask } from './models/user_to_task';
 import { AccountType } from './models/account_type';
-import { head } from 'underscore';
+import { PondAssignedUser } from './models/pond_assigned_user';
 
 @Injectable({
   providedIn: 'root'
@@ -410,9 +410,9 @@ export class RestService {
       )
   }
 
-  getPondAssignedUsers(pond_id: string): Observable<DisplayUser[]> {
+  getPondAssignedUsers(pond_id: string): Observable<PondAssignedUser[]> {
     const url = this.getPondAssignedUsersURL + pond_id;
-    return this.http.get<DisplayUser[]>(url)
+    return this.http.get<PondAssignedUser[]>(url)
       .pipe(
         tap (
           event => {
@@ -422,7 +422,7 @@ export class RestService {
             this.handleErrorResponse(error)
           }
         ),
-        catchError(this.handleError<DisplayUser[]>('getPondAssignedUsers'))
+        catchError(this.handleError<PondAssignedUser[]>('getPondAssignedUsers'))
       )
   }
 

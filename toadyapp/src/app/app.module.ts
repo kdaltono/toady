@@ -28,6 +28,7 @@ import { TaskdetailComponent } from './taskdetail/taskdetail.component';
 import { NewPondComponent } from './pond/new-pond/new-pond.component';
 import { UserAssignmentComponent } from './user-assignment/user-assignment.component';
 import { PondSettingsComponent, AccountTypeInsertDialog, AccountTypeDeleteDialog } from './pond/pond-settings/pond-settings.component';
+import { PondAssignmentComponent } from './pond-assignment/pond-assignment.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -64,7 +65,8 @@ const appRoutes: Routes = [
     UserAssignmentComponent,
     PondSettingsComponent,
     AccountTypeInsertDialog,
-    AccountTypeDeleteDialog
+    AccountTypeDeleteDialog,
+    PondAssignmentComponent
   ],
   imports: [
     BrowserModule,

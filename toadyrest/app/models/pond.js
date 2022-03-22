@@ -171,32 +171,6 @@ Pond.getPondAccountTypes = (pond_id, result) => {
     })
 }
 
-Pond.getPondAssignedUsers = (pond_id, result) => {
-    var query = 
-    "SELECT " +
-        "u.user_id, " +
-        "CONCAT(u.first_name, \" \", u.last_name) AS full_name, " +
-        "u.first_name, " +
-        "u.last_name, " +
-        "u.username " +
-    "FROM " +
-        "ponds p left join user_to_pond utp " +
-        "on (p.pond_id = utp.pond_id) left join users u " +
-        "on (utp.user_id = u.user_id) " +
-    "WHERE " +
-        "p.pond_id = ?"
-    
-    sql.query(query, pond_id, (err, res) => {
-        if (err) {
-            console.log("Error with query: " + query + "\nError: " + err)
-            result(err, null)
-            return
-        }
-
-        result(null, res)
-    })
-}
-
 Pond.insertNewPond = (pond_name, created_by, result) => {
     var query = "insert into ponds (pond_name, created_by) values (?, ?)"
 

@@ -1,5 +1,6 @@
 const Pond = require('../models/pond')
 const Pad = require('../models/pad')
+const UserToPond = require('../models/user_to_pond')
 const e = require('express')
 const jsonwebtoken = require('jsonwebtoken')
 
@@ -16,7 +17,7 @@ exports.getUserAssignedPonds = (req, res) => {
 }
 
 exports.getPondAssignedUsers = (req, res) => {
-    Pond.getPondAssignedUsers(req.params.pondId, (err, data) => {
+    UserToPond.getPondAssignedUsers(req.params.pondId, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: `Can't find pond ID: ${req.params.pondId}`
